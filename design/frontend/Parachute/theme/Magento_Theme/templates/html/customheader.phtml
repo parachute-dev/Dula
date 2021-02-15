@@ -1,0 +1,85 @@
+<header id="header">
+	<div class="top-nav" style="display:none;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<p>Top Message</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="logo-container">
+		<div class="container">
+			<div class="row logo-container__row">
+				<div class="col-4 d-block d-sm-none dm-xs-none">
+					
+				</div>
+				<div class="col-4 col-lg-3">
+					<div class="logo-container__logo">
+						<a href="/">
+							<img src="/assets/img/logo.png" alt="">
+						</a>
+					</div>
+				</div>
+				<div class="col-4 col-lg-9 justify-content-end d-flex">
+					<ul>
+						<li>  
+							<?php
+							echo $this->getLayout()
+							->createBlock('Magento\Framework\View\Element\Template')
+							->setTemplate('Magento_Search::form.mini.phtml')
+							->toHtml();
+							?>
+						</li>
+						<li><a href="/customer/account/"><img src="/assets/img/account.png?v=2" alt="Account" /></a></li>
+						<li class=""><a href="/wishlist/index/"><img src="/assets/img/wishlist.png" alt="Wishlist" /></a></li>
+						<li class="" id="shopping-basket"><a href="/checkout/cart"><img src="/assets/img/basket.png?v=2" alt="Basket" /></a>
+							<?php echo $this->getChildHtml('minicart'); ?>
+						</li>
+					</ul>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="main-navigation">
+		<div class="container"><div class="row">
+			<div class="col-12">
+				<ul>
+					<li><a href="#">Link</a></li>
+					<li><a href="#">Link</a></li>
+					<li><a href="#">Link</a></li>
+					<li><a href="#">Link</a></li>
+					<li><a href="#">Link</a></li>
+				</ul>
+				<?= $this->helper(\Magezon\NinjaMenus\Helper\Menu::class)->getMenuHtml('main') ?>
+			</div>
+		</div>
+	</div>
+
+</div>
+</header> 
+
+<div class="trust-bar">
+	<div class="container">
+		<div class="row"> 
+			<div class="col-md-12">
+				<div class="trust-carousel owl-carousel">
+					<div class="trust-item">
+						<img src="/assets/img/delivery.png" alt="">
+						<h6>Free Delivery</h6>
+					</div>
+					<div class="trust-item">
+						<img src="/assets/img/percentage.png" alt="">
+						<h6>20% off first order</h6>
+					</div>	
+					<div class="trust-item">
+						<img src="/assets/img/return.png" alt="">
+						<h6>Return Policy</h6>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

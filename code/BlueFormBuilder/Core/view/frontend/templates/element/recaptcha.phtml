@@ -1,0 +1,16 @@
+<?php
+/**
+ * @var $block \BlueFormBuilder\Core\Block\Element\Control
+ */
+
+$formHelper = $this->helper('\BlueFormBuilder\Core\Helper\Data');
+$publicKey  = $formHelper->getConfig('recaptcha/public_key');
+$elementId  = $this->getElHtmlId();
+$element    = $this->getElement();
+$type       = $element->getData('recaptcha_type');
+$language   = $element->getData('recaptcha_language');
+$theme      = $element->getData('recaptcha_theme');
+$size       = $element->getData('recaptcha_size');
+?>
+<div class="g-recaptcha" id="<?= $elementId ?>" data-sitekey="<?= $publicKey ?>" data-type="<?= $type ?>" data-theme="<?= $theme ?>" data-size="<?= $size ?>"></div>
+<script src='https://www.google.com/recaptcha/api.js?hl=<?= $language ?>'></script>

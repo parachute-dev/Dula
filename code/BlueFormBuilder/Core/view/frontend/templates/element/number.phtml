@@ -1,0 +1,20 @@
+<?php
+/**
+ * @var $block \BlueFormBuilder\Core\Block\Element\Number
+ */
+
+$elemName     = $this->getElemName();
+$elementId    = $this->getElHtmlId();
+$element      = $this->getElement();
+$min          = $element->getData('min');
+$max          = $element->getData('max');
+$defaultValue = $element->getData('default_value') ? (float)$element->getData('default_value') : '';
+$class = '';
+if ($max) $class = 'validate-number-range number-range-' . $min . '-' . $max;
+$validate['validate-number'] = true;
+if ($element->getData('required')) $validate['required'] = true;
+?>
+<span class="bfb-element-number-btn bfb-element-number-minus" data-bind="click: decreaseQty"></span>
+<input id="<?= $elementId ?>" class="bfb-control" type="number" name="<?= $elemName ?>" data-bind="textInput: qty" value="<?= $defaultValue ?>" min="<?= $min ?>" max="<?= $max ?>" data-validate="{<?= $this->parseJson($validate) ?>}"/>
+<span class="bfb-element-number-btn bfb-element-number-plus" data-bind="click: increaseQty"></span>
+<script type="text/x-magento-init">{"*": {"Magento_Ui/js/core/app": {"components": {"<?= $elementId ?>": <?= $block->getJsLayout() ?>}}}}</script>

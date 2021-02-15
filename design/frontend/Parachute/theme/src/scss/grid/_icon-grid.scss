@@ -1,0 +1,36 @@
+.icon-grid {
+  &__header {
+    text-align:center;
+    color:colours(brand,one);
+    @include padding-bottom(40px);
+  }
+  h5{
+        color:colours(brand,one);
+    @include padding-top(20px);
+
+  }
+  &__icon {
+
+border-right:1px solid #ccc;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+    &:last-child{
+      border-right:0;
+    }
+    img{
+      margin-bottom:20px;
+    }
+  }
+  &__icon-container {
+    min-height:80px;
+ 
+  }  
+  &__icon-title {
+  }
+  &__icons {
+    display:flex;
+    justify-content:center;
+  }  
+}  

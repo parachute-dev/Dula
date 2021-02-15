@@ -1,0 +1,117 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/**
+ * @see \Blackbird\ContentManager\Block\View
+ */
+?>
+<?php
+/*
+ * 
+ * 
+ * AVAILABLE METHODS
+ * 
+ * Get all raw values as an array
+ * $content->getData();
+ * 
+ * Get a specific value by his field identifier
+ * $content->getData('field_identifier');
+ * $content->getFieldIdentifier();
+ * $content->getAttributeText('field_identifier');
+ * 
+ * Get content type model
+ * $content->getContentType();
+ * 
+ * Get image URL for an image field type.
+ * $content->getImage($attributeName, $width, $height, $keepRatio, $cropped = false);
+ * 
+ * Get file absolute URL, for a file field typ
+ * $content->getFile($field_identifier);
+ * 
+ * Get content url
+ * $content->getLinkUrl();
+ * 
+ * Render a field in HTML
+ * $content->render($element, $params);
+ * 
+ * See the complete documentation and more examples at:
+ * http://www.advancedcontentmanager.com/documentation/
+ * 
+ */
+?>
+
+<?php
+    // Object manager and collection
+    $_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); //instance of\Magento\Framework\App\ObjectManager
+    $_contentCollection = $_objectManager->create('Blackbird\ContentManager\Model\ResourceModel\Content\CollectionFactory'); 
+
+    // Helpers
+    $_coreHelper = $this->helper('\Magezon\Core\Helper\Data');
+    $_builderHelper = $this->helper('\Magezon\Builder\Helper\Data');
+
+    // ACM data
+    /** @var \Blackbird\ContentManager\Model\Content $content */
+    $_item = $block->getContent();
+    /** @var \Blackbird\ContentManager\Model\ContentType $contentType */
+    $_contentType = $_item->getContentType();
+
+    // Content-type data
+    $_identifier = $_contentType != null ? $_contentType->getData('identifier') : "";
+    $_prefix = $_identifier . "_";
+
+    // Common Content (Prefixed with the content-type slug, i.e - "job_subtitle")
+    // Excluding "title", which is always there
+    $title = $_item->getData("title");
+    $subtitle = $_item->getData($_prefix . "subtitle");
+
+    // Image data
+    $image = !empty($_item->getData($_prefix . 'image')) ? $_item->getImage($_prefix . "image", $width = null, $height = null, $keepAspectRatio = false, $cropped = false) : null;
+    $image_src = !empty($image) ? $image : "";
+
+    $preview_image = !empty($_item->getData($_prefix . 'preview_image')) ? $_item->getImage($_prefix . "preview_image", $width = null, $height = null, $keepAspectRatio = false, $cropped = false) : null;
+    $preview_image_src = !empty($preview_image) ? $preview_image : "";
+
+    $banner_img = !empty($_item->getData($_prefix . 'banner_image')) ? $_item->getImage($_prefix . "banner_image", $width = null, $height = null, $keepAspectRatio = false, $cropped = false) : null;
+    $banner_img_src = !empty($banner_img) ? $banner_img : "";
+?>
+
+<div class="banner-block content-block no-gutter">
+    <div class="banner-block-inner content-block-inner">
+        <div class="banner-block-inner-container content-block-inner-container container-fluid">
+            <div class="banner-block-inner-row content-block-inner-row row">
+                <div class="banner-block-inner-content content-block-inner-content col-xs-12 col-sm-12 col-md-12">
+                    <div class="content-block-content">
+                        <ul class="banner-list">
+                            <li class="banner banner-item item header small">
+                                <div class="banner-inner" style="background-image:url(<?php echo $banner_img_src; ?>)">
+                                    <div class="banner-inner-row">
+                                        <div class="banner-image col-xs-12 col-sm-8 col-md-8">
+                                            <div class="banner-image-inner" style="background-image:url(<?php echo $banner_img_src; ?>)">
+                                                <img src="<?php echo $banner_img_src; ?>" alt="" title="" class="banner-image-fallback sr-only">
+                                                <img src="<?php echo $banner_img_src; ?>" alt="" title="" class="banner-image-mobile visible-xs">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

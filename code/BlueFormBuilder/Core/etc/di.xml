@@ -1,0 +1,703 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license.
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  BlueFormBuilder
+ * @package   BlueFormBuilder_Core
+ * @copyright Copyright (C) 2019 Magezon (https://www.magezon.com)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="BlueFormBuilder\Core\Api\Data\FormSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="BlueFormBuilder\Core\Api\FormRepositoryInterface" type="BlueFormBuilder\Core\Model\FormRepository" />
+    <preference for="BlueFormBuilder\Core\Api\Data\FormInterface" type="BlueFormBuilder\Core\Model\Form" />
+    <preference for="BlueFormBuilder\Core\Api\Data\SubmissionSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="BlueFormBuilder\Core\Api\SubmissionRepositoryInterface" type="BlueFormBuilder\Core\Model\SubmissionRepository" />
+    <preference for="BlueFormBuilder\Core\Api\Data\SubmissionInterface" type="BlueFormBuilder\Core\Model\Submission" />
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="BlueFormBuilder\Core\Api\Data\FormInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">mgz_blueformbuilder_form</item>
+                    <item name="identifierField" xsi:type="string">form_id</item>
+                </item>
+                <item name="BlueFormBuilder\Core\Api\Data\SubmissionInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">mgz_blueformbuilder_submission</item>
+                    <item name="identifierField" xsi:type="string">submission_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="BlueFormBuilder\Core\Api\Data\FormInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="BlueFormBuilder\Core\Api\Data\SubmissionInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="BlueFormBuilder\Core\Api\Data\FormInterface" xsi:type="string">BlueFormBuilder\Core\Api\FormRepositoryInterface</item>
+                <item name="BlueFormBuilder\Core\Api\Data\SubmissionInterface" xsi:type="string">BlueFormBuilder\Core\Api\SubmissionRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Catalog\Plugin\Model\Attribute\Backend\AttributeValidation">
+        <arguments>
+            <argument name="allowedEntityTypes" xsi:type="array">
+                <item name="formbuilderForm" xsi:type="string">BlueFormBuilder\Core\Api\Data\FormInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="BlueFormBuilder\Core\Api\Data\FormInterface" xsi:type="array">
+                    <item name="read" xsi:type="array">
+                        <item name="customerGroup" xsi:type="string">BlueFormBuilder\Core\Model\ResourceModel\Form\Relation\CustomerGroup\ReadHandler</item>
+                        <item name="store" xsi:type="string">BlueFormBuilder\Core\Model\ResourceModel\Form\Relation\Store\ReadHandler</item>
+                    </item>
+                    <item name="create" xsi:type="array">
+                        <item name="customerGroup" xsi:type="string">BlueFormBuilder\Core\Model\ResourceModel\Form\Relation\CustomerGroup\SaveHandler</item>
+                        <item name="store" xsi:type="string">BlueFormBuilder\Core\Model\ResourceModel\Form\Relation\Store\SaveHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="customerGroup" xsi:type="string">BlueFormBuilder\Core\Model\ResourceModel\Form\Relation\CustomerGroup\SaveHandler</item>
+                        <item name="store" xsi:type="string">BlueFormBuilder\Core\Model\ResourceModel\Form\Relation\Store\SaveHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="BlueFormBuilder\Core\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="default" xsi:type="object">BlueFormBuilder\Core\Model\DefaultConfigProvider</item>
+                <item name="directives" xsi:type="array">
+                    <item name="my-templates" xsi:type="array">
+                        <item name="element" xsi:type="string">Magezon_Builder/js/builder/navbar/my-templates</item>
+                        <item name="displayArea" xsi:type="string">navbar</item>
+                        <item name="additionalClasses" xsi:type="string">mgz-mytemplates</item>
+                        <item name="sortOrder" xsi:type="number">30</item>
+                    </item>
+                    <item name="bfb_after_modal_title" xsi:type="array">
+                        <item name="templateUrl" xsi:type="string">BlueFormBuilder_Core/js/templates/modal/title.html</item>
+                        <item name="displayArea" xsi:type="string">after-modal-title</item>
+                        <item name="dynamic" xsi:type="boolean">true</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magezon\Builder\Data\Groups">
+        <arguments>
+            <argument name="groups" xsi:type="array">
+                <item name="bfb" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Form</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magezon\Builder\Data\Elements">
+        <arguments>
+            <argument name="elements" xsi:type="array">
+                <item name="gmaps" xsi:type="array">
+                    <item name="disabled" xsi:type="boolean">false</item>
+                </item>
+                <item name="single_image" xsi:type="array">
+                    <item name="disabled" xsi:type="boolean">false</item>
+                </item>
+                <item name="bfb_pages" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Pages</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\Pages</item>
+                    <item name="element" xsi:type="string">Magezon_Builder/js/builder/element/tabs</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/pages.phtml</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Pages</item>
+                    <item name="sortOrder" xsi:type="number">300</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-tabs</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="allowed_types" xsi:type="string">bfb_page</item>
+                    <item name="children" xsi:type="string">bfb_page</item>
+                    <item name="childrenCount" xsi:type="string">2</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="is_collection" xsi:type="boolean">true</item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_page" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Page</item>
+                    <item name="element" xsi:type="string">BlueFormBuilder_Core/js/builder/list</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\Page</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/page.phtml</item>
+                    <item name="sortOrder" xsi:type="number">90</item>
+                    <item name="excluded_types" xsi:type="string">bfb_page</item>
+                    <item name="modalVisible" xsi:type="boolean">false</item>
+                    <item name="is_collection" xsi:type="boolean">true</item>
+                    <item name="area" xsi:type="string">bfb</item>
+                    <item name="default" xsi:type="array">
+                        <item name="padding_top" xsi:type="number">20</item>
+                        <item name="padding_right" xsi:type="number">14</item>
+                        <item name="padding_bottom" xsi:type="number">14</item>
+                        <item name="padding_left" xsi:type="number">20</item>
+                    </item>
+                </item>
+                <item name="bfb_fieldset" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Field Set</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\FieldSet</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\FieldSet</item>
+                    <item name="element" xsi:type="string">BlueFormBuilder_Core/js/builder/list</item>
+                    <item name="templateUrl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/fieldset.html</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/fieldset.phtml</item>
+                    <item name="sortOrder" xsi:type="number">302</item>
+                    <item name="icon" xsi:type="string">fa fa-th-large</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="is_collection" xsi:type="boolean">true</item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_text" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Single Line Text</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\Text</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/text.html</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Text</item>
+                    <item name="model" xsi:type="string">BlueFormBuilder\Core\Model\Element</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/text.phtml</item>
+                    <item name="sortOrder" xsi:type="number">304</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-text-field</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="conditional" xsi:type="boolean">true</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                        <item name="font-weight" xsi:type="string">bold</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">text</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_textarea" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Paragraph</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\Textarea</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/textarea.html</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/textarea.phtml</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Textarea</item>
+                    <item name="sortOrder" xsi:type="number">306</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-menu-toggle</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="conditional" xsi:type="boolean">true</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                        <item name="font-weight" xsi:type="string">bold</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">text</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_email" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Email</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\Email</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/text.html</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Text</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/text.phtml</item>
+                    <item name="sortOrder" xsi:type="number">308</item>
+                    <item name="icon" xsi:type="string">fa fa-envelope-o</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="conditional" xsi:type="boolean">true</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="default" xsi:type="array">
+                        <item name="validation" xsi:type="string">validate-email</item>
+                        <item name="icon" xsi:type="string">far mgz-fa-envelope</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">text</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_date" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Date Picker</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\Date</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/text.html</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Date</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/date.phtml</item>
+                    <item name="sortOrder" xsi:type="number">310</item>
+                    <item name="icon" xsi:type="string">fa fa-calendar</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="conditional" xsi:type="boolean">true</item>
+                    <item name="model" xsi:type="string">BlueFormBuilder\Core\Model\Element\Date</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">datetime</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_time" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Time Picker</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\Time</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/time.html</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Control</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/time.phtml</item>
+                    <item name="model" xsi:type="string">BlueFormBuilder\Core\Model\Element\Time</item>
+                    <item name="sortOrder" xsi:type="number">312</item>
+                    <item name="icon" xsi:type="string">far mgz-fa-clock</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">text</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_file" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">File Upload</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\File</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/file.html</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\File</item>
+                    <item name="model" xsi:type="string">BlueFormBuilder\Core\Model\Element\File</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/file.phtml</item>
+                    <item name="sortOrder" xsi:type="number">314</item>
+                    <item name="icon" xsi:type="string">fa fa-cloud-upload</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="renderer" xsi:type="string">\BlueFormBuilder\Core\Block\Adminhtml\Form\Submission\Field\Renderer\File</item>
+                        <item name="type" xsi:type="string">text</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_number" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Number</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\Number</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/number.html</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Number</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/number.phtml</item>
+                    <item name="sortOrder" xsi:type="number">316</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-number-field</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="conditional" xsi:type="boolean">true</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">number</item>
+                        <item name="column_css_class" xsi:type="string">a-center</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_address" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Address</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\Address</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/address.html</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Address</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/address.phtml</item>
+                    <item name="model" xsi:type="string">BlueFormBuilder\Core\Model\Element\Address</item>
+                    <item name="sortOrder" xsi:type="number">318</item>
+                    <item name="icon" xsi:type="string">far mgz-fa-address-card</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">text</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_starratings" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Star Ratings</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\StarRatings</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\StarRatings</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/star-ratings.html</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/star-ratings.phtml</item>
+                    <item name="model" xsi:type="string">BlueFormBuilder\Core\Model\Element\StarRatings</item>
+                    <item name="sortOrder" xsi:type="number">320</item>
+                    <item name="icon" xsi:type="string">far mgz-fa-star</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="conditional" xsi:type="boolean">true</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">number</item>
+                        <item name="renderer" xsi:type="string">\BlueFormBuilder\Core\Block\Adminhtml\Form\Submission\Field\Renderer\StarRatings</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_website" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Website</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\Website</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/text.html</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Control</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/website.phtml</item>
+                    <item name="sortOrder" xsi:type="number">322</item>
+                    <item name="icon" xsi:type="string">fa fa-link</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="conditional" xsi:type="boolean">true</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">text</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_singlecheckbox" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Single Checkbox</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\SingleCheckbox</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\SingleCheckbox</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/single-checkbox.html</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/single-checkbox.phtml</item>
+                    <item name="model" xsi:type="string">BlueFormBuilder\Core\Model\Element\SingleCheckbox</item>
+                    <item name="sortOrder" xsi:type="number">324</item>
+                    <item name="icon" xsi:type="string">fa fa-check-square-o</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="conditional" xsi:type="boolean">true</item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">text</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_submit" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Submit</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Submit</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\Submit</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/submit.html</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/submit.phtml</item>
+                    <item name="sortOrder" xsi:type="number">326</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-button</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                        <item name="font-weight" xsi:type="string">bold</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_select" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Select</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\Select</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/select.html</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Control</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/select.phtml</item>
+                    <item name="model" xsi:type="string">BlueFormBuilder\Core\Model\Element\Select</item>
+                    <item name="sortOrder" xsi:type="number">328</item>
+                    <item name="icon" xsi:type="string">fa fa-check</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="conditional" xsi:type="boolean">true</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">text</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_multiselect" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Multiple Select</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\MultipleSelect</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/multiselect.html</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\MultipleSelect</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/multiselect.phtml</item>
+                    <item name="model" xsi:type="string">BlueFormBuilder\Core\Model\Element\MultipleSelect</item>
+                    <item name="sortOrder" xsi:type="number">330</item>
+                    <item name="icon" xsi:type="string">fa fa-list</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="conditional" xsi:type="boolean">true</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">text</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_checkboxlist" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Checkbox List</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\CheckboxList</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/checkbox_list.html</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Control</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/checkbox_list.phtml</item>
+                    <item name="model" xsi:type="string">BlueFormBuilder\Core\Model\Element\MultipleSelect</item>
+                    <item name="sortOrder" xsi:type="number">332</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-checkbox</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="conditional" xsi:type="boolean">true</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">text</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_radiolist" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Radio List</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\RadioList</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/radio_list.html</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Control</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/radio_list.phtml</item>
+                    <item name="model" xsi:type="string">BlueFormBuilder\Core\Model\Element\RadioList</item>
+                    <item name="sortOrder" xsi:type="number">334</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-icon-list</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="conditional" xsi:type="boolean">true</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">text</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_choicematrix" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Choice Matrix</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\ChoiceMatrix</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\ChoiceMatrix</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/choice_matrix.html</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/choice_matrix.phtml</item>
+                    <item name="model" xsi:type="string">BlueFormBuilder\Core\Model\Element\ChoiceMatrix</item>
+                    <item name="sortOrder" xsi:type="number">336</item>
+                    <item name="icon" xsi:type="string">fa fa-th</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">text</item>
+                        <item name="renderer" xsi:type="string">\BlueFormBuilder\Core\Block\Adminhtml\Form\Submission\Field\Renderer\ChoiceMatrix</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_singleslider" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Single Slider</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\SingleSlider</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\SingleSlider</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/single_slider.html</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/single_slider.phtml</item>
+                    <item name="sortOrder" xsi:type="number">338</item>
+                    <item name="icon" xsi:type="string">fa fa-sliders</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="conditional" xsi:type="boolean">true</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">number</item>
+                        <item name="column_css_class" xsi:type="string">a-center</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_magento2_captcha" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Magento2 Captcha</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\Magento2Captcha</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/magento2_captcha.html</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Magento2Captcha</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/magento2_captcha.phtml</item>
+                    <item name="sortOrder" xsi:type="number">340</item>
+                    <item name="icon" xsi:type="string">fab mgz-fa-magento</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#f26322</item>
+                        <item name="font-size" xsi:type="string">32px</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_recaptcha" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">ReCaptcha</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\Recaptcha</item>
+                    <item name="templateUrl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/control.html</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/recaptcha.html</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Recaptcha</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/recaptcha.phtml</item>
+                    <item name="sortOrder" xsi:type="number">342</item>
+                    <item name="icon" xsi:type="string">mgz-icon mgz-icon-product</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_currency" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Currency</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\Currency</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/text.html</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Control</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/currency.phtml</item>
+                    <item name="sortOrder" xsi:type="number">344</item>
+                    <item name="icon" xsi:type="string">fa fa-dollar</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="conditional" xsi:type="boolean">true</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="default" xsi:type="array">
+                        <item name="icon" xsi:type="string">fas mgz-fa-dollar-sign</item>
+                        <item name="placeholder" xsi:type="string">0.00</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">number</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_toggle" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Toggle</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\Toggle</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Toggle</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/toggle.html</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/toggle.phtml</item>
+                    <item name="model" xsi:type="string">BlueFormBuilder\Core\Model\Element\Toggle</item>
+                    <item name="sortOrder" xsi:type="number">346</item>
+                    <item name="icon" xsi:type="string">fa fa-toggle-on</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="conditional" xsi:type="boolean">true</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">text</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_phone" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Phone</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\Phone</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/text.html</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Control</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/phone.phtml</item>
+                    <item name="model" xsi:type="string">BlueFormBuilder\Core\Model\Element\Phone</item>
+                    <item name="sortOrder" xsi:type="number">348</item>
+                    <item name="icon" xsi:type="string">fa fa-phone</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="conditional" xsi:type="boolean">true</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#007dbd</item>
+                        <item name="font-size" xsi:type="string">26px</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">text</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+                <item name="bfb_subscribe" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Subscribe</item>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Data\Element\Subscribe</item>
+                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/single-checkbox.html</item>
+                    <item name="block" xsi:type="string">BlueFormBuilder\Core\Block\Element\Control</item>
+                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/subscribe.phtml</item>
+                    <item name="model" xsi:type="string">BlueFormBuilder\Core\Model\Element\Subscribe</item>
+                    <item name="sortOrder" xsi:type="number">350</item>
+                    <item name="group" xsi:type="string">bfb</item>
+                    <item name="control" xsi:type="boolean">true</item>
+                    <item name="conditional" xsi:type="boolean">true</item>
+                    <item name="icon" xsi:type="string">fab mgz-fa-magento</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">transparent</item>
+                        <item name="color" xsi:type="string">#f26322</item>
+                        <item name="font-size" xsi:type="string">32px</item>
+                    </item>
+                    <item name="grid" xsi:type="array">
+                        <item name="type" xsi:type="string">text</item>
+                    </item>
+                    <item name="area" xsi:type="string">bfb</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="BlueFormBuilder\Core\Ui\DataProvider\FormDataProvider">
+        <arguments>
+            <argument name="additionalFilterPool" xsi:type="array">
+                <item name="fulltext" xsi:type="object">BlueFormBuilder\Core\Ui\Component\Form\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="BlueFormBuilder\Core\Framework\Mail\TransportInterface" type="BlueFormBuilder\Core\Model\Transport" />
+</config>

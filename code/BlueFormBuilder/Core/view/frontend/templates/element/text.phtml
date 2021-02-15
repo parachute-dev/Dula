@@ -1,0 +1,44 @@
+<?php
+/**
+ * @var $block \BlueFormBuilder\Core\Block\Element\Text
+ */
+
+$elementId   = $this->getElHtmlId();
+$element     = $this->getElement();
+$showIcon    = $element->getData('show_icon');
+$icon        = $element->getData('icon');
+$max         = $element->getData('max');
+$showCount   = $element->getData('show_count');
+$limitMsg    = $element->getData('limit_message');
+$inputMask   = $element->getData('input_mask');
+$autoSuggest = $this->getAutoSuggest();
+$attrs       = $this->getControlAttributes();
+$validate    = $this->getElementValidate();
+?>
+<div class="bfb-element-text-wrapper" data-bind="outerClick: outerClick.bind($data)">
+	<input type="text" <?= $this->parseAttributes($attrs) ?> data-bind="textInput: value,click: onClick" data-validate="{<?= $this->parseJson($validate) ?>}"/>
+	<?php if ($showIcon && $icon) { ?>
+		<i class="bfb-element-icon <?= $icon ?>"></i>
+	<?php } ?>
+	<?php if ($autoSuggest) { ?>
+		<div class="bfb-autocomplete-wrapper" data-bind="visible: listVisible" style="display: none">
+			<ul class="bfb-autocomplete" data-bind="foreach: {data: autoOptions, as: 'option'}">
+				<li data-bind="click: function(data, event){$parent.toggleOptionSelected($data)}">
+					<div class="bfb-autocomplete-item">
+						<span data-bind="text:option"></span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	<?php } ?>
+	<?php if ($showCount) { ?>
+		<div class="bfb-element-input-limit" style="display: none" data-bind="visible: showMsg">
+			<?php if ($max) { ?>
+				<span data-bind="text: limit"></span> <?= __('of') ?> <?= $max ?> <?= $limitMsg ?>
+			<?php } else { ?>
+				<span data-bind="text: limit"></span>
+			<?php } ?>
+		</div>
+	<?php } ?>
+</div>
+<script type="text/x-magento-init">{"*": {"Magento_Ui/js/core/app": {"components": {"<?= $elementId ?>": <?= $block->getJsLayout() ?>}}}}</script>

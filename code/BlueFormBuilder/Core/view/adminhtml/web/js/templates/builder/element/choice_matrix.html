@@ -1,0 +1,19 @@
+<table cellspacing="0" cellpadding="0" ng-if="element.columns.length">
+	<thead>
+		<tr>
+			<th></th>
+			<th ng-repeat="column in element.columns" ng-bind-html="column.title" class="mgz-text-center"></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="row in element.rows">
+			<td ng-bind-html="row.title"></td>
+			<td class="mgz-text-center" ng-repeat="column in element.columns">
+				<input type="checkbox" id="matrix-item{{ element.id + '' + $parent.$index + '' + $index }}" class="mgz-control-checkbox" ng-if="element.multiple"/>
+				<label for="matrix-item{{ element.id + '' + $parent.$index + '' + $index }}" ng-if="element.multiple"><span class="mgz-hidden">{{ $row.title + '-' + column.title }}</span></label>
+				<input type="radio" id="matrix-item{{ element.id + '' + $parent.$index + '' + $index }}" class="mgz-control-radio" ng-hide="element.multiple" name="matrix-option{{ $parent.$index }}" data-parent-index="{{ $parent.$index }}"/>
+				<label for="matrix-item{{ element.id + '' + $parent.$index + '' + $index }}" ng-hide="element.multiple"><span class="mgz-hidden">{{ $row.title + '-' + column.title }}</span></label>
+			</td>
+		</tr>
+	</tbody>
+</table>

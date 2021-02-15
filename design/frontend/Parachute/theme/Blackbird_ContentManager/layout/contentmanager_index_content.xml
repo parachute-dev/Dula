@@ -1,0 +1,13 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Blackbird_ContentManager::css/content.css" />
+    </head>
+
+    <body>
+        <referenceContainer name="content">
+            <container name="content-block" htmlClass="acm-content-block" htmlTag="div">
+                <block class="Blackbird\ContentManager\Block\View" name="contentmanager_view" />
+            </container>
+        </referenceContainer>
+    </body>
+</page>

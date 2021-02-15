@@ -1,0 +1,31 @@
+<?php
+/**
+ * @var $block \Magezon\Builder\Block\Element
+ */
+
+$coreHelper = $this->helper('\Magezon\Core\Helper\Data');
+$elements   = $this->getElements();
+$count      = count($elements);
+$element    = $this->getElement();
+$title      = $coreHelper->filter($element->getData('title'));
+$titleAlign = $element->getData('title_align');
+$titleTag   = $element->getData('title_tag');
+?>
+<?php if ($title) { ?>
+<div class="bfb-fieldset-heading bfb-fieldset-heading-align-<?= $titleAlign ?>">
+	<?php if ($title) { ?>
+		<<?= $titleTag ?> class="title"><?= $title ?></<?= $titleTag ?>>
+	<?php } ?>
+</div>
+<?php } ?>
+<div class="bfb-fieldset-content">
+	<?php
+	$elements = $this->getElements();
+	$count    = count($elements);
+	?>
+	<?php if ($count) { ?>
+		<?php foreach ($elements as $index => $_element) { ?>
+			<?= $_element->toHtml() ?>
+		<?php } ?>
+	<?php } ?>
+</div>

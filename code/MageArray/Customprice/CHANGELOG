@@ -1,0 +1,31 @@
+MageArray_Customprice
+
+-------------
+  CHANGELOG
+-------------
+
+===== 1.0.0 =====
+ * Initial stable M2 release
+
+===== 1.0.1 =====
+ * Bug fixes
+ 
+===== 1.0.2 =====
+ * Tab bug fixes
+ * Magento 2.2 Compatibility
+ 
+===== 1.0.3 =====
+* Bug Fixes (Conflict with FormulaPricing)
+* Magento 2.2 Compatibility
+
+===== 1.0.5 =====
+* Bug Fixes (Conflict with FormulaPricing)
+* New Features (CSV Types - One dimensional,option wise csv)
+* Magento 2.2 Compatibility
+
+===== 1.0.6 =====
+ * Compatibility with Magento 2.3
+ 
+===== 1.0.7 =====
+ * Compatibility with Magento 2.3.3
+ * Bug Fixes (Fix Display all range value, Unit functionlaity)

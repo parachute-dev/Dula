@@ -1,0 +1,76 @@
+<?php
+/**
+ * @var $block \BlueFormBuilder\Core\Block\Element\Address
+ */
+
+$elemName          = $this->getElemName();
+$element           = $this->getElement();
+$id                = $element->getId();
+$showAddress1      = $element->getData('show_address1');
+$showAddress2      = $element->getData('show_address2');
+$showCity          = $element->getData('show_city');
+$showState         = $element->getData('show_state');
+$showZip           = $element->getData('show_zip');
+$showCountry       = $element->getData('show_country');
+$defaultValue      = $element->getData('default_value');
+$validate          = $element->getData('required') ? 'data-validate="{required:true}"' : '';
+$countryCollection = $this->getCountryCollection();
+$countrySelected   = $this->getCountrySelected();
+?>
+<div class="addressfield">
+	<?php if ($showAddress1) { ?>
+	<div class="subfield address1field">
+		<input type="text" class="bfb-control" name="<?= $elemName ?>[address1]" placeholder="<?= __('Street Address') ?>" <?= $showAddress1 ? $validate : '' ?> value="<?= isset($defaultValue['address1']) ? $defaultValue['address1'] : '' ?>"/>
+	</div>
+	<?php } ?>
+	<?php if ($showAddress2) { ?>
+	<div class="subfield address2field">
+		<input type="text" class="bfb-control" name="<?= $elemName ?>[address2]" placeholder="<?= __('Address Line 2') ?>"  value="<?= isset($defaultValue['address1']) ? $defaultValue['address2'] : '' ?>"/>
+	</div>
+	<?php } ?>
+	<?php if ($showCity) { ?>
+	<div class="subfield cityfield">
+		<input type="text" class="bfb-control" name="<?= $elemName ?>[city]" placeholder="<?= __('City') ?>"  <?= $showCity ? $validate : '' ?> value="<?= isset($defaultValue['city']) ? $defaultValue['city'] : '' ?>"/>
+	</div>
+	<?php } ?>
+	<?php if ($showState) { ?>
+	<div class="subfield statefield">
+		<select id="<?= $id ?>_state_id" name="<?= $elemName ?>[state_id]" title="<?= __('State/Province') ?>"  <?= $showState ? $validate : '' ?>>
+            <option value=""><?= __('Please select a region, state or province.') ?></option>
+        </select>
+        <input type="text" id="<?= $id ?>_state" name="<?= $elemName ?>[state]" title="<?= __('State/Province') ?>" class="bfb-control validate-not-number-first " placeholder="<?= __('State/Prov/Region') ?>" value="<?= isset($defaultValue['state']) ? $defaultValue['state'] : '' ?>"/>
+	</div>
+	<?php } ?>
+	<?php if ($showZip) { ?>
+	<div class="subfield zipfield">
+		<input type="text" id="<?= $id ?>_zip" class="bfb-control" name="<?= $elemName ?>[zip]" placeholder="<?= __('Postal/Zip') ?>" <?= $showZip ? $validate : '' ?> value="<?= isset($defaultValue['state']) ? $defaultValue['zip'] : '' ?>"/>
+	</div>
+	<?php } ?>
+	<?php if ($showCountry) { ?>
+	<div class="subfield countryfield">
+		<select id="<?= $id ?>_country" name="<?= $elemName ?>[country]" class="bfb-control" <?= $showCountry ? $validate : '' ?>>
+			<?php foreach ($countryCollection as $country) { ?>
+				<?php if ($country->getId()) { ?>
+					<option <?= $countrySelected == $country->getId() ? 'selected' : '' ?> value='<?= $country->getId() ?>'><?= $country->getName() ?></option>	
+				<?php } ?>
+			<?php } ?>
+		</select>
+	</div>
+	<?php } ?>
+	<script type="text/x-magento-init">
+	    {
+	        "#<?= $id ?>_country": {
+	            "regionUpdater": {
+	                "optionalRegionAllowed": true,
+	                "regionListId": "#<?= $id ?>_state_id",
+	                "regionInputId": "#<?= $id ?>_state",
+	                "postcodeId": "#<?= $id ?>_zip",
+	                "form": "#form-validate",
+	                "regionJson": <?= $this->helper(\Magento\Directory\Helper\Data::class)->getRegionJson() ?>,
+	                "defaultRegion": "0",
+	                "countriesWithOptionalZip": <?= $this->helper(\Magento\Directory\Helper\Data::class)->getCountriesWithOptionalZip(true) ?>
+	            }
+	        }
+	    }
+	</script>
+</div>

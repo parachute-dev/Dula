@@ -1,0 +1,27 @@
+<div class="bfb-formbuilder-conditional-children" visible="visible" disable="disabled" css="element.setClasses(element)">
+    <div class="bfb-formbuilder-conditional-children-inner">
+        <div data-role="spinner" class="admin__data-grid-loading-mask" if="$data.showSpinner">
+            <div class="spinner">
+                <span repeat="8"/>
+            </div>
+        </div>
+        <div class="bfb-formbuilder-conditional-children-top">
+            <div class="bfb-formbuilder-conditional-childrens" css="element.recordId" repeat="foreach: elems, item: '$record'">
+                <!-- ko foreach: { data: $record().elems(), as: 'elem'}  -->
+                    <div class="admin__field bfb-formbuilder-conditional-col" css="elem.index" visible="visible" disable="disabled">
+                        <div if="elem.template" template="elem.template"></div>
+                    </div>
+                <!-- /ko -->
+            </div>
+        </div>
+        <div class="bfb-formbuilder-conditional-actions">
+            <button if="element.addButton"
+                attr="{disabled: disabled, 'data-action': 'add_new_row'}"
+                type="button"
+                click="processingAddChild.bind($data, false, false, false)">
+                <span translate="addButtonLabel"/>
+            </button>
+        </div>
+    </div>
+    <div class="admin__additional-info" data-bind="html: $data.additionalInfo"></div>
+</div>

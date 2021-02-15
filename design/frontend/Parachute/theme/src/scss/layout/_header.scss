@@ -1,0 +1,68 @@
+#page{
+	background:white;
+}
+#header {
+	background:white;
+} 
+
+.top-nav{
+	background:colours(brand,two);
+	text-align:center;
+	@include padding(5px);
+	p{
+		padding-bottom:0;
+		color:white;
+	}
+}
+.logo-container{
+	@include padding-top(20px);
+	@include padding-bottom(20px);
+	&__logo {
+		img{
+			max-width:200px;
+		}
+
+	}
+
+	ul{
+		li{
+			img{
+				max-width:30px;
+			}
+		}
+	}
+
+	&__row {
+		align-items:center;
+		justify-content:center;
+	}
+
+	&.sticky {
+		position: fixed;
+			background:white;
+		width: 100%;
+		left: 0;
+		top: 0;
+		z-index: 100;
+		border-top: 0;
+		box-shadow:0px 0px 15px rgba(0,0,0,0.3);
+	}
+}
+
+.hamburger{
+	outline:none;
+
+	@include media-breakpoint-up(lg) { 
+		display:none;
+	}
+
+}
+ 
+
+.trust-bar{
+	background:colours(brand,one);
+	color:#333;
+	a{
+		color:#333;
+	}
+}

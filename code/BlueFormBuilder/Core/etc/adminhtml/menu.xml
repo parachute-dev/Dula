@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license.
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  BlueFormBuilder
+ * @package   BlueFormBuilder_Core
+ * @copyright Copyright (C) 2019 Magezon (https://www.magezon.com)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="BlueFormBuilder_Core::formbuilder" title="Blue Form Builder" translate="title" module="BlueFormBuilder_Core" sortOrder="100" dependsOnModule="BlueFormBuilder_Core" resource="BlueFormBuilder_Core::blueformbuilder" parent="Magento_Backend::content"/>
+		<add id="BlueFormBuilder_Core::forms_add" title="Add New Form" translate="title" module="BlueFormBuilder_Core" sortOrder="10" parent="BlueFormBuilder_Core::formbuilder" action="blueformbuilder/form/new" resource="BlueFormBuilder_Core::form_save"/>
+		<add id="BlueFormBuilder_Core::forms" title="Manage Forms" translate="title" module="BlueFormBuilder_Core" sortOrder="20" parent="BlueFormBuilder_Core::formbuilder" action="blueformbuilder/form" resource="BlueFormBuilder_Core::form"/>
+		<add id="BlueFormBuilder_Core::submissions" title="Form Submissions" translate="title" module="BlueFormBuilder_Core" sortOrder="30" parent="BlueFormBuilder_Core::formbuilder" action="blueformbuilder/submission" resource="BlueFormBuilder_Core::submission"/>
+		<add id="BlueFormBuilder_Core::settings" title="Settings" translate="title" module="BlueFormBuilder_Core" sortOrder="1000" parent="BlueFormBuilder_Core::formbuilder" action="adminhtml/system_config/edit/section/blueformbuilder" resource="BlueFormBuilder_Core::settings"/>
+	</menu>
+</config>

@@ -1,0 +1,171 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/**
+ * @see \Blackbird\ContentManager\Block\ContentList
+ * @var \Blackbird\ContentManager\Block\ContentList $block
+ */
+?>
+
+
+<?php 
+
+$_item = $block->getContent();
+
+$image_category = $_item->getImage("how_to_categ_image"); 
+
+if($_item->getHowToCategImage() == null || $_item->getHowToCategImage() == ""){
+    $image_category = "/assets/img/banner.png";
+}
+
+$_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); //instance of\Magento\Framework\App\ObjectManager
+$contentCollection = $_objectManager->create('Blackbird\ContentManager\Model\ResourceModel\Content\CollectionFactory'); 
+
+$categoryattributes = array(
+    'entity_id',
+    'title',
+    'url_key',
+    'blog_blog_category'
+);
+
+$categories = $contentCollection
+->create()
+->addContentTypeFilter('blog')
+->addAttributeToFilter('blog_blog_category', 6)
+->addAttributeToFilter('status', 1)
+->addAttributeToSelect($categoryattributes);
+?>
+
+<div class="banner-block content-block">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="banner-carousel two-thirds ">
+                <div class="banner">
+                    <div class="container height-small">
+                        <div class="image" style="background-image:url('<?php echo $image_category?>')">
+                        </div> 
+                        <div class="content background-white text-align-left">
+                            <h1 class="h2"><?php echo $_item->getTitle(); ?></h1>
+                            <p><?php echo $_item->getHowToCategContent(); ?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<?php 
+
+$_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); //instance of\Magento\Framework\App\ObjectManager
+$contentCollection = $_objectManager->create('Blackbird\ContentManager\Model\ResourceModel\Content\CollectionFactory'); 
+
+$categoryattributes = array(
+    'entity_id',
+    'title',
+    'url_key',
+
+);
+
+$categories = $contentCollection
+->create()
+->addContentTypeFilter('how_to_category')
+->addAttributeToFilter('status', 1)
+->addAttributeToSelect($categoryattributes);
+?>
+
+<div class="subnav-block no-border">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="flex"> 
+                    <nav>
+                        <h2>How To</h2>
+                        <ul>
+                         <?php foreach ($categories as $category) { ?>
+                            <li><a href="<?= $category->getLinkUrl(); ?>"><?= $category->getTitle(); ?></a></li>
+                        <?php }?>
+                    </ul>
+                </nav>
+                <select name="" id="">
+                    <option value="">Sort By</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<div class="video-block container">
+    <div class="row">
+
+
+      <?php 
+
+
+      $contentCollection = $_objectManager->create('Blackbird\ContentManager\Model\ResourceModel\Content\CollectionFactory'); 
+
+      $videoattributes = array(
+        'entity_id',
+        'title',
+        'url_key',
+        'how_to_youtube_code',
+        'how_to_teaser',
+        'how_to_content',
+        'how_to_background_image',
+        'how_to_category',
+        'how_to_author'
+    );
+
+      $videos = $contentCollection
+      ->create()
+      ->addContentTypeFilter('how_to')
+      ->addAttributeToFilter('how_to_category', array('in' => array((int)$_item->getID())))
+      ->addAttributeToFilter('status', 1)
+      ->addAttributeToSelect($videoattributes);
+
+      foreach ($videos as $video){
+        ?>
+
+
+
+        <div class="col-md-6">
+            <div class="video-item">
+                <a data-fancybox href="<?= $video->getHowToYoutubeCode(); ?>">
+                    <div class="header">
+                        <h3><?= $video->getTitle(); ?></h3>
+                    </div>
+                    <div class="video-content">
+                        <div class="image" style="background-image:url('<?php echo $video->getImage("how_to_background_image"); ?>')"></div>
+                        <div class="content">
+                            <h4>Vieve</h4>
+                            <h6><?= $video->getHowToTeaser(); ?></h6>
+                            <i class="fa fa-play-circle"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    <?php }?>
+
+</div>
+
+</div>

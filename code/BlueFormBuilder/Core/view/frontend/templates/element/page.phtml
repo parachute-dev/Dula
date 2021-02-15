@@ -1,0 +1,17 @@
+<?php
+/**
+ * @var $block \Magezon\Builder\Block\Element
+ */
+
+$elements = $this->getElements();
+$count    = count($elements);
+?>
+<?php if ($count) { ?>
+	<?php foreach ($elements as $index => $_element) { ?>
+		<?php
+			if ($index == 0) $_element->addWrapperClasses('mgz-element-first');
+			if ($index == ($count-1)) $_element->addWrapperClasses('mgz-element-last');
+		?>
+		<?= $_element->toHtml() ?>
+	<?php } ?>
+<?php } ?>

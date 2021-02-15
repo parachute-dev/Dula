@@ -1,0 +1,124 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/**
+ * @see \Blackbird\ContentManager\Block\ContentList
+ * @var \Blackbird\ContentManager\Block\ContentList $block
+ */
+?>
+<?php
+    // Powered by Blackbird Content Manager's Content Lists feature in the backoffice:
+    // <host>/admin/contentmanager/contentlist/
+
+    // Should be output on a listings page as a block with the class type:
+    // Blackbird\ContentManager\Block\ContentList
+
+    // ACM will handle getting the Content Collection (i.e. - a collection of Staff content items)
+    // We'll then query the content collection for categories of the type "staff_category"
+    // This way, we have full access to the categories collection AND the items that were queried by the view
+
+    // Object manager and collection
+    $_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); //instance of\Magento\Framework\App\ObjectManager
+    $_contentCollectionFactory = $_objectManager->create('Blackbird\ContentManager\Model\ResourceModel\Content\CollectionFactory'); 
+
+    // Helpers
+    $_coreHelper = $this->helper('\Magezon\Core\Helper\Data');
+    $_builderHelper = $this->helper('\Magezon\Builder\Helper\Data');
+
+    // Request data
+    $_baseUrl = $block->getBaseUrl();
+    $_currentUrl = $block->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+
+    // Filtering data
+    $_currentCat = !empty($_GET) && !empty($_GET['_cat']) ? intval($_GET['_cat']) : null; // Category
+    $_currentPage = !empty($_GET) && !empty($_GET['p']) ? intval($_GET['p']) : null; // Pagination
+
+    // Collection data of the block
+    $_collection = $block->getCollection();
+    
+    /** @var \Blackbird\ContentManager\Model\ContentList $contentList */
+    $_contentList = $block->getContentList();
+    $_link = $block->getLink();
+
+    // Element data
+    $_id = time() . uniqid();
+    $_identifier = 'staff_category';
+
+    // Get the categories
+    // $_attributes = array(
+    //     'entity_id',
+    //     'title',
+    //     'url_key'
+    // );
+    $_attributes = '*';
+
+    $_items = $_contentCollectionFactory
+        ->create()
+        ->addContentTypeFilter($_identifier)
+        ->addAttributeToFilter('status', 1)
+        ->addAttributeToSelect($_attributes);
+
+    $_items_count = count($_items);
+?>
+
+<?php if($_items_count > 0): ?>
+    <div class="content-category-filters staff-category-filters">
+        <div class="content-category-filters-inner">
+            <div class="content-category-filters-inner-container container">
+                <div class="content-category-filters-inner-row row">
+                    <div class="content-category-filters-inner-content col-xs-12 col-sm-12 col-md-12">
+                        <dl class="content-category-filters-list">
+                            <dt class="sr-only"><?php echo __('Category Filters'); ?></dt>
+
+                            <?php foreach($_items as $_item): ?>
+                                <?php
+                                    // Item data 
+                                    $identifier = 'staff_category';
+                                    $prefix = $identifier . '_';
+
+                                    // Content
+                                    $id = $_item->getData('entity_id');
+                                    $active = intval($_currentCat) == intval($id) ? true : false;
+                                    $title = $_item->getData('title');
+                                    $url = $_item->getData('url_key');
+                                    
+                                    // Prepare to build the filter URL, setup our filter parameters
+                                    $query = [ '_cat' => $id ];
+
+                                    // Optionally add the current pagination value, if it is already in the url
+                                    if(!empty($_currentPage)) $query['p'] = $_currentPage;
+                                    
+                                    // Build via Magento's UrlBuilder accessible within blocks by default
+                                    $filterUrl = $block->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true, '_query' => $query]);
+                                    if(empty($filterUrl)) $filterUrl = $_currentUrl;
+                                ?>
+
+                                <dd id="content-category-filter-<?php echo $id; ?>" class="content-category-filter category-filter filter<?php echo $active ? ' active' : ''; ?>">
+                                    <div class="category-filter-inner filter-inner">
+                                        <a href="<?php echo $filterUrl; ?>" class="content-category-filter-link category-filter-link filter-link">
+                                            <?php echo $title; ?>
+                                        </a>
+                                    </div>
+                                </dd>
+                            <?php endforeach; ?>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

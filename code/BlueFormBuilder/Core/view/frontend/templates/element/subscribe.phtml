@@ -1,0 +1,35 @@
+<?php
+/**
+ * @var $block \BlueFormBuilder\Core\Block\Element\Control
+ */
+
+$elementId    = $this->getElHtmlId();
+$elemName     = $this->getElemName();
+$element      = $this->getElement();
+$defaultValue = $element->getData('default_value') ? 1 : 0;
+$required     = $element->getData('required');
+$subLabel     = $element->getData('sub_label');
+$validate     = [];
+if ($required) $validate['required'] = true;
+?>
+<?php if (!$required) { ?>
+	<input type="hidden" value="0" name="<?= $elemName ?>">
+<?php } ?>
+<input type="checkbox" id="<?= $elementId ?>" class="<?= $elementId ?> bfb-control mgz-control-checkbox" name="<?= $elemName ?>" data-validate="{<?= $this->parseJson($validate) ?>}" data-value="<?= $defaultValue ?>" value="<?= $defaultValue ?>" <?= $defaultValue ? 'checked' : '' ?>/>
+<label for="<?= $elementId ?>"><?= $subLabel ?></label>
+<script>
+	require(['jquery'], function($) {
+        $('#<?= $elementId ?>').click(function(event) {
+            if ($(this).is(':checked')) {
+                if ($(this).data('value')) {
+                    $(this).val($(this).data('value'));
+                } else {
+                    $(this).val(1);
+                }
+            } else {
+                $(this).val(0);
+            }
+            return true;
+        });
+	});
+</script>

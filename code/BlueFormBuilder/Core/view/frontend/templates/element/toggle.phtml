@@ -1,0 +1,20 @@
+<?php
+/**
+ * @var \BlueFormBuilder\Core\Block\Form\Element $block
+ */
+
+$elementId    = $this->getElHtmlId();
+$elemName     = $this->getElemName();
+$element      = $this->getElement();
+$defaultValue = $element->getDefaultValue();
+$textOn       = $element->getData('toggle_text_on');
+$textOff      = $element->getData('toggle_text_off');
+$validate     = [];
+if ($element->getData('required')) $validate['required'] = true;
+?>
+<div class="mgz__actions-switch" data-role="switcher">
+    <input type="checkbox" id="toggle<?= $elementId ?>" class="<?= $elementId ?> bfb-control mgz__actions-switch-checkbox" name="<?= $elemName ?>" value="1" <?= $defaultValue ? 'checked' : '' ?> data-validate="{<?= $this->parseJson($validate) ?>}">
+    <label class="mgz__actions-switch-label" for="toggle<?= $elementId ?>">
+        <span class="mgz__actions-switch-text" data-text-on="<?= $block->escapeHtml($textOn) ?>" data-text-off="<?= $block->escapeHtml($textOff) ?>"></span>
+    </label>
+</div>

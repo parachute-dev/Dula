@@ -1,0 +1,79 @@
+<?php
+/**
+ * @var \BlueFormBuilder\Core\Block\Form\View $block
+ */
+$coreHelper     = $this->helper('\Magezon\Core\Helper\Data');
+$helper         = $this->helper('\BlueFormBuilder\Core\Helper\Data');
+$product        = $block->getProduct();
+$form           = $block->getCurrentForm();
+$submission     = $this->getCurrentSubmission();
+$id             = $form->getRandomId();
+$jsBeforeSubmit = $form->getJsBeforeSubmit();
+$jsAfterSubmit  = $form->getJsAfterSubmit();
+$mageScript     = $coreHelper->serialize($this->getMageScript());
+$width          = $form->getWidth();
+$style          = [];
+$styles = '';
+if ($width) $styles = 'style="width:' . $width . ';"';
+$customCss = $form->getCustomCss();
+$publicKey = $helper->getConfig('recaptcha3/public_key');
+?>
+<?php if ($customCss) { ?>
+<style><?= $form->getCustomCss() ?></style>
+<?php } ?>
+<div id="<?= $form->getContainerId() ?>" class="block bfb <?= $form->getCustomClasses() ?>" <?= $styles ?>>
+    <div class="bfb-loading-mask">
+        <div class="bfb-spinner">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+    </div>
+    <form class="form bfb-form" action="<?= $block->escapeUrl($block->getUrl('blueformbuilder/form/post')) ?>" method="post" id="<?= $form->getHtmlId() ?>" enctype="multipart/form-data" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"  data-role="bfb-form" data-mage-init='<?= $mageScript ?>'>
+        <?php if ($product && $product->getId()) { ?>
+            <input type="hidden" name="product_id" class="bfb-input-hidden" value="<?=  $product->getId() ?>"/>
+        <?php } ?>
+        <?php if ($submission && $submissionId = $submission->getId()) { ?>
+            <input type="hidden" name="submission_id" class="bfb-input-hidden" value="<?= $submissionId ?>"/>
+        <?php } ?>
+        <input type="hidden" name="bfb_form_key" class="bfb-input-hidden" value="<?= $form->getBfbFormKey() ?>"/>
+        <?php if ($form->getEnableRecaptcha()) { ?>
+            <input type="hidden" name="g-recaptcha-response" id="gRecaptchaResponse">
+            <script src="https://www.google.com/recaptcha/api.js?render=<?= $publicKey ?>"></script>
+            <script>
+                grecaptcha.ready(function() {
+                    grecaptcha.execute('<?= $publicKey ?>', {action: 'bfb_form'}).then(function(token) {
+                        var gRecaptchaResponse = document.getElementById('gRecaptchaResponse');
+                        gRecaptchaResponse.value = token;
+                    });
+                });
+            </script>
+        <?php } ?>
+        <?= $this->getProfileHtml() ?>
+    </form>
+    <?php if ($jsBeforeSubmit) { ?>
+        <div class="bfb-form-<?= $id ?>beforesubmit bfb-form-js"><?= $jsBeforeSubmit ?></div>
+    <?php } ?>
+    <?php if ($jsAfterSubmit) { ?>
+        <div class="bfb-form-<?= $id ?>aftersubmit bfb-form-js"><?= $jsAfterSubmit ?></div>
+    <?php } ?>
+    <?php if ($jsOnPageLoad = $form->getJsOnPageload()) { ?>
+        <div class="bfb-form-<?= $id ?>pageload bfb-form-js"><?= $jsOnPageLoad ?></div>
+        <script type="text/javascript">
+            require(['jquery'], function($) {
+                jQuery(document).ready(function($) {
+                    eval($('.bfb-form-<?= $id ?>pageload').html());
+                    $('.bfb-form-<?= $id ?>pageload').remove();
+                });
+            });
+        </script>
+    <?php } ?>
+    <script type="text/x-magento-init">
+        {
+            "#<?= $form->getHtmlId() ?>": {
+                "BlueFormBuilder_Core/js/rules": {},
+                "BlueFormBuilder_Core/js/validate-review": {},
+                "BlueFormBuilder_Core/js/validate-file": {},
+                "BlueFormBuilder_Core/js/validate-phone": {}
+            }
+        }
+    </script>
+</div>

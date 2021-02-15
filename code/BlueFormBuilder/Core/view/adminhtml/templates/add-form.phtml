@@ -1,0 +1,275 @@
+<?php
+/**
+ * @var \BlueFormBuilder\Core\Block\Adminhtml\AddForm $block
+ */
+
+$formHelper = $this->helper('\BlueFormBuilder\Core\Helper\Form');
+$collection = $this->getCollection();
+$templates  = $formHelper->getFormTemplates();
+?>
+<div id="bfb-newform" class="bfb-popup white-popup mfp-with-anim mfp-hide" data-effect="mfp-zoom-in" style="width: 650px;">
+	<form id="bfb-add-form" method="POST" action="<?= $block->getUrl('blueformbuilder/form/ajax') ?>" enctype="multipart/form-data">
+		<div class="bfb-popup-close"></div>
+		<div class="bfb-newform-wrapper">
+			<div class="bfb-newform-top">
+				<a class="bfb-newform-top-item bfb-newform-blank active" href="#bfb-newform-blank" data-type="blank" data-width="650">
+					<span class="bfb-newform-icon"></span>
+					<span class="bfb-newform-text"><?= __('Blank') ?></span>
+				</a>
+				<a class="bfb-newform-top-item bfb-newform-template" href="#bfb-newform-template" data-type="template" data-width="800">
+					<span class="bfb-newform-icon fas mgz-fa-align-justify"></span>
+					<span class="bfb-newform-text"><?= __('Template') ?></span>
+				</a>
+				<a class="bfb-newform-top-item bfb-newform-duplicate" href="#bfb-newform-duplicate" data-type="duplicate" data-width="650">
+					<span class="bfb-newform-icon far mgz-fa-clone"></span>
+					<span class="bfb-newform-text"><?= __('Duplicate') ?></span>
+				</a>
+				<a class="bfb-newform-top-item bfb-newform-import" href="#bfb-newform-import" data-type="import" data-width="650">
+					<span class="bfb-newform-icon fas mgz-fa-cloud-upload-alt"></span>
+					<span class="bfb-newform-text"><?= __('Import') ?></span>
+				</a>
+			</div>
+			<select name="type" class="bfb-newform-type">
+				<option value="blank" selected="selected"><?= __('Blank') ?></option>
+				<option value="template"><?= __('Template') ?></option>
+				<option value="duplicate"><?= __('Duplicate') ?></option>
+				<option value="import"><?= __('Import') ?></option>
+			</select>
+			<div class="bfb-newform-content">
+				<div id="bfb-newform-blank" class="bfb-newform-content-item active"><?= __('(blank form)') ?></div>
+				<div id="bfb-newform-template" class="bfb-newform-content-item">
+					<?php if (is_array($templates) && count($templates)) { ?>
+					<div class="bfb-newform-template-left">
+						<ul>
+							<?php $defaultTemplate = ''; ?>
+							<?php foreach ($templates as $i => $_template) { ?>
+							<?php if ($i == 0) { ?>
+							<?php $defaultTemplate = $_template['file'] ?>
+							<?php } ?>
+							<li><a href="#template<?= $i ?>" class="bfb-newform-template-item <?= ($i==0) ? 'active' : '' ?>" data-file="<?= $_template['file'] ?>" title="<?= $_template['name'] ?>"><?= $_template['name'] ?></a></li>
+							<?php } ?>
+						</ul>
+					</div>
+					<div class="bfb-newform-template-right">
+						<?php foreach ($templates as $i => $_template) { ?>
+						<div id="template<?= $i ?>" class="bfb-newform-template-item <?= ($i==0) ? 'active' : '' ?>">
+							<?php if ($_template['img']) { ?>
+							<a href="<?= $_template['img'] ?>" title="<?= $_template['name'] ?>">
+								<img data-src="<?= $_template['img'] ?>" src=""/>
+							</a>
+							<?php } ?>
+						</div>
+						<?php } ?>
+					</div>
+					<input type="hidden" name="template" value="<?= $defaultTemplate ?>" class="bfb-newform-template-value"/>
+					<?php } ?>
+				</div>
+				<div id="bfb-newform-duplicate" class="bfb-newform-content-item">
+					<select class="admin__control-select bfb-btn" name="form_id">
+						<?php foreach ($collection as $form) { ?>
+						<option value="<?= $form->getId() ?>"><?= $form->getName() ?></option>
+						<?php } ?>
+					</select>
+				</div>
+				<div id="bfb-newform-import" class="bfb-newform-content-item">
+					<div class="bfb-newform-import-btn">
+						<div class="file-uploader-area">
+							<label class="file-uploader-button action-default bfb-btn" for="bfb-newform-import-file"><?= __('Upload Form File') ?><i class="fa 	fa-cloud-upload"></i></label>
+							<input type="file" class="required-entry" disabled accept=".json" id="bfb-newform-import-file" name="formfile"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bfb-newform-footer">
+				<input name="form_key" type="hidden" value="<?= $block->getFormKey() ?>" />
+				<div class="bfb-newform-form-name">
+					<input name="name" type="text" class="admin__control-text required-entry" placeholder="<?= __('Form Name') ?>" />
+				</div>
+				<button id="save-form" class="action-default primary"><?= __('Save Form') ?></button>
+			</div>
+		</div>
+	</form>
+	<div class ="icon loading-icon"></div>
+</div>
+<div id="bfb-plugins" class="bfb-popup white-popup mfp-with-anim mfp-hide" data-effect="mfp-zoom-in">
+	<div class="bfb-popup-close"></div>
+	<iframe id="bfb-iframe" src="" data-src="https://www.magezon.com/productfile/blueformbuilder/plugins.html" frameborder="0" width="100%" height="100%"></iframe>
+</div>
+<script>
+	require([
+		'jquery',
+		'underscore',
+		'mage/template',
+		'text!Magento_Ui/templates/grid/cells/thumbnail/preview.html',
+		'mage/backend/validation',
+		'Magento_Ui/js/modal/modal',
+		'Magezon_Core/js/magnific.min'
+		], function($, _, mageTemplate, thumbnailPreviewTemplate) {
+			$('.bfb-add-new').removeAttr('onclick');
+			$('.bfb-add-new, .bfb-add-new, .item-forms-add a').click(function(e) {
+				e.preventDefault();
+				$.magnificPopup.open({
+					items: {
+						src: '#bfb-newform'
+					},
+					type: 'inline',
+					removalDelay: 300,
+					fixedContentPos: true,
+					fixedBgPos: true,
+					overflowY: 'auto',
+					showCloseBtn: false,
+					callbacks: {
+						beforeOpen: function() {
+							this.st.mainClass = $('#bfb-newform').attr('data-effect');
+						}, 
+						beforeClose: function() {
+							$('#bfb-newform').css('transition', '');
+						},
+						afterClose: function() {
+							$('#bfb-newform').removeClass('ajax-loaded');
+						}
+					}
+				});
+				return false;
+			});
+
+			$('.bfb-plugins').click(function(e) {
+				if (!$('#bfb-plugins iframe').attr('src')) {
+					$('#bfb-plugins iframe').attr('src', $('#bfb-plugins iframe').data('src'));
+				}
+				e.preventDefault();
+				$.magnificPopup.open({
+					items: {
+						src: '#bfb-plugins'
+					},
+					type: 'inline',
+					removalDelay: 300,
+					fixedContentPos: true,
+					fixedBgPos: true,
+					overflowY: 'auto',
+					showCloseBtn: false,
+					callbacks: {
+						beforeOpen: function() {
+							this.st.mainClass = $('#bfb-plugins').attr('data-effect');
+							var windowHeight = $(window).height() - 50;
+							$('#bfb-plugins').css('height', windowHeight);
+						},
+						afterClose: function() {
+							$('#bfb-plugins').css('height','');
+						}
+					}
+				});
+				return false;
+			});
+
+			$('.bfb-popup-close').click(function(e) {
+				$.magnificPopup.close();
+			});
+
+			$('#bfb-newform .bfb-newform-top a').click(function(e) {
+				e.preventDefault();
+				var height1 = $('#bfb-newform').height();
+				$('#bfb-newform').height('');
+				$('.bfb-newform-top a').removeClass('active');
+				$(this).addClass('active');
+				$('.bfb-newform-content-item').removeClass('active');
+				$('.bfb-newform-content-item').find('input, select').attr('disabled', true);
+				var target = $(this).attr('href');
+				$(target).addClass('active');
+				$(target).find('input, select').removeAttr('disabled');
+				var type = $(this).data('type');
+				$('.bfb-newform-type').val(type);
+				var height2 = $('#bfb-newform').height();
+				$('#bfb-newform').height(height1).height(height2);
+				var width = $(this).data('width');
+				$('#bfb-newform').width(width);
+				if (target == '#bfb-newform-template') {
+					$('.bfb-newform-template-left').height($('#bfb-newform-template').height());
+					if (!$('#bfb-add-form .bfb-newform-form-name input').val()) {
+						$('.bfb-newform-template-left a:first').trigger('click');
+					}
+				} else {
+					$('.bfb-newform-template-left').height(0);
+				}
+			});
+
+			$('.bfb-newform-template-left a').click(function(e) {
+				e.preventDefault();
+				$('.bfb-newform-template-left a').removeClass('active');
+				$(this).addClass('active');
+				$('.bfb-newform-template-right .bfb-newform-template-item').removeClass('active');
+				var target = $($(this).attr('href'));
+				target.addClass('active');
+				var imgSelector = target.find('img').first();
+				if (!imgSelector.attr('src') && imgSelector.data('src')) {
+					imgSelector.attr('src', imgSelector.data('src'));
+				}
+				$('.bfb-newform-template-value').val($(this).data('file'));
+				$('.bfb-newform-form-name input').val($(this).attr('title'));
+			});
+
+			$("#bfb-newform-import-file").change(function(e) {
+				var fileName = e.target.files[0].name;
+				var realName = e.target.files[0].name.substring(0, fileName.lastIndexOf("."));
+				$('.bfb-newform-form-name input').val(realName);
+
+				$('.file-uploader-button').html(fileName + '<i class="fa fa-check" style="color: #007dbd"/>');
+			});
+
+			$('.bfb-newform-template-right a').click(function(e) {
+				e.preventDefault();
+				var src       = $(this).attr('href');
+				var title     = $(this).attr('title');
+				var modalHtml = mageTemplate(
+					thumbnailPreviewTemplate,
+					{
+						src: src,
+						alt: title,
+						link: src,
+						linkText: ''
+					}
+					),
+				previewPopup = $('<div/>').html(modalHtml);
+
+				previewPopup.modal({
+					title: title,
+					innerScroll: true,
+					modalClass: 'bfb-template-preview',
+					buttons: [],
+					opened: function() {
+						$('body').addClass('bfb-preview-open');
+					},
+					closed: function() {
+						$('body').removeClass('bfb-preview-open');
+					}
+				}).trigger('openModal');
+
+			});
+
+			$('.bfb-newform-template').click(function(event) {
+				var imgSelector = $('.bfb-newform-template-right').find('img').first();
+				if (!imgSelector.attr('src') && imgSelector.data('src')) {
+					imgSelector.attr('src', imgSelector.data('src'));
+				}
+			});
+
+			$('#bfb-add-form input[name=form_key]').val(FORM_KEY);
+
+			$('#bfb-add-form').validation();
+
+			if (window.location.hash == '#newbfbform') {
+				$('.bfb-add-new').trigger('click');
+			}
+
+			jQuery(document).ready(function($) {
+				var height = $('.page-main-actions').height() * 2 + 60;
+				setTimeout(function() {
+					if ($('.blueformbuilder-form-edit .entry-edit').find('._show').length) {
+						$('html, body').animate({
+							scrollTop: parseInt($('.blueformbuilder-form-edit .entry-edit').find('._show').last().offset().top - height)
+						}, 1000);
+					}
+				}, 2000);
+			});
+		});
+	</script>

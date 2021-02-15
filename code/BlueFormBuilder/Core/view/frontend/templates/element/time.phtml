@@ -1,0 +1,33 @@
+<?php
+/**
+ * @var $block BlueFormBuilder\Core\Block\Element\Control
+ */
+
+$elemName     = $this->getElemName();
+$element      = $this->getElement();
+$minHour      = $element->getData('min_hour');
+$maxHour      = $element->getData('max_hour');
+$hourStep     = $element->getData('hour_step');
+$minMinute    = $element->getData('min_minute');
+$maxMinute    = $element->getData('max_minute');
+$minuteStep   = $element->getData('minute_step');
+$hideAmPm     = $element->getData('hide_am_pm');
+$autofocus    = $element->getData('autofocus');
+$hourOptions  = $this->getRange($minHour, $maxHour, $hourStep);
+$minOptions   = $this->getRange($minMinute, $maxMinute, $minuteStep);
+$defaultValue = $element->getData('default_hour') . ':' . $element->getData('default_minute');
+if (is_string($defaultValue)) $defaultValue = explode(':', $defaultValue);
+?>
+<select class="bfb-control bfb-element-time-dropdown bfb-element-hour" name="<?= $elemName ?>[hour]" <?= $autofocus ? 'autofocus' : '' ?>>
+	<?php foreach ($hourOptions as $_val) { ?>
+		<option value="<?= $_val['label'] ?>" <?php if (isset($defaultValue[0]) && $defaultValue[0] == $_val['label']) { ?>selected="selected"<?php } ?>><?= $_val['label'] ?></option>
+	<?php } ?>
+</select><span>:</span><select class="bfb-control bfb-element-time-dropdown bfb-element-min" name="<?= $elemName ?>[min]">
+	<?php foreach ($minOptions as $_val) { ?>
+		<option value="<?= $_val['label'] ?>" <?php if (isset($defaultValue[1]) && $defaultValue[1] == $_val['label']) { ?>selected="selected"<?php } ?>><?= $_val['label'] ?></option>
+	<?php } ?>
+</select><?php if (!$hideAmPm) { ?><span>:</span><select class="bfb-control bfb-element-time-dropdown" name="<?= $elemName ?>[type]">
+		<option value="am" <?php if (isset($defaultValue[2]) && $defaultValue[2] == 'AM') { ?>selected="selected"<?php } ?>><?= __('AM') ?>
+		<option value="pm" <?php if (isset($defaultValue[2]) && $defaultValue[2] == 'PM') { ?>selected="selected"<?php } ?>><?= __('PM') ?>
+	</select>
+<?php } ?>

@@ -1,0 +1,40 @@
+<?php
+/**
+ * @var $block \BlueFormBuilder\Core\Block\Element\Control
+ */
+
+$elemName     = $this->getElemName();
+$elementId    = $this->getElHtmlId();
+$element      = $this->getElement();
+$showIcon     = $element->getData('show_icon');
+$icon         = $element->getData('icon');
+$defaultValue = $element->getData('default_value');
+$validate     = [];
+$validate['validate-phone'] = true;
+if ($element->getData('required')) $validate['required'] = true;
+?>
+<input type="tel" id="<?= $elementId ?>" class="bfb-control" name="<?= $elemName ?>[main]" data-validate="{<?= $this->parseJson($validate) ?>}" value="<?= $defaultValue ?>"/>
+<input type="hidden" id="<?= $elementId ?>-code" name="<?= $elemName ?>[code]"/>
+<input type="hidden" id="<?= $elementId ?>-dialcode" name="<?= $elemName ?>[dialcode]"/>
+<?php if ($showIcon && $icon) { ?>
+	<i class="bfb-element-icon <?= $icon ?>"></i>
+<?php } ?>
+<script>
+	require(['jquery', 'BlueFormBuilder_Core/js/intlTelInput.min'], function($) {
+		var iti = window.intlTelInput($('#<?= $elementId ?>')[0], {
+			initialCountry: "auto",
+			hiddenInput: "full",
+			geoIpLookup: function(callback) {
+				$.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+					var countryCode = (resp && resp.country) ? resp.country : "";
+					callback(countryCode);
+				});
+			}
+		});
+		window.intlTelInputGlobals.loadUtils('<?= $block->getViewFileUrl('BlueFormBuilder_Core/js/utils.js') ?>');
+		$('#<?= $elementId ?>').on('countrychange', function(e) {
+			$('#<?= $elementId ?>-code').val(iti.getSelectedCountryData().iso2);
+			$('#<?= $elementId ?>-dialcode').val('+' + iti.getSelectedCountryData().dialCode);
+		});
+	})
+</script>

@@ -1,0 +1,200 @@
+<?php
+$form              = $block->getForm();
+$buttonText        = $block->getData('button_text');
+$displayType       = $block->getData('display_type') ? $block->getData('display_type') : 'inline';
+$width             = (int)$block->getData('width') ? ((int)$block->getData('width') . 'px') : '500px';
+$buttonAlign       = $block->getData('button_align') ? $block->getData('button_align') : 'left';
+$showAutomatically = $block->getData('show_automatically');
+$showTimeout       = (int)$block->getData('show_timeout') * 1000;
+$cookieTime        = (int)$block->getData('cookie_time');
+$customClass       = $block->getData('custom_class');
+$id                = $form->getRandomId();
+$htmlId            = 'bfb-form' . $id;
+$popupId           = 'bfb-popup' . $form->getHtmlId();
+$style             = '';
+$attrs             = [];
+if ($width) {
+	$attrs['width'] = $width;
+}
+foreach ($attrs as $key => $value) {
+	$style .= $key . ': ' . $value . ';';
+}
+if ($style) {
+	$style = 'style="' . $style . '"';
+}
+
+$buttonFontSize             = (int)$this->getData('button_font_size');
+$buttonColor                = $block->getData('button_color');
+$buttonHoverColor           = $block->getData('button_hover_color');
+$buttonBackgroundColor      = $block->getData('button_background_color');
+$buttonHoverBackgroundColor = $block->getData('button_hover_background_color');
+$popupSelectors             = array_filter(explode(',', $block->getData('popup_selectors')));
+?>
+<div class="bfb-widget <?= $customClass ?>">
+	<?php if ($displayType == 'inline') { ?>
+		<?= $block->getFormHtml() ?>
+	<?php } ?>
+	<?php if ($displayType == 'popup') { ?>
+		<?php
+		$buttonAlign = $block->getData('popup_button_align') ? $block->getData('popup_button_align') : 'inline';
+		$popupEffect = 'mfp-zoom-in';
+		if ( $buttonText && ($buttonAlign == 'right' || $buttonAlign == 'left')) {
+			$popupEffect = 'bfb-popup-animate-' . $buttonAlign;
+		}
+		?>
+		<div id="<?= $popupId ?>" class="bfb-popup-container bfb-popup-popup <?= 'bfb-popup-align-' . $buttonAlign ?>">
+			<a href="#<?= $htmlId ?>" id="bfb-popup-open<?= $id ?>" class="bfb-popup-link <?= (!$buttonText) ? 'bfb-hidden' : '' ?>" data-effect="<?= $popupEffect ?>" <?= !$buttonText ? 'style="display: none"' : '' ?>><?= $buttonText ?></a>
+		</div>
+		<div id="<?= $htmlId ?>" class="bfb-popup white-popup mfp-with-anim mfp-hide" <?= $style ?>>
+			<div class="bfb-popup-close"></div>
+			<?= $block->getFormHtml() ?>
+		</div>
+		<script>
+			require(['jquery', 'Magezon_Core/js/magnific.min'], function($) {
+				$('#bfb-popup-open<?= $id ?>').magnificPopup({
+					type:'inline',
+					midClick: true,
+					showCloseBtn: false,
+					closeOnContentClick: false,
+					closeBtnInside: false,
+					removalDelay: 500,
+					mainClass: 'bfb-magnific',
+					callbacks: {
+						beforeOpen: function() {
+							$('#bfb-popup-open<?= $id ?>').addClass('bfb-clicked');
+							this.st.mainClass += ' ' + this.st.el.attr('data-effect');
+						},
+						open: function() {
+							$('.bfb-magnific').addClass('bfb-popup-in');
+						}
+					}
+				});
+				$('.bfb-popup-close').click(function(e) {
+					$('.mfp-container').trigger('click');
+					$.magnificPopup.close();
+				});
+				<?php $targetElems = ''; ?>
+				<?php foreach ($popupSelectors as $_selector) {
+					if ($targetElems) $targetElems .= ',';
+					$targetElems .= $_selector;
+				} ?>
+				<?php if ($targetElems) { ?>
+					$('<?= $targetElems ?>').click(function(e) {
+						e.preventDefault();
+						$('#bfb-popup-open<?= $id ?>').trigger('click');
+					});
+				<?php } ?>
+			});
+		</script>
+	<?php } ?>
+
+	<?php if ($displayType == 'slidein') { ?>
+		<div class="bfb-popup-overlay"></div>
+		<div id="<?= $popupId ?>" class="bfb-popup-container bfb-popup-slidein <?= 'bfb-popup-align-' . $buttonAlign ?>">
+			<a data-target="#<?= $htmlId ?>" id="bfb-popup-open<?= $id ?>" class="bfb-popup-link"><?= $buttonText ?></a>
+			<div id="<?= $htmlId ?>" class="bfb-popup" <?= $style ?>>
+				<div id="bfb-popup-close<?= $id ?>" class="bfb-popup-close"></div>
+				<?= $block->getFormHtml() ?>
+			</div>
+		</div>
+	<?php } ?>
+
+	<?php if ($displayType == 'slidein' || $displayType == 'popup') { ?>
+		<script>
+			require(['jquery'
+				<?php if ($cookieTime) { ?>,'mage/cookies'<?php } ?>
+			], function($) {
+				jQuery(document).ready(function($) {
+					$('#<?= $popupId ?>').addClass('a-show');
+				});
+
+				<?php if ($displayType == 'slidein') { ?>
+					<?php if (($buttonAlign == 'right' || $buttonAlign == 'left')) { ?>
+						var initPopup<?= $id ?> = function() {
+							var popupHeight = $('#<?= $htmlId ?>').height();
+							var popupTop    = ($(window).height() - $('#<?= $htmlId ?>').height()) / 2;
+							$('#<?= $htmlId ?>').css('top', popupTop);
+						}
+					<?php } ?>
+
+					$('#bfb-popup-open<?= $id ?>').click(function(e) {
+						e.preventDefault();
+						$('#bfb-popup-open<?= $id ?>').addClass('bfb-clicked');
+						$('#<?= $htmlId ?>').css('max-height', $(window).height() * 0.8);
+						<?php if ($displayType == 'slidein' && ($buttonAlign == 'right' || $buttonAlign == 'left')) { ?>
+							initPopup<?= $id ?>();
+						<?php } ?>
+						$('body').toggleClass('bfb-popup-show');
+						$('#<?= $popupId ?>').toggleClass('popup-show');
+					});
+
+					$('#bfb-popup-close<?= $id ?>,.bfb-popup-overlay').click(function(e) {
+						$('body').removeClass('bfb-popup-show');
+						$('#<?= $popupId ?>').removeClass('popup-show');
+						<?php if ($displayType == 'slidein' && ($buttonAlign == 'right' || $buttonAlign == 'left')) { ?>
+							setTimeout(function() {
+								initPopup<?= $id ?>();
+							}, <?= $showTimeout ?>);
+						<?php } ?>
+					});
+				<?php } ?>
+
+				<?php if ($buttonAlign == 'right' || $buttonAlign == 'left') { ?>
+					var windowHeight = $(window).height();
+					var linkWidth    = $('#<?= $popupId ?>').outerWidth();
+					var linkTop      = (windowHeight - linkWidth) / 2;
+					$('#<?= $popupId ?>').css('top', linkTop);
+				<?php } ?>
+
+				<?php if ($showAutomatically) { ?>
+					jQuery(document).ready(function($) {
+						setTimeout(function() {
+							<?php if ($cookieTime) { ?>
+								if (!$.mage.cookies.get('bfb_form_<?= $form->getIdentifier() ?>')) {
+									var expiryDate = new Date();
+									expiryDate.setTime(expiryDate.getTime() + (<?= $cookieTime ?> * 1000));
+									$.mage.cookies.set('bfb_form_<?= $form->getIdentifier() ?>', true, { expires: expiryDate });
+									if (!$('#bfb-popup-open<?= $id ?>').hasClass('bfb-clicked')) {
+										$('#bfb-popup-open<?= $id ?>').trigger('click');
+									}
+								}
+							<?php } else { ?>
+								if (!$('#bfb-popup-open<?= $id ?>').hasClass('bfb-clicked')) {
+									$('#bfb-popup-open<?= $id ?>').trigger('click');
+								}
+							<?php } ?>
+						}, <?= $showTimeout ?>);
+					});
+				<?php } ?>
+			});
+		</script>
+		<?php } ?>
+	<?php if ($displayType == 'link') { ?>
+		<a href="<?= $form->getUrl() ?>" id="bfb-popup-open<?= $id ?>"><?= $buttonText ?></a>
+	<?php } ?>
+	<style>
+		<?php if ($buttonColor || $buttonBackgroundColor || $buttonFontSize) { ?>
+			#bfb-popup-open<?= $id ?> {
+				<?php if ($buttonColor) { ?>
+					color: <?= $buttonColor ?>;
+				<?php } ?>
+				<?php if ($buttonBackgroundColor) { ?>
+					background-color: <?= $buttonBackgroundColor ?>;
+				<?php } ?>
+				<?php if ($buttonFontSize) { ?>
+					font-size: <?= $buttonFontSize ?>px;
+				<?php } ?>
+			}
+		<?php } ?>
+		<?php if ($buttonHoverColor || $buttonHoverBackgroundColor) { ?>
+			#bfb-popup-open<?= $id ?>:hover {
+				<?php if ($buttonHoverColor) { ?>
+					color: <?= $buttonHoverColor ?>;
+				<?php } ?>
+				<?php if ($buttonHoverBackgroundColor) { ?>
+					background-color: <?= $buttonHoverBackgroundColor ?>;
+				<?php } ?>
+			}
+		<?php } ?>
+	</style>
+</div>

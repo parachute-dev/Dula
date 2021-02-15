@@ -1,0 +1,319 @@
+<?php
+    // Class ref: \Parachute\PageBuilderExtension\Data\Element\ProductsOfCategory
+
+    // Helpers
+    $_coreHelper = $this->helper('\Magezon\Core\Helper\Data');
+    $_builderHelper = $this->helper('\Magezon\Builder\Helper\Data');
+	$_catalogHelper = $this->helper('Magento\Catalog\Helper\Output');
+    $_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $_storeManager = $this->getStoreManager();
+
+    // Element data
+    $_element = $this->getElement();
+    $_id = time() . uniqid();
+
+    // foreach($_element->getData() as $key=>$value):
+    //     echo '<pre>' . $key . '</pre>';
+    //     print_r($value);
+    // endforeach;
+	
+    // Product list categories chosen via the AJAX driven dropdown-picker
+    $_categories = $this->getCategories();
+    $_catIds = [];
+    $_collectionObj = null;
+    $_items = null;
+    $_items_per_page = 10;
+    $_items_curr_page = 1;
+    
+    // Build our array of category ids
+	if(!empty($_categories))
+	{
+		foreach ($_categories as $_c) 
+		{
+            if(!empty($_c["id"])) $_catIds[] = $_c["id"];
+		}	
+    }
+
+    // If we've got an array of valid ids then attempt to load a product collection
+    // that has a category filter populated by those ids
+    if(!empty($_catIds))
+    {
+        $_collectionObj = $_objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
+        $_items = $_collectionObj
+            ->addCategoriesFilter(['in' => $_catIds])
+            ->addStoreFilter($_storeManager->getStore())
+            ->addAttributeToSelect('*') // add all attributes - optional
+            ->addAttributeToFilter('status', 1) // enabled
+            ->addAttributeToFilter('visibility', 4) //visibility in catalog,search
+            // ->setOrder('position', 'ASC')
+            ->setPageSize($_items_per_page)
+            ->setCurPage($_items_curr_page);
+    }
+
+    // Layout
+    // Block classes
+    $block_class_str = "";
+    $block_class_arr = [];
+
+    // Block container classes
+    $block_container_class_str = "";
+    $block_container_class_arr = [];
+
+    // Block inner classes
+    $block_inner_class_str = "";
+    $block_inner_class_arr = [];
+
+    // Block inner container classes
+    $block_inner_container_class_str = "";
+    $block_inner_container_class_arr = [];
+
+    // Listings classes
+    $listings_class_str = "";
+    $listings_class_arr = [];
+
+    // Block
+    $block_active = $_element->getData('block_active');
+    $block_title = $_element->getData('block_title');
+    $block_subtitle = $_element->getData('block_subtitle');
+    $block_content = $_element->getData('block_content');
+    $block_subcontent = $_element->getData('block_subcontent');
+
+    // Block CTA
+    $block_cta_type = $_element->getData('block_cta_type');
+    $block_cta_target = $_element->getData('block_cta_target');
+    $block_cta_link = $_element->getData('block_cta_link');
+    $block_cta_link_text = !empty($_element->getData('block_cta_link_text')) ? $_element->getData('block_cta_link_text') : "Read more";
+
+    // Block sub-content CTA
+    $block_subcontent_cta_type = $_element->getData('block_subcontent_cta_type');
+    $block_subcontent_cta_target = $_element->getData('block_subcontent_cta_target');
+    $block_subcontent_cta_link = $_element->getData('block_cta_subcontent_link');
+    $block_subcontent_cta_link_text = !empty($_element->getData('block_subcontent_cta_link_text')) ? $_element->getData('block_subcontent_cta_link_text') : "Read more";
+
+    $block_header_show = boolval($_element->getData('block_header_show')) ? $_element->getData('block_header_show') : false;
+    $block_footer_show = boolval($_element->getData('block_footer_show')) ? $_element->getData('block_footer_show') : false;
+    $block_layout = !empty($_element->getData("layout_type")) ? $_element->getData("layout_type") : "content";
+    $block_layout = "product-listings"; // Hardcoded
+    $block_header_has_data = false;
+    $block_footer_has_data = false;
+
+    // Does our header have any content?
+    if(
+        !empty($block_title) || 
+        !empty($block_subtitle) || 
+        !empty($block_content) || 
+        !empty($block_subcontent) || 
+        !empty($block_cta_link)) 
+    {
+        $block_header_has_data = true;
+        $block_footer_has_data = true;
+    }
+
+    // Layout type classes
+    if(!empty($block_layout))
+    {
+        $block_class_arr[] = $block_layout;
+        $listings_class_arr[] = $block_layout;
+    }
+
+    // Block images
+    // Primary image
+    $block_image = $_element->getData('block_image');
+    $block_image_src = !empty($_builderHelper->getImageUrl($block_image)) ? $_builderHelper->getImageUrl($block_image) : "";
+    $block_image_background_type = $_element->getData('block_image_background_type');
+    $block_image_video_url = $_element->getData('block_image_video_url');
+    $block_image_youtube_id = $_element->getData('block_image_youtube_id');
+    $block_image_vimeo_id = $_element->getData('block_image_vimeo_id');
+
+    // Secondary image
+    $block_secondary_image = $_element->getData('block_secondary_image');
+    $block_secondary_image_src = !empty($_builderHelper->getImageUrl($block_secondary_image)) ? $_builderHelper->getImageUrl($block_secondary_image) : "";
+    $block_secondary_image_background_type = $_element->getData('block_secondary_image_background_type');
+    $block_secondary_image_video_url = $_element->getData('block_secondary_image_video_url');
+    $block_secondary_image_youtube_id = $_element->getData('block_secondary_image_youtube_id');
+    $block_secondary_image_vimeo_id = $_element->getData('block_secondary_image_vimeo_id');
+
+    // Block image list
+    $block_image_list = $this->toObjectArray($_element->getData('block_image_list'));
+
+    // Layout
+    $layout_type = !empty($_element->getData('layout_type')) ? $_element->getData('layout_type') : "text-panel";
+    $text_align = !empty($_element->getData('text_align')) ? $_element->getData('text_align') : "centre";
+    $content_align = !empty($_element->getData('content_align')) ? $_element->getData('content_align') : "centre";
+    $content_justify = !empty($_element->getData('content_justify')) ? $_element->getData('content_justify') : "centre";
+    $alignment = !empty($_element->getData('alignment')) ? $_element->getData('alignment') : "left";
+    $content_size = !empty($_element->getData('content_size')) ? $_element->getData('content_size') : "medium";
+
+    $block_class_arr[] = $layout_type;
+    $block_class_arr[] = "text-align-" . $text_align;
+    $block_class_arr[] = "align-content-" . $content_align;
+    $block_class_arr[] = "justify-content-" . $content_justify;
+    $block_class_arr[] = "align-" . $alignment;
+    $block_class_arr[] = $content_size;
+    
+    $container_outer_type = !empty($_element->getData('container_type')) ? $_element->getData('container_type') : "container-fluid";
+    $container_outer_type_str = $container_outer_type == "fixed" ? "container" : "container-fluid";
+
+    $container_inner_type = !empty($_element->getData('container_type_inner')) ? $_element->getData('container_type_inner') : "container";
+    $container_inner_type_str = $container_inner_type == "fixed" ? "container" : "container-fluid";
+
+    $no_gutter = $_element->getData('no_gutter');
+    $no_gutter_inner = $_element->getData('no_gutter_inner');
+
+    $block_container_class_arr[] = $container_outer_type_str;
+    $block_inner_container_class_arr[] = $container_inner_type_str;
+
+    if(!empty($no_gutter)) { $block_class_arr[] = "no-gutter"; }
+    if(!empty($no_gutter_inner)) { $block_inner_container_class_arr[] = "no-gutter"; }
+
+    // Carousel Options
+
+    // General
+
+    // Design Options
+
+    // Generate class string
+    // For the block
+    if(!empty($block_class_arr))
+        $block_class_str = join(" ", $block_class_arr);
+
+    // Block container
+    if(!empty($block_container_class_arr))
+        $block_container_class_str = join(" ", $block_container_class_arr);
+
+    // Inner block
+    if(!empty($block_inner_class_arr))
+        $block_inner_class_str = join(" ", $block_inner_class_arr);
+
+    // Inner block container
+    if(!empty($block_inner_container_class_arr))
+        $block_inner_container_class_str = join(" ", $block_inner_container_class_arr);
+
+    // Listings
+    if(!empty($listings_class_arr))
+        $listings_class_str = join(" ", $listings_class_arr);
+?>
+
+<?php if(!empty($block_active)): ?>
+    <div id="block-<?php echo $_id; ?>" class="product-listings-block content-block<?php echo !empty($block_class_str) ? " " . $block_class_str : ""; ?>">
+        <div class="product-listings-block-inner content-block-inner">
+            <div class="product-listings-block-inner-container content-block-inner-container<?php echo !empty($block_container_class_str) ? " " . $block_container_class_str : " container"; ?>">
+                <div class="product-listings-block-inner-row content-block-inner-row row">
+                    <div class="product-listings-block-inner-content content-block-inner-content col-xs-12 col-sm-12 col-md-12">
+                        <div class="product-listings-block-content-container<?php echo !empty($block_inner_container_class_str) ? " " . $block_inner_container_class_str : " container-fluid no-gutter"; ?>">
+                            <div class="product-listings-block-content-container-row row">
+                                <!-- Content Header -->
+                                <div class="product-listings-header content-block-header">
+                                    <div class="product-listings-header-inner content-block-header-inner">
+                                        <div class="product-listings-header-titles content-block-header-titles">
+                                            <?php if(!empty($block_title)): ?>
+                                                <h3 class="product-listings-header-title content-block-header-title">
+                                                    <?php echo $block_title; ?>
+                                                </h3>
+                                            <?php endif; ?>
+
+                                            <?php if(!empty($block_subtitle)): ?>
+                                                <h4 class="product-listings-header-subtitle content-block-header-subtitle">
+                                                    <?php echo $block_subtitle; ?>
+                                                </h4>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Content Header -->
+
+                                <!-- Content -->
+                                <div class="content-block-content">
+									<?php if(!empty($_items)): ?>
+										<?php
+											// We're lazy and we don't want to be handling more code than we need to!
+											// Let's rely on the default Magento 2 blocks to render our product lists
+											// That way, we get all the styling, markup and functionality we enjoy on 
+											// product category pages! Ain't it, neat? We can also configure this block
+											// in more or less the exact same manner as our XML layout files like:
+											// "catalog_category_view.xml"
+											$productsListBlock = $block->getLayout()
+												->createBlock('Magento\Catalog\Block\Product\ListProduct')
+												->setTemplate("Magento_Catalog::product/list.phtml")
+                                                ->setCollection($_items);
+
+                                            // Customise the layout of this block depending on need
+                                            $productsListBlock->setData('_itemLayoutClass', 'col-xs-12 col-sm-5ths col-md-5ths');
+                                            $productsListBlock->setData('_rowLimit', 5);
+                                            $productsListBlock->setData('_isCarousel', true);
+
+											// Render
+											echo $productsListBlock->toHtml();
+										?>
+                                    <?php endif; ?>
+                                </div>
+                                <!-- End Content -->
+
+                                <!-- Content Footer -->
+                                <?php if($block_footer_has_data == true && $block_footer_show == true && !empty($block_cta_link)): ?>
+                                    <div class="content-block-footer product-listings-footer">
+                                        <div class="content-block-footer-inner product-listings-footer-inner">
+                                            <?php if(!empty($block_cta_link)): ?>
+                                                <ul class="content-block-footer-links-list product-listings-footer-links-list">
+                                                    <li class="content-block-footer-link product-listings-footer-link footer-link">
+                                                        <a href="<?php echo $block_cta_link; ?>" title="<?php echo $block_cta_link_text; ?>" class="button">
+                                                            <span class="text"><?php echo $block_cta_link_text; ?></span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                <!-- End Content Footer -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+
+
+        <script>
+            require([
+                'jquery',
+                'slick'
+            ], function ($) {
+                $(document).ready(function () {
+                    $("#block-<?php echo $_id; ?> .products.is-carousel").slick({
+                        arrows:true,
+                        dots: false,
+                        infinite: true,
+                        speed: 300,
+                        slidesToShow: 5,
+                        slidesToScroll: 1,
+                        responsive: [
+                            {
+                                breakpoint:976,
+                                settings: {
+                                    arrows:true, 
+                                    dots: false,
+                                    infinite: true,
+                                    speed: 300,
+                                    slidesToShow: 3,
+                                    slidesToScroll: 1,
+                                }
+                            },
+                            {
+                                breakpoint:767,
+                                settings: {
+                                    arrows:true,
+                                    dots: false,
+                                    infinite: true,
+                                    speed: 300,
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1,
+                                }
+                            }
+                        ]
+                    });
+                });
+            });
+        </script>

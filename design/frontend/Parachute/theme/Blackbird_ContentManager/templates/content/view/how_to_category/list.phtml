@@ -1,0 +1,135 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/**
+ * @see \Blackbird\ContentManager\Block\ContentList
+ * @var \Blackbird\ContentManager\Block\ContentList $block
+ */
+?>
+
+
+<?php
+$collection = $block->getCollection();
+/** @var \Blackbird\ContentManager\Model\ContentList $contentList */
+$contentList = $block->getContentList();
+$link = $block->getLink();
+?>
+
+
+
+
+
+<?php 
+
+$_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); //instance of\Magento\Framework\App\ObjectManager
+$contentCollection = $_objectManager->create('Blackbird\ContentManager\Model\ResourceModel\Content\CollectionFactory'); 
+
+$categoryattributes = array(
+    'entity_id',
+    'title',
+    'url_key',
+
+);
+
+$categories = $contentCollection
+->create()
+->addContentTypeFilter('blog_category')
+->addAttributeToFilter('status', 1)
+->addAttributeToSelect($categoryattributes);
+
+?>
+
+
+<div class="blog-nav-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul>
+                    <li><a href="/blog">All</a></li>
+                    <?php foreach ($categories as $category) { ?>
+                      <li><a href="<?= $category->getLinkUrl(); ?>"><?= $category->getTitle(); ?></a></li>
+
+                  <?php }?>
+
+              </ul>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+<div class="blog-row-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <header>
+                    <h2>Make Up Tips</h2>
+                </header>
+            </div>
+        </div>
+        <div class="row">
+
+            <?php 
+
+            $contentCollection = $_objectManager->create('Blackbird\ContentManager\Model\ResourceModel\Content\CollectionFactory'); 
+
+            $blogattributes = array(
+                'entity_id',
+                'title',
+                'url_key',
+                'blog_preview_image',
+                'blog_entry_date',
+                'blog_teaser',
+                'blog_blog_author'
+
+            );
+
+            $blogs = $contentCollection
+            ->create()
+            ->addContentTypeFilter('blog')
+            ->addAttributeToFilter('status', 1)
+            ->addAttributeToSelect($blogattributes);
+
+            foreach ($blogs as $blog){
+                ?>
+                <div class="col-md-4">
+                    <div class="blog-item">
+                        <a href="<?= $blog->getLinkUrl(); ?>">
+                            <div class="image" style="background-image:url('/assets/img/lip-liner.png')"></div>
+                            <div class="content">
+                                <h6><?= $blog->getBlogEntryDate() ?> | Authors Name</h6>
+                                <h3><?= $blog->getTitle(); ?></h3>
+                                <p><?= $blog->getBlogTeaser() ?> </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            <?php } ?>
+
+        </div>
+        <div class="row footer-row">
+            <div class="col-md-12">
+                <a href="/blog/category/makeup-tips" class="more-blog-button button button-black">
+                    More Tips
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

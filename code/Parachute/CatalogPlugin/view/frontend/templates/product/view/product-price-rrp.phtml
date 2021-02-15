@@ -1,0 +1,20 @@
+<?php
+// Simple block used to show the RRP price when a product is viewed in the trade site.
+// Treats the default store as the source of the RRP price
+
+// Get the currently viewed product
+$_consumerStoreId = 1;
+$_product = $block->getProduct();
+$_storeManager = $block->getStoreManager();
+$_customerSession = $block->getCustomerSession();
+$_finalPrice = $block->getFinalPriceForStore($_product->getId(), $_consumerStoreId);
+$_rrpPrice = $block->getRRPForStore($_product->getId(), $_consumerStoreId);
+$_unitPrice = $block->getUnitPriceForStore($_product->getId(), $_consumerStoreId);
+?>
+
+<?php if($_storeManager->getWebsite()->getCode() == 'trade' && $_rrpPrice > 0): ?>
+    <div class="rrp-price-container">
+        <span class="label"><?php echo __('RRP'); ?></span>
+        <?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($_rrpPrice, true, true); ?>
+    </div>
+<?php endif; ?>

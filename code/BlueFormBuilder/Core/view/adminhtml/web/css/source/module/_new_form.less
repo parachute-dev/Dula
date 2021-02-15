@@ -1,0 +1,273 @@
+#bfb-newform {
+	position: relative;
+	margin: 20px auto;
+	background: #fff;
+	overflow-x: scroll;
+	border-top: 5px solid #007dbd;
+	transition: transform .25s,opacity .25s,height .5s,width .5s;
+
+	.bfb-newform-wrapper {
+		overflow: hidden;
+	}
+
+	.bfb-newform-top {
+		list-style: none;
+		margin: 0;
+		background: #f8fafc;
+		border-bottom: 1px solid #e7e8e9;
+		position: relative;
+		float: left;
+		width: 100%;
+
+		.bfb-newform-top-item {
+			padding: 1.4em 0;
+			display: inline-block;
+			width: 25%;
+			text-align: center;
+			cursor: pointer;
+			vertical-align: top;
+			text-rendering: optimizeLegibility;
+			float: left;
+			margin-bottom: 20px;
+
+			&.active,
+			&:hover,
+			&.active {
+				text-decoration: none;
+				span {
+					color: @bfb-main-hover-color;
+					border-color: @bfb-main-hover-color;
+				}
+			}
+		}
+
+		.bfb-newform-icon {
+			margin: 1em auto;
+			width: 2.75em;
+			height: 4em;
+			border: 2px solid #456;
+			border-radius: 2px;
+			position: relative;
+			display: block;
+
+			&:before {
+				font-size: 20px;
+				top: 30%;
+				position: absolute;
+				left: 0;
+				right: 0;
+			}
+		}
+
+		// .bfb-newform-template {
+		// 	.bfb-newform-icon:before {
+		// 		content: "\f039";
+		// 	}
+		// }
+
+		// .bfb-newform-duplicate {
+		// 	.bfb-newform-icon:before {
+		// 		content: "\f0c5";
+		// 	}
+		// }
+
+		// .bfb-newform-import {
+		// 	.bfb-newform-icon:before {
+		// 		content: "\f01a";
+		// 	}
+		// }
+
+		.bfb-newform-text,
+		.bfb-newform-template,
+		.bfb-newform-duplicate,
+		.bfb-newform-import {
+			font-weight: 500;
+			color: #456;
+			text-transform: uppercase;
+		}
+	}
+
+	.bfb-btn {
+		text-align: left;
+		box-shadow: 0 0 0 0.5px rgba(0,0,0,.1), 0 1px 4px rgba(0,20,40,.12);
+		border: 0;
+		padding: 20px;
+		font-size: 16px;
+		font-weight: normal;
+		background-color: #FFF;
+		position: relative;
+		border-radius: 4px;
+
+		i {
+			font-size: 1.5em;
+			right: 20px;
+			position: absolute;
+			top: 18px;
+		}
+
+		&:hover {
+			box-shadow: 0 0 0 0.5px rgba(0,0,0,.12), 0 2px 6px rgba(0,20,40,.16);
+		}
+	}
+
+	.bfb-newform-content {
+		float: left;
+		width: 100%;
+
+		#bfb-newform-blank {
+			text-align: center;
+			line-height: 200px;
+			font-size: 1.4em;
+		}
+
+		#bfb-newform-duplicate {
+			text-align: center;
+
+			.bfb-btn {
+				width: 300px;
+				margin: 100px auto;
+				color: #303030;
+			}
+
+			select:hover,
+			select {
+				background-image: url('../images/arrows-bg.svg');
+				background-position: calc(~"100% - 26px") -20px, 100%, calc(~"100% - 3.2rem") 0;
+			}
+		}
+
+		#bfb-newform-import {
+			.file-uploader-area {
+				position: relative;
+				width: 300px;
+				margin: 100px auto;
+
+				.bfb-btn {
+					width: 100%;
+					color: #303030;
+				}
+			}
+		}
+
+		.bfb-newform-content-item {
+			display: none;
+
+			&.active {
+				display: block;
+			}
+		}
+
+		#bfb-newform-template {
+			padding: 15px;
+			float: left;
+			height: 450px;
+			width: 100%;
+
+			.bfb-newform-template-left {
+				width: 25%;
+				float: left;
+				max-width: 180px;
+				box-shadow: 0 0 0 0.5px rgba(0,20,40,.11), 0 2px 8px 0 rgba(50,55,90,.2);
+				background: #FFF;
+				height: 100%;
+				overflow-y: scroll;
+
+				ul {
+					list-style: none;
+					padding-top: 10px;
+
+					li {
+						a {
+							display: block;
+							padding: 6px 15px;
+							color: #456;
+
+							&.active,
+							&:hover {
+								color: @bfb-main-color;
+								text-decoration: none;
+							}
+						}
+					}
+				}
+			}
+
+			.bfb-newform-template-right {
+				width: 75%;
+				float: right;
+				padding: 15px;
+				height: 100%;
+				overflow-y: scroll;
+
+				.bfb-newform-template-item {
+					display: none;
+
+					&.active {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+
+	.bfb-newform-content {
+		background-color: #FFF;
+	}
+
+	.bfb-newform-footer {
+		float: left;
+		width: 100%;
+		padding: 1.5em;
+		text-align: right;
+		border-top: 1px solid #e7e8e9;
+		background-color: #f8fafc;
+
+		.admin__control-text {
+			line-height: 30px;
+			border-radius: 4px;
+			width: 250px;
+
+			&:focus {
+				border-color: @bfb-main-hover-color;
+			}
+		}
+
+		#save-form {
+			background-color: @bfb-main-color;
+			border-color: @bfb-main-hover-color;
+			color: #FFF;
+			font-weight: normal;
+			line-height: 30px;
+			border-radius: 4px;
+			text-transform: uppercase;
+
+			&:hover {
+				box-shadow: none;
+				background: @bfb-main-hover-color;
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+			}
+		}
+
+		.bfb-newform-form-name {
+			display: inline-block;
+			position: relative;
+
+			.mage-error {
+				border-color: #e22626;
+			}
+
+			label.mage-error {
+				position: absolute;
+				left: -150px;
+				top: 0px;
+				margin: 0px;
+				display: block;
+				line-height: 25px;
+			}
+		}
+	}
+
+	.bfb-newform-type {
+		display: none;
+	}
+}

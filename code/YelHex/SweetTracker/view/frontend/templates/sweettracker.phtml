@@ -1,0 +1,46 @@
+<?php
+/** @var \YelHex\SweetTracker\Block\SweetTracker $block */
+
+$trackingId = $block->getTrackingId();
+$order = $block->getOrder();
+$orderObject = [];
+
+if ($block->isSuccessPage() && $order && $order->getId()) {
+    $orderObject['transaction_id'] = $order->getIncrementId();
+    $orderObject['total'] = $order->getGrandTotal();
+    $orderObject['products'] = [];
+
+    foreach ($order->getAllItems() as $item) {
+        $categoryName = 'Unknown';
+        $categoryIds = $item->getProduct()->getCategoryIds();
+
+        if (count($categoryIds)) {
+            $categoryName = $block->getCategoryName($categoryIds[0]);
+        }
+
+        array_push($orderObject['products'], [
+            'transaction_id' => $order->getIncrementId(),
+            'id' => $item->getSku(),
+            'name' => $item->getName(),
+            'category' => $categoryName,
+            'price' => round($item->getRowTotalInclTax() / $item->getQtyOrdered(), 2),
+            'qty' => $item->getQtyOrdered()
+        ]);
+    }
+}
+
+?>
+
+<?php if ($trackingId): ?>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "YelHex_SweetTracker/js/sweet-analytics": {
+                "trackingId": "<?= $trackingId ?>",
+                "pageUrl": "<?= $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]) ?>",
+                "order": <?= $orderObject ? json_encode($orderObject) : 'false' ?>
+            }
+        }
+    }
+</script>
+<?php endif; ?>

@@ -1,0 +1,59 @@
+<?php
+$form         = $this->getCurrentForm();
+$gridBlock    = $this->getGridBlock();
+$gridHtml     = $gridBlock->toHtml();
+$columns      = $gridBlock->getColumns();
+$activeFields = ['increment_id', 'action'];
+?>
+<div id="bfb-submission-columns" class="admin__data-grid-action-columns admin__action-dropdown-wrap admin__data-grid-action-column">
+    <a href="#"
+        class="admin__action-dropdown"
+        title="<?= $block->escapeHtml(__('Columns')) ?>">
+        <span class="admin__action-dropdown-text">
+            <span><?= __('Columns') ?></span>
+        </span>
+    </a>
+    <ul class="admin__action-dropdown-menu">
+    	<?php foreach ($columns as $index => $column) { ?>
+    	<?php
+			$id = 'bfb-submission-column-' . $index;
+			$checked = false;
+			$element = $form->getElement($index, 'elem_name');
+			if ($element || in_array($index, $activeFields)) {
+				$checked = true;	
+			}
+		?>
+        <li>
+            <input id="<?= $id ?>" data-target="bfb-submission-grid-<?= $column->getId() ?>" class="admin__control-checkbox" type="checkbox" <?= $checked ? 'checked' : '' ?>>
+			<label for="<?= $id ?>"><?= $column->getHeader() ?></label>
+        </li>
+        <?php } ?>
+    </ul>
+</div>
+<style type="text/css"></style>
+<script>
+	require(['jquery', 'dropdown'], function($) {
+		$('#bfb-submission-columns > .admin__action-dropdown').dropdown({
+			closeOnClickOutside: false
+		});
+	})
+</script>
+<style type="text/css"></style>
+<script>
+	require(['jquery'], function($) {
+		var loadStyles = function() {
+			var styles = '';
+			$('#bfb-submission-columns').find('input').each(function(index, el) {
+				if (!$(this).is(':checked')) {
+					styles += '.' + $(this).data('target') + '{display: none}';
+				}
+			});
+			$('#bfb-submission-columns').next().html(styles);
+		}
+		$('#bfb-submission-columns input').click(function(value) {
+			loadStyles();
+		});
+		loadStyles();
+	});
+</script>
+<?= $gridHtml ?>

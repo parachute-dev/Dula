@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license.
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  BlueFormBuilder
+ * @package   BlueFormBuilder_Core
+ * @copyright Copyright (C) 2019 Magezon (https://www.magezon.com)
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="blueformbuilder_form_block" class="BlueFormBuilder\Core\Block\Widget\Form">
+        <label translate="true">BlueFormBuilder Form</label>
+        <description translate="true"></description>
+        <parameters>
+            <parameter name="code" xsi:type="block" visible="true" required="true">
+                <label translate="true">Form</label>
+                <block class="BlueFormBuilder\Core\Block\Adminhtml\Form\Widget\Chooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string" translate="true">Select Form...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+            <parameter name="display_type" xsi:type="select" visible="true" source_model="BlueFormBuilder\Core\Model\Config\Source\WidgetTypes">
+                <label translate="true">Display Type</label>
+            </parameter>
+            <parameter name="width" xsi:type="text" visible="true">
+                <label translate="true">Width(px)</label>
+            </parameter>
+            <parameter name="button_text" xsi:type="text" visible="true">
+                <label translate="true">Button Text</label>
+            </parameter>
+            <parameter name="button_align" xsi:type="select" visible="true" source_model="BlueFormBuilder\Core\Model\Config\Source\ButtonAligns">
+                <label translate="true">Button Align</label>
+                <depends>
+                    <parameter name="display_type" value="slidein"/>
+                </depends>
+            </parameter>
+            <parameter name="popup_button_align" xsi:type="select" visible="true" source_model="BlueFormBuilder\Core\Model\Config\Source\PopupButtonAligns">
+                <label translate="true">Button Align</label>
+                <depends>
+                    <parameter name="display_type" value="popup"/>
+                </depends>
+            </parameter>
+            <parameter name="popup_selectors" xsi:type="text" visible="true">
+                <label translate="true">Popup Selectors</label>
+                <description translate="true"><![CDATA[Comma-separated.]]></description>
+                <depends>
+                    <parameter name="display_type" value="popup"/>
+                </depends>
+            </parameter>
+            <parameter name="show_automatically" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Popup Automatically</label>
+            </parameter>
+            <parameter name="show_timeout" xsi:type="text" visible="true">
+                <label translate="true">Show after X seconds</label>
+                <description translate="true">After how many seconds popup should show.</description>
+            </parameter>
+            <parameter name="cookie_time" xsi:type="text" visible="true">
+                <label translate="true">Cookie lifetime in X seconds</label>
+                <description translate="true"><![CDATA[After how many seconds popup should show. <br/>5minutes: 300 <br/>30minutes: 1800 <br/>1hour: 3600 <br/>3hours: 10800 <br/>6hours: 21600 <br/>12hours: 43200 <br/>24hours: 86400]]></description>
+            </parameter>
+            <parameter name="custom_class" xsi:type="text" visible="true">
+                <label translate="true">Custom Class</label>
+            </parameter>
+            <parameter name="button_color" xsi:type="text" visible="true">
+                <label translate="true">Button Color</label>
+            </parameter>
+            <parameter name="button_hover_color" xsi:type="text" visible="true">
+                <label translate="true">Button Color on Hover</label>
+            </parameter>
+            <parameter name="button_background_color" xsi:type="text" visible="true">
+                <label translate="true">Background Color</label>
+            </parameter>
+            <parameter name="button_hover_background_color" xsi:type="text" visible="true">
+                <label translate="true">Background Color on Hover</label>
+            </parameter>
+            <parameter name="button_font_size" xsi:type="text" visible="true">
+                <label translate="true">Button Font Size(px)</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

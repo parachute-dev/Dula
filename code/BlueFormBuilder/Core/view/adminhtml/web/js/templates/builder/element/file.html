@@ -1,0 +1,17 @@
+<div class="bfb-element-file-inner">
+	<div class="bfb-file-insert" ng-if="element.dragdrop">
+		<i class="{{ element.icon }}" ng-if="element.show_icon" ng-style="{color: element.icon_color}"></i>
+		<h3 ng-if="element.dragdrop_description" ng-bind-html="element.dragdrop_description"></h3>
+	</div>
+	<label class="file-uploader-button" ng-if="!element.dragdrop">
+		<i class="{{ element.icon }}" ng-if="element.show_icon&&element.icon_position=='left'"></i>
+		<span>{{ element.upload_btn_text }}</span>
+		<i class="{{ element.icon }}" ng-if="element.show_icon&&element.icon_position=='right'"></i>
+	</label>
+	<input type="file" class="admin__control-file" ng-if="!element.dragdrop"/>
+	<div class="bfb-file-meta" ng-if="element.max_file_size && element.allowed_exttensions">
+		{{ element.max_file_size ? 'Max file size: ' + element.max_file_size + ' KB' : '' }}
+		{{ (element.max_file_size && element.allowed_exttensions) ? ' | ' : '' }}
+		{{ element.allowed_exttensions ? 'Allow file types: ' + element.allowed_exttensions : '' }}
+	</div>
+</div>

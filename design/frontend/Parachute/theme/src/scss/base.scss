@@ -1,0 +1,42 @@
+// Setup fonts, vars, functions, mixins, resets and base styles
+@import "vendor/bootstrap/bootstrap-grid"; 
+@import "base/vars";
+@import "base/reset";
+@import "helper/functions";  
+@import "helper/mixins";  
+@import "base/typography";  
+@import "helper/helpers";
+@import "components/buttons";  
+
+@import "vendor/mmenu";  
+@import "vendor/hamburgers/hamburgers";  
+
+// Navigation
+@import "layout/toolbar";  
+@import "layout/footer";   
+
+// Navigation
+@import "components/forms";   
+
+// Grid Blocks
+@import "grid/banners";
+@import "grid/media-text";
+@import "grid/content-listings";
+@import "grid/accordian";
+@import "grid/icon-grid";
+
+//Vendor
+@import "vendor/fancybox";
+@import "vendor/slick";
+@import "vendor/mmenu";
+
+// Pages 
+@import "pages/page";  
+
+// Animations 
+@import "helper/animations";      
+  
+
+  .action.skip.contentarea, .modals-wrapper{
+  	display:none;
+  }

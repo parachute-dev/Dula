@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <SimpleConfigurable_config>
+        	<SimpleConfigurable_settings>
+                <enable>1</enable>
+                <preselect>1</preselect>
+                <updatepageurl>1</updatepageurl>
+                <updatemeta>1</updatemeta>
+            </SimpleConfigurable_settings>
+            <SimpleConfigurable_reload>
+                <content>name,description,short_description,attributes</content>
+                <name>h1 span[itemprop="name"]</name>
+                <description>div[id='product.info.description'] div.product.attribute.description div.value</description>
+                <short_description>div[itemprop="description"]</short_description>
+                <attributes>div.additional-attributes-wrapper</attributes>
+                <sku>[itemprop="sku"]</sku>
+            </SimpleConfigurable_reload>
+        </SimpleConfigurable_config>
+    </default>
+</config>

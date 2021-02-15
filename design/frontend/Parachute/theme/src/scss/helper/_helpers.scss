@@ -1,0 +1,178 @@
+.block-margin{
+    margin:4em 0!important;
+}
+
+.list-inline {
+    li {
+        display: inline-block;
+    }
+}
+
+.background-video, .background-video video{
+    position:absolute;
+    left:0;
+    width:100%;
+    height:100%;
+    top:0;
+    object-fit:cover;
+}
+
+
+.alignright {
+    float: right;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.alignleft {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+
+.aligncenter {
+    display: block;
+    margin: 0 auto 30px auto;
+}
+
+
+img{
+    max-width:100%;
+}
+.background-image-container{
+    position:relative;
+    .background-image{
+        object-fit:cover;
+        width:100%;
+        height:100%;
+
+    }
+}
+
+.content-block{
+
+    width:100%;
+
+}
+
+.content-block-padding{
+    padding-top:3em;
+    padding-bottom:3em;
+}
+.content-block-margin{
+    margin-top:3em;
+    margin-bottom:3em;
+}
+
+.content-header{
+    position:relative;
+    display:inline-block;
+
+    width:100%;
+    padding-bottom:10px;
+    h3{
+        font-weight:bold;
+    }
+
+
+
+    p{
+
+    }
+
+
+    h3{
+
+
+
+    }
+}
+
+
+
+.slick-arrow{
+    border:0;
+    background:none;
+    outline:0;
+    font-size:0;
+    position:absolute;
+    left:30px;
+    top:50%;
+    cursor:pointer;
+    z-index:10;
+
+    &.slick-next{
+       left:auto;
+       right:30px;
+       &:after{
+        font-family:"FontAwesome";
+        content:"\f054";
+        font-size:30px;
+
+    }
+
+}
+&.slick-prev{
+  &:after{
+    font-family:"FontAwesome";
+    content:"\f053";
+    font-size:30px;
+
+}
+}
+}
+
+.slick-dots{
+    width:100%;
+    text-align:center;
+    position:absolute;
+    bottom:0;
+    left:0;
+    z-index:10;
+    li{
+        display:inline-block;
+        margin:10px 5px;
+        button{
+            cursor:pointer;
+            outline:0;
+            border:0;
+            background:none;
+            width:15px;
+            height:15px;
+            font-size:0;
+            border-radius:50%;
+            background:colours(brand,one);
+            border:1px solid colours(brand,two);
+
+        }
+
+        &.slick-active{
+            button{
+              background:colours(brand,two);
+              border:1px solid colours(brand,one);  
+          }
+      }
+  }
+}
+
+.content-block{
+    @include padding-top(60px);
+    @include padding-bottom(60px);
+    &__header{
+        @include padding-bottom(30px);
+
+    }
+
+}
+
+
+.mgz-container{
+width:100%!important;
+}
+.mgz-element-inner{
+padding:0!important;
+}
+.page-title-wrapper{
+    display:none;
+}

@@ -1,0 +1,79 @@
+
+
+.gallery-block{
+
+padding:4em 0;
+text-align:center;
+h2{
+	margin-bottom:20px;
+}
+
+
+.slick-dots{
+	li{
+		display:inline-block;
+		margin:5px;
+
+
+			button{
+		width:auto;
+		height:20px;
+		border:3px solid colours(brand,red)!important;
+		background:transparent;
+		font-size:0;
+		min-width:initial;
+		border:0;
+		outline:0;
+		width:20px;
+		padding:0; 
+
+
+
+	}
+
+		&.slick-active{
+			button{
+		background:colours(brand,red)!important;
+			}
+		}
+	}
+
+}
+
+}
+.gallery-items{
+
+	.slider-item{
+
+
+		align-items:center;
+		justify-self: center;
+		width:100%;
+
+		padding:15px;
+
+		background-position:center;
+		background-size:cover;
+		a{
+
+		display:flex!important;
+		align-items:center;
+				height:40vh;
+		justify-self: center;
+		width:100%;
+		text-align:center;
+		text-align:center;
+		background-position:center;
+		background-size:cover;
+		}
+
+		
+		i{
+			color:white;
+margin:0 auto;
+			font-size:4em;
+
+		}
+
+	}
+}

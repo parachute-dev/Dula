@@ -1,0 +1,19 @@
+<?php
+/**
+ * @var $block BlueFormBuilder\Core\Block\Element\Control
+ */
+
+$elementId    = $this->getElHtmlId();
+$elemName     = $this->getElemName();
+$element      = $this->getElement();
+$showIcon     = $element->getData('show_icon');
+$icon         = $element->getData('icon');
+$defaultValue = $element->getData('default_value');
+$placeholder  = $this->escapeHtmlAttr($element->getData('placeholder'));
+$validate['validate-url'] = true;
+if ($element->getData('required')) $validate['required'] = true;
+?>
+<input type="text" id="<?= $elementId ?>" class="bfb-control" name="<?= $elemName ?>" data-validate="{<?= $this->parseJson($validate) ?>}" value="<?= $defaultValue ?>" placeholder="<?= $placeholder ?>"/>
+<?php if ($showIcon && $icon) { ?>
+	<i class="bfb-element-icon <?= $icon ?>"></i>
+<?php } ?>

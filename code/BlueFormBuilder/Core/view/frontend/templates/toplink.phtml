@@ -1,0 +1,6 @@
+<?php
+$collection = $this->getCollection();
+?>
+<?php foreach ($collection as $form) { ?>
+    <li class="bfb-form-toplink"><a href="<?= $form->getUrl() ?>"><?= $form->getName() ?></a></li>
+<?php } ?>

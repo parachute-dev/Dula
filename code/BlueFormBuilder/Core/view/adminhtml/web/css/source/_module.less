@@ -1,0 +1,554 @@
+@import 'module/_form.less';
+@import 'module/_smart_variables.less';
+@import 'module/_new_form.less';
+@import 'module/_conditional.less';
+
+@bfb-main-color: #007dbd;
+@bfb-main-color2: #e22626;
+@bfb-main-color3: #514943;
+@bfb-main-hover-color: #0077b3;
+@bfb-box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+
+.admin__menu {
+	.item-formbuilder {
+		.submenu-group-title {
+			position: relative;
+
+			&:after {
+				content: url(../Magezon_Core/images/logo.svg);
+				float: right;
+				margin-top: -3px;
+				position: absolute;
+				right: 5px;
+			}
+		}
+	}
+}
+
+.bfb-box-shadow {
+	.mgz-box-shadow(@bfb-box-shadow);
+}
+
+.FontAwesome {
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.BFB_AdminIcon {
+	-webkit-font-smoothing: antialiased;
+	font-family: 'Admin Icons';
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	speak: none;
+}
+
+.bfb-clearfix() {
+	&:before,
+	&:after {
+		content: " ";
+		display: table;
+		clear: both;
+	}
+}
+
+.bfb-customer-notice {
+	.admin__field-complex-content {
+		max-width: 100%;
+	}
+}
+
+.bfb-embed {
+	.admin__field-complex-content {
+		width: 60%;
+		margin: 0 auto;
+	}
+
+	li {
+		list-style: none;
+		margin-bottom: 20px;
+
+		.bfb-embed-note {
+			border: 1px solid #ffd967;
+			padding: 8px 8px 8px 35px;
+			margin-bottom: 10px;
+			background: #fffbf0 url('../BlueFormBuilder_Core/images/note_msg_icon.gif') no-repeat 10px 10px;
+			color: #3d6611;
+			font-weight: 600;
+		}
+
+		textarea {
+			width: 100%;
+			border: 0;
+			height: auto;
+			resize: none;
+		}
+	}
+
+	.admin__field-complex-title {
+		visibility: hidden;
+	}
+}
+
+.admin__field._disabled {
+	.bfb-smart-action {
+		opacity: .6;
+	}
+}
+
+.bfb-form-submissions {
+	.admin__data-grid-header-row {
+		.action-select {
+			padding-right: 0;
+			position: relative;
+
+			&:before {
+				border-top-width: 0;
+				border-right-width: 0;
+				border-bottom-width: 0;
+			}
+		}
+	}
+
+	.admin__data-grid-pager-wrap .selectmenu {
+		padding: 0;
+	}
+
+	.admin__data-grid-filters-wrap .admin__form-field .admin__form-field .admin__form-field-label {
+		padding: 0;
+		border: 0;
+	}
+
+	.data-grid-multicheck-cell .action-multicheck-wrap .admin__control-checkbox + label {
+		display: none;
+	}
+}
+
+#bfb-plugins {
+	@bfb-plugins-transition: transform .25s,opacity .25s,height .5s,width .5s;
+	.mgz-transition(@bfb-plugins-transition);
+	position: relative;
+	margin: 20px auto;
+	background: #fff;
+	overflow-x: scroll;
+	border-top: 5px solid #007dbd;
+	max-width: 1280px;
+	height: 800px;
+	width: 100%;
+
+	iframe h1 {
+		display: none;
+	}
+}
+
+.bfb-action-menu {
+	list-style: none;
+	margin-bottom: 0;
+
+	li {
+		margin-bottom: 8px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.bfb-btn,
+.bfb-btn:focus {
+	padding: 5px 10px;
+	background-color: @bfb-main-color;
+	border-color: @bfb-main-hover-color;
+	color: #FFF;
+	font-weight: normal;
+
+	&:hover {
+		@bfb-box-shadow1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+		.mgz-box-shadow(@bfb-box-shadow1);
+		color: #FFF;
+		background-color: @bfb-main-hover-color;
+		border-color: @bfb-main-hover-color;
+	}
+}
+
+#submission_tabs {
+	.admin__page-nav-item {
+		display: inline-block;
+		border-left: 0;
+		border-top: 3px solid transparent;
+
+		a {
+			border-bottom: 0;
+			text-align: center;
+			padding: 2rem;
+		}
+
+		&._active,
+		&.ui-state-active {
+			.admin__page-nav-link
+			{
+				font-weight: normal;
+			}
+		}
+
+		&:hover {
+			border-top-color: #e4e4e4
+		}
+
+		&.ui-state-active {
+			border-top-color: #eb5202;
+			border-left: 0;
+		}
+	}
+	.admin__page-nav-items {
+		padding: 0;
+	}
+	.ui-state-focus {
+		border-bottom: 0;
+	}
+}
+
+#submission_tabs_main_message_content {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.bfb-column {
+	float: left;
+	width: 100%;
+}
+
+.bfb-columnauto > div {
+	width: auto;
+	display: inline-block;
+}
+
+.bfb-column1 > div {
+	width: 100%;
+}
+
+.bfb-column2 > div {
+	width: 50%;
+	float: left;
+
+	&:nth-child(2n+1) {	
+		clear: left;
+	}
+}
+
+.bfb-column3 > div {
+	width: 33.333%;
+	float: left;
+
+	&:nth-child(3n+1) {	
+		clear: left;
+	}
+}
+
+.bfb-column4 > div {
+	width: 25%;
+	float: left;
+
+	&:nth-child(4n+1) {	
+		clear: left;
+	}
+}
+
+.bfb-column5 > div {
+	width: 20%;
+	float: left;
+
+	&:nth-child(5n+1) {	
+		clear: left;
+	}
+}
+
+.bfb-column6 > div {
+	width: 16.666%;
+	float: left;
+
+	&:nth-child(6n+1) {	
+		clear: left;
+	}
+}
+
+.bfb-element {
+	input.bfb-control,
+	textarea.bfb-control {
+		width: 100%;
+	}
+}
+
+.mgz-element-bfb_recaptcha-icon {
+	background: url('../BlueFormBuilder_Core/images/reCaptcha_logo.png') center center no-repeat;
+	background-size: 32px;
+
+	i {
+		visibility: hidden;
+	}
+}
+
+.bfb-submission-read {
+	display: block;
+	font-weight: bold;
+	line-height: 17px;
+	padding: 0 3px;
+	text-align: center;
+	text-transform: uppercase;
+	border: 1px solid transparent;
+	max-width: 90px;
+	margin: 0 auto;
+
+	&.bfb-submission-read_1 {
+		background: #d0e5a9 none repeat scroll 0 0;
+		border-color: #5b8116;
+		color: #185b00;
+	}
+
+	&.bfb-submission-read_0 {
+		background: #f9d4d4 none repeat scroll 0 0;
+		border-color: #e22626;
+		color: #e22626;
+	}
+}
+
+.blueformbuilder-submission-edit {
+	.admin__field-note {
+		padding: 15px;
+		border: 1px solid #ccc;
+		margin-top: -20px;
+		font-size: 1.4rem;
+		min-height: 50px;
+	}
+
+	.mgz-fa-times-circle {
+		display: none;
+	}
+}
+
+.bfb-rating-summary-1 {
+	.lib-rating-summary(
+		@_icon-count: 1,
+		@_icon-font-size: 30px
+		);
+}
+.bfb-rating-summary-2 {
+	.lib-rating-summary(
+		@_icon-count: 2,
+		@_icon-font-size: 30px
+		);
+}
+.bfb-rating-summary-3 {
+	.lib-rating-summary(
+		@_icon-count: 3,
+		@_icon-font-size: 30px
+		);
+}
+.bfb-rating-summary-4 {
+	.lib-rating-summary(
+		@_icon-count: 4,
+		@_icon-font-size: 30px
+		);
+}
+.bfb-rating-summary-5 {
+	.lib-rating-summary(
+		@_icon-count: 5,
+		@_icon-font-size: 30px
+		);
+}
+.bfb-rating-summary-6 {
+	.lib-rating-summary(
+		@_icon-count: 6,
+		@_icon-font-size: 30px
+		);
+}
+.bfb-rating-summary-7 {
+	.lib-rating-summary(
+		@_icon-count: 7,
+		@_icon-font-size: 30px
+		);
+}
+.bfb-rating-summary-8 {
+	.lib-rating-summary(
+		@_icon-count: 8,
+		@_icon-font-size: 30px
+		);
+}
+.bfb-rating-summary-9 {
+	.lib-rating-summary(
+		@_icon-count: 9,
+		@_icon-font-size: 30px
+		);
+}
+.bfb-rating-summary-10 {
+	.lib-rating-summary(
+		@_icon-count: 10,
+		@_icon-font-size: 30px
+		);
+}
+
+#bfb-submission-columns {
+	float: left;
+	line-height: 1.36;
+	z-index: 490;
+
+	&.active {
+		.admin__action-dropdown-text {
+			&:after {
+				left: 0;
+			}
+		}
+	}
+
+	ul {
+		color: #303030;
+		font-size: 1.3rem;
+		overflow: hidden;
+		padding: 2.2rem 3.5rem 1rem;
+		z-index: 1;
+		width: 550px;
+		left: 0;
+
+		li {
+			float: left;
+			margin-bottom: 1.5rem;
+			padding: 0 1rem 0 0;
+			width: 15.8rem;
+
+			label {
+				&:before {
+					margin-right: 5px;
+				}
+			}
+		}
+	}
+}
+
+.bfb-unread-submissions {
+	margin-left: 5px;
+	position: relative;
+
+	&:before {
+		-webkit-font-smoothing: antialiased;
+		font-family: 'Admin Icons';
+		font-style: normal;
+		font-weight: normal;
+		line-height: 1;
+		speak: none;
+		content: '\e607';
+		font-size: 1.9rem;
+		margin-right: 0;
+	}
+
+	span {
+		background-color: #e22626;
+		border-radius: 1em;
+		color: #ffffff;
+		display: inline-block;
+		font-size: 1.1rem;
+		font-weight: 700;
+		margin-left: .3em;
+		padding: .3em .5em;
+		position: absolute;
+		text-align: center;
+		top: -10px;
+		left: 8px;
+	}
+}
+
+.bfb-preview-open {
+	.modals-wrapper {
+		z-index: 9999;
+		position: relative;
+	}
+}
+
+
+.bfb-popup {
+	.bfb-popup-close {
+		height: 30px;
+		width: 30px;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		line-height: 19px;
+		cursor: pointer;
+		opacity: .5;
+		z-index: 4;
+		background-image: url('../BlueFormBuilder_Core/images/close-icon.png');
+		background-size: 30px;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+}
+
+.bfbreport-chart-header {
+	text-align: center;
+
+	> div {
+		padding: 2.75em 0;
+		height: 26%;
+		text-align: center;
+		width: 22%;
+		display: inline-block;
+
+		.one {
+			-webkit-font-smoothing: antialiased;
+			text-rendering: optimizeLegibility;
+			-moz-osx-font-smoothing: grayscale;
+			display: block;
+			font-size: 2em;
+		}
+	}
+
+	.bfbreport-views {
+		.two {
+			color: #ed8542;
+		}
+	}
+
+	.bfbreport-submissions {
+		.two {
+			color: #6497f3;
+		}
+	}
+
+	.bfbreport-conversion {
+		.two {
+			color: #5da85d;
+		}
+	}
+}
+.bfb-form-submissions {
+	.admin__data-grid-header-row {
+		.action-select {
+			padding-right: 0;
+			position: relative;
+
+			&:before {
+				border-top-width: 0;
+				border-right-width: 0;
+				border-bottom-width: 0;
+			}
+		}
+	}
+
+	.admin__data-grid-pager-wrap .selectmenu {
+		padding: 0;
+	}
+
+	.admin__data-grid-filters-wrap .admin__form-field .admin__form-field .admin__form-field-label {
+		padding: 0;
+		border: 0;
+	}
+
+	.data-grid-multicheck-cell .action-multicheck-wrap .admin__control-checkbox + label {
+		display: none;
+	}
+}

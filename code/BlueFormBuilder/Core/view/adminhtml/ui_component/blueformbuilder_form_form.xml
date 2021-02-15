@@ -1,0 +1,542 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license.
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  BlueFormBuilder
+ * @package   BlueFormBuilder_Core
+ * @copyright Copyright (C) 2019 Magezon (https://www.magezon.com)
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">blueformbuilder_form_form.blueformbuilder_form_form_data_source</item>
+            <item name="deps" xsi:type="string">blueformbuilder_form_form.blueformbuilder_form_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Form Information</item>
+        <item name="buttons" xsi:type="array">
+            <item name="view" xsi:type="string">BlueFormBuilder\Core\Block\Adminhtml\Form\Edit\Button\View</item>
+            <item name="save" xsi:type="string">BlueFormBuilder\Core\Block\Adminhtml\Form\Edit\Button\Save</item>
+            <item name="delete" xsi:type="string">BlueFormBuilder\Core\Block\Adminhtml\Form\Edit\Button\Delete</item>
+            <item name="export_submissions" xsi:type="string">BlueFormBuilder\Core\Block\Adminhtml\Form\Edit\Button\ExportSubmissions</item>
+            <item name="back" xsi:type="string">BlueFormBuilder\Core\Block\Adminhtml\Form\Edit\Button\Back</item>
+        </item>
+        <item name="config" xsi:type="array">
+            <item name="namespace" xsi:type="string">blueformbuilder_form_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <dataSource name="blueformbuilder_form_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">BlueFormBuilder\Core\Ui\DataProvider\Form\FormDataProvider</argument>
+            <argument name="name" xsi:type="string">blueformbuilder_form_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">form_id</argument>
+            <argument name="requestFieldName" xsi:type="string">form_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/save"/>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <fieldset name="builder">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Magezon Blue Form Builder</item>
+                <item name="sortOrder" xsi:type="number">10</item>
+                <item name="dataScope" xsi:type="string">data</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <field name="profile">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string"/>
+                    <item name="class" xsi:type="string">BlueFormBuilder\Core\Ui\Component\Form\Element\Builder</item>
+                    <item name="component" xsi:type="string">BlueFormBuilder_Core/js/builder</item> 
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="additionalClasses" xsi:type="string">admin__field-wide</item>
+                    <item name="ajax_data" xsi:type="array">
+                        <item name="load_builder_url" xsi:type="string">blueformbuilder/builder/load</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="common">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string"/>
+                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="visible" xsi:type="boolean">false</item>
+                <item name="dataScope" xsi:type="string">data</item>
+            </item>
+        </argument>
+        <field name="form_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">hidden</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="plugins" class="BlueFormBuilder\Core\Ui\Component\Form\Element\Plugins">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Plugins</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">400</item>
+            </item>
+        </argument>
+    </fieldset>
+    <fieldset name="settings">
+        <fieldset name="email">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Email Notifications</item>
+                    <item name="collapsible" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                </item>
+            </argument>
+            <fieldset name="admin">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Admin</item>
+                        <item name="collapsible" xsi:type="boolean">true</item>
+                        <item name="sortOrder" xsi:type="number">100</item>
+                        <item name="dataScope" xsi:type="string">data</item>
+                    </item>
+                </argument>
+                <field name="enable_notification">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="sortOrder" xsi:type="number">10</item>
+                            <item name="dataType" xsi:type="string">boolean</item>
+                            <item name="formElement" xsi:type="string">checkbox</item>
+                            <item name="prefer" xsi:type="string">toggle</item>
+                            <item name="label" xsi:type="string" translate="true">Enable Admin Notification</item>
+                            <item name="valueMap" xsi:type="array">
+                                <item name="true" xsi:type="string">1</item>
+                                <item name="false" xsi:type="string">0</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="sender_name">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="sortOrder" xsi:type="number">20</item>
+                            <item name="dataType" xsi:type="string">string</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="label" xsi:type="string" translate="true">Sender Name</item>
+                            <item name="component" xsi:type="string">BlueFormBuilder_Core/js/form/input-smart-variables</item> 
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="imports" xsi:type="array">
+                                <item name="visible" xsi:type="string">ns = ${ $.ns }, index = enable_notification :checked</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="sender_email">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="sortOrder" xsi:type="number">30</item>
+                            <item name="dataType" xsi:type="string">string</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="label" xsi:type="string" translate="true">Sender Email</item>
+                            <item name="component" xsi:type="string">BlueFormBuilder_Core/js/form/input-smart-variables</item> 
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="imports" xsi:type="array">
+                                <item name="visible" xsi:type="string">ns = ${ $.ns }, index = enable_notification :checked</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="reply_to">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="sortOrder" xsi:type="number">40</item>
+                            <item name="dataType" xsi:type="string">string</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="label" xsi:type="string" translate="true">Reply To</item>
+                            <item name="component" xsi:type="string">BlueFormBuilder_Core/js/form/input-smart-variables</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="validate-email" xsi:type="boolean">false</item>
+                            </item>
+                            <item name="imports" xsi:type="array">
+                                <item name="visible" xsi:type="string">ns = ${ $.ns }, index = enable_notification :checked</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="recipients">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="sortOrder" xsi:type="number">50</item>
+                            <item name="dataType" xsi:type="string">string</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="label" xsi:type="string" translate="true">Send Email(s) To</item>
+                            <item name="additionalInfo" xsi:type="string"><![CDATA[When the form is submitted, an email will be sent to these addresses. You can add multiple emails, separated by a comma.]]></item>
+                            <item name="validation" xsi:type="array">
+                                <item name="validate-email" xsi:type="boolean">false</item>
+                            </item>
+                            <item name="imports" xsi:type="array">
+                                <item name="visible" xsi:type="string">ns = ${ $.ns }, index = enable_notification :checked</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="recipients_bcc">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="sortOrder" xsi:type="number">60</item>
+                            <item name="dataType" xsi:type="string">string</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="label" xsi:type="string" translate="true">BBC</item>
+                            <item name="additionalInfo" xsi:type="string"><![CDATA[You can add multiple emails, separated by a comma.]]></item>
+                            <item name="imports" xsi:type="array">
+                                <item name="visible" xsi:type="string">ns = ${ $.ns }, index = enable_notification :checked</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="email_subject">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="sortOrder" xsi:type="number">70</item>
+                            <item name="dataType" xsi:type="string">string</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="label" xsi:type="string" translate="true">Email Subject</item>
+                            <item name="component" xsi:type="string">BlueFormBuilder_Core/js/form/input-smart-variables</item> 
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="imports" xsi:type="array">
+                                <item name="visible" xsi:type="string">ns = ${ $.ns }, index = enable_notification :checked</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="email_body">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="class" xsi:type="string">\Magento\Ui\Component\Form\Element\Wysiwyg</item>
+                            <item name="label" xsi:type="string" translate="true">Email Body</item>
+                            <item name="formElement" xsi:type="string">wysiwyg</item>
+                            <item name="template" xsi:type="string">ui/form/field</item>
+                            <item name="component" xsi:type="string">BlueFormBuilder_Core/js/form/smart-variables</item>
+                            <item name="additionalClasses" xsi:type="string">bfb-smart-variables-editor</item>
+                            <item name="editorMode" xsi:type="boolean">true</item>
+                            <item name="wysiwyg" xsi:type="boolean">true</item>
+                            <item name="disableMagezonBuilder" xsi:type="boolean">true</item>
+                            <item name="sortOrder" xsi:type="number">80</item>
+                            <item name="rows" xsi:type="number">8</item>
+                            <item name="wysiwygConfigData" xsi:type="array">
+                                <item name="height" xsi:type="string">300px</item>
+                            </item>
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="imports" xsi:type="array">
+                                <item name="visible" xsi:type="string">ns = ${ $.ns }, index = enable_notification :checked</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="attach_files">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="sortOrder" xsi:type="number">90</item>
+                            <item name="dataType" xsi:type="string">boolean</item>
+                            <item name="formElement" xsi:type="string">checkbox</item>
+                            <item name="prefer" xsi:type="string">toggle</item>
+                            <item name="label" xsi:type="string" translate="true">Attach file uploads to emails</item>
+                            <item name="valueMap" xsi:type="array">
+                                <item name="true" xsi:type="string">1</item>
+                                <item name="false" xsi:type="string">0</item>
+                            </item>
+                            <item name="imports" xsi:type="array">
+                                <item name="visible" xsi:type="string">ns = ${ $.ns }, index = enable_notification :checked</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+            </fieldset>
+            <fieldset name="customer">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Customer</item>
+                        <item name="collapsible" xsi:type="boolean">true</item>
+                        <item name="sortOrder" xsi:type="number">200</item>
+                        <item name="dataScope" xsi:type="string">data</item>
+                    </item>
+                </argument>
+                <container name="customer_notice">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="sortOrder" xsi:type="number">10</item>
+                            <item name="label" xsi:type="string"/>
+                            <item name="template" xsi:type="string">ui/form/components/complex</item>
+                            <item name="content" xsi:type="string"><![CDATA[Make sure to edit the email field in your form and check the option <b>Advanced > Send Autoresponder</b> for fields where we should send autoresponder emails.]]></item>
+                            <item name="additionalClasses" xsi:type="string">bfb-customer-notice</item>
+                        </item>
+                    </argument>
+                </container>
+                <field name="enable_customer_notification">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="sortOrder" xsi:type="number">20</item>
+                            <item name="dataType" xsi:type="string">boolean</item>
+                            <item name="formElement" xsi:type="string">checkbox</item>
+                            <item name="prefer" xsi:type="string">toggle</item>
+                            <item name="label" xsi:type="string" translate="true">Enable Customer Notification</item>
+                            <item name="valueMap" xsi:type="array">
+                                <item name="true" xsi:type="string">1</item>
+                                <item name="false" xsi:type="string">0</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="customer_sender_name">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="sortOrder" xsi:type="number">30</item>
+                            <item name="dataType" xsi:type="string">string</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="label" xsi:type="string" translate="true">Sender Name</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="imports" xsi:type="array">
+                                <item name="visible" xsi:type="string">ns = ${ $.ns }, index = enable_customer_notification :checked</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="customer_sender_email">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="sortOrder" xsi:type="number">40</item>
+                            <item name="dataType" xsi:type="string">string</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="label" xsi:type="string" translate="true">Sender Email</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="imports" xsi:type="array">
+                                <item name="visible" xsi:type="string">ns = ${ $.ns }, index = enable_customer_notification :checked</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="customer_reply_to">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="sortOrder" xsi:type="number">50</item>
+                            <item name="dataType" xsi:type="string">string</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="label" xsi:type="string" translate="true">Reply To</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="validate-email" xsi:type="boolean">false</item>
+                            </item>
+                            <item name="imports" xsi:type="array">
+                                <item name="visible" xsi:type="string">ns = ${ $.ns }, index = enable_customer_notification :checked</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="customer_email_subject">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="label" xsi:type="string" translate="true">Email Subject</item>
+                            <item name="component" xsi:type="string">BlueFormBuilder_Core/js/form/input-smart-variables</item>
+                            <item name="dataType" xsi:type="string">string</item>
+                            <item name="sortOrder" xsi:type="number">60</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="imports" xsi:type="array">
+                                <item name="visible" xsi:type="string">ns = ${ $.ns }, index = enable_customer_notification :checked</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="customer_email_body">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="class" xsi:type="string">\Magento\Ui\Component\Form\Element\Wysiwyg</item>
+                            <item name="component" xsi:type="string">BlueFormBuilder_Core/js/form/smart-variables</item>
+                            <item name="additionalClasses" xsi:type="string">bfb-smart-variables-editor</item>
+                            <item name="editorMode" xsi:type="boolean">true</item>
+                            <item name="label" xsi:type="string" translate="true">Email Body</item>
+                            <item name="formElement" xsi:type="string">wysiwyg</item>
+                            <item name="template" xsi:type="string">ui/form/field</item>
+                            <item name="wysiwyg" xsi:type="boolean">true</item>
+                            <item name="disableMagezonBuilder" xsi:type="boolean">true</item>
+                            <item name="sortOrder" xsi:type="number">70</item>
+                            <item name="rows" xsi:type="number">8</item>
+                            <item name="wysiwygConfigData" xsi:type="array">
+                                <item name="height" xsi:type="string">300px</item>
+                            </item>
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="imports" xsi:type="array">
+                                <item name="visible" xsi:type="string">ns = ${ $.ns }, index = enable_customer_notification :checked</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="customer_attach_files">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="sortOrder" xsi:type="number">80</item>
+                            <item name="dataType" xsi:type="string">boolean</item>
+                            <item name="formElement" xsi:type="string">checkbox</item>
+                            <item name="prefer" xsi:type="string">toggle</item>
+                            <item name="label" xsi:type="string" translate="true">Attach file uploads to emails</item>
+                            <item name="valueMap" xsi:type="array">
+                                <item name="true" xsi:type="string">1</item>
+                                <item name="false" xsi:type="string">0</item>
+                            </item>
+                            <item name="imports" xsi:type="array">
+                                <item name="visible" xsi:type="string">ns = ${ $.ns }, index = enable_customer_notification :checked</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+            </fieldset>
+        </fieldset>
+        <fieldset name="success_message">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">200</item>
+                    <item name="additionalClasses" xsi:type="string">bfb-content-fieldset</item>
+                    <item name="collapsible" xsi:type="boolean">true</item>
+                    <item name="label" xsi:type="string" translate="true">Success Message</item>
+                    <item name="dataScope" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <field name="success_message">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="class" xsi:type="string">\Magento\Ui\Component\Form\Element\Wysiwyg</item>
+                        <item name="component" xsi:type="string">BlueFormBuilder_Core/js/form/smart-variables</item>
+                        <item name="additionalClasses" xsi:type="string">bfb-smart-variables-editor</item>
+                        <item name="editorMode" xsi:type="boolean">true</item>
+                        <item name="formElement" xsi:type="string">wysiwyg</item>
+                        <item name="template" xsi:type="string">ui/form/field</item>
+                        <item name="wysiwyg" xsi:type="boolean">true</item>
+                        <item name="disableMagezonBuilder" xsi:type="boolean">true</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                        <item name="rows" xsi:type="number">8</item>
+                        <item name="wysiwygConfigData" xsi:type="array">
+                            <item name="height" xsi:type="string">300px</item>
+                        </item>
+                    </item>
+                </argument>
+            </field>
+            <field name="success_message_header">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Header Content</item>
+                        <item name="editorMode" xsi:type="boolean">true</item>
+                        <item name="formElement" xsi:type="string">textarea</item>
+                        <item name="sortOrder" xsi:type="number">20</item>
+                        <item name="rows" xsi:type="number">8</item>
+                        <item name="wysiwygConfigData" xsi:type="array">
+                            <item name="height" xsi:type="string">300px</item>
+                        </item>
+                    </item>
+                </argument>
+            </field>
+            <field name="success_message_footer">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Footer Content</item>
+                        <item name="editorMode" xsi:type="boolean">true</item>
+                        <item name="formElement" xsi:type="string">textarea</item>
+                        <item name="sortOrder" xsi:type="number">30</item>
+                        <item name="rows" xsi:type="number">8</item>
+                        <item name="wysiwygConfigData" xsi:type="array">
+                            <item name="height" xsi:type="string">300px</item>
+                        </item>
+                    </item>
+                </argument>
+            </field>
+            <field name="success_message_style">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">BlueFormBuilder\Core\Model\Source\SuccessMessageStyle</item>
+                    <item name="config" xsi:type="array">
+                        <item name="component" xsi:type="string">Magezon_UiBuilder/js/form/element/ui-select</item>
+                        <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" xsi:type="string" translate="true">Style</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="sortOrder" xsi:type="number">40</item>
+                        <item name="disableLabel" xsi:type="boolean">true</item>
+                        <item name="groupsConfig" xsi:type="array">
+                            <item name="style1" xsi:type="array">
+                                <item name="color1" xsi:type="string">success_message_heading_color</item>
+                                <item name="color2" xsi:type="string">success_message_heading_background_color</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </field>
+            <field name="success_message_heading_color">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="component" xsi:type="string">Magezon_UiBuilder/js/form/element/color-picker</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" xsi:type="string" translate="true">Color</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="sortOrder" xsi:type="number">50</item>
+                        <item name="additionalClasses" xsi:type="string">uibuilder-element-color minicolors</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="success_message_heading_background_color">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="component" xsi:type="string">Magezon_UiBuilder/js/form/element/color-picker</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" xsi:type="string" translate="true">Background Color</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="sortOrder" xsi:type="number">60</item>
+                        <item name="additionalClasses" xsi:type="string">uibuilder-element-color minicolors</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="success_message_heading_border_color">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="component" xsi:type="string">Magezon_UiBuilder/js/form/element/color-picker</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" xsi:type="string" translate="true"><![CDATA[Border & Circle Color]]></item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="sortOrder" xsi:type="number">70</item>
+                        <item name="additionalClasses" xsi:type="string">uibuilder-element-color minicolors</item>
+                    </item>
+                </argument>
+            </field>
+        </fieldset>
+    </fieldset>
+</form>

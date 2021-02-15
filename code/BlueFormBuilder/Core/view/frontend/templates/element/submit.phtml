@@ -1,0 +1,24 @@
+<?php
+/**
+ * @var $block \BlueFormBuilder\Core\Block\Element\Control
+ */
+
+$element      = $this->getElement();
+$title        = $element->getData('title');
+$buttonStyle  = $element->getData('button_style');
+$buttonSize   = $element->getData('button_size');
+$addIcon      = $element->getData('show_icon');
+$iconPosition = $element->getData('icon_position');
+$icon         = $element->getData('icon');
+?>
+<div class="mgz-button mgz-btn-style-<?= $buttonStyle ?> mgz-btn-size-<?= $buttonSize ?>">
+	<button type="submit" class="mgz-btn mgz-link">
+		<?php if ($addIcon && $icon && $iconPosition == 'left') { ?>
+			<i class="<?= $icon ?>"></i>
+		<?php } ?>
+		<span><?= $title ?></span>
+		<?php if ($addIcon && $icon && $iconPosition == 'right') { ?>
+			<i class="<?= $icon ?>"></i>
+		<?php } ?>
+	</button>
+</div>

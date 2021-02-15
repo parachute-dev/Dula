@@ -1,0 +1,105 @@
+
+
+label{
+  @include font-size(14px,"body");
+  font-weight:bold;
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+  font-size:12px;
+  margin-bottom:5px;
+  display:inline-block;
+  width:100%;
+}
+
+input, select, textarea{
+  padding:12px 25px;
+  @include font-size(14px,"body");
+  font-size:15px; 
+  letter-spacing:2px; 
+  margin-bottom:15px;
+  color:black;
+  width:100%;
+  border:1px solid colours(brand,grey_line);
+
+  background:white;
+
+}
+input[type=checkbox], input[type=radio]{
+  width:auto;
+  margin-bottom:0;
+}
+textarea{
+  height:120px!important;
+}
+
+.field{
+  width:50%;
+  float:left;
+  padding:0 10px;
+}
+input, select{
+  width:100%;
+
+}
+fieldset.field{
+  width:100%;
+  padding:0;
+}
+fieldset legend{
+  display:none;
+}
+
+
+
+input[type=checkbox] + label{
+  width:Auto;
+  margin:15px;
+  vertical-align:middle;
+}
+input[type=checkbox]{
+  vertical-align:middle;
+  display:inline-block;
+}
+
+
+.nf-form-wrap {
+ .nf-error-wrap {
+  position:absolute;
+  top:0;
+  right:0;
+}
+
+.nf-form-errors {
+  position:absolute;
+  bottom:-30px;
+  left:0;
+}
+
+
+.nf-form-content .label-above .nf-field-label{
+  margin-bottom:5px;
+}
+#ninja_forms_required_items, .nf-field-container{
+  margin-bottom:10px;
+}
+.nf-form-content .list-select-wrap .nf-field-element>div, .nf-form-content input:not([type=button]), .nf-form-content textarea{
+  background:white;
+}
+.nf-form-content label{
+  font-size:15px;
+}
+
+.nf-form-fields-required{
+  display:none!important;
+}
+
+.nf-form-content {
+  padding:0;
+
+  input{
+    background:white;
+  }
+
+}
+}
+

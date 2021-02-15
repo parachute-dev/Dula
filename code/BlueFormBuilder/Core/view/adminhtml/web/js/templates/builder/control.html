@@ -1,0 +1,21 @@
+<div ng-class="getFieldClasses()">
+	<div class="bfb-element-label" ng-if="element.label_position!=='below'">
+		<label ng-if="element.label"><span ng-bind-html="getTrustedHtml(element.label)"></span></label>
+		<div class="bfb-element-tooltip" ng-if="element.tooltip">
+			<div class="bfb-element-tooltip-action action-help"><i class="fas mgz-fa-question-circle"></i></div>
+			<div class="bfb-element-tooltip-content" ng-bind-html="getTrustedHtml(element.tooltip)"></div>
+		</div>
+	</div>
+	<div class="bfb-element-control">
+		<div class="bfb-element-control-inner mgz-component-element-tmpl"></div>
+		<div class="bfb-error"></div>
+		<div class="bfb-element-description" ng-if="element.description" ng-bind-html="getTrustedHtml(element.description)"></div>
+	</div>
+	<div class="bfb-element-label" ng-if="element.label_position=='below'">
+		<label ng-if="element.label"><span ng-bind-html="getTrustedHtml(element.label)"></span></label>
+		<div class="bfb-element-tooltip" ng-if="element.tooltip">
+			<div class="bfb-element-tooltip-action action-help"><i class="fas mgz-fa-question-circle"></i></div>
+			<div class="bfb-element-tooltip-content" ng-bind-html="getTrustedHtml(element.tooltip)"></div>
+		</div>
+	</div>
+</div>

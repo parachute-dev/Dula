@@ -1,0 +1,228 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/**
+ * @see \Blackbird\ContentManager\Block\ContentList
+ * @var \Blackbird\ContentManager\Block\ContentList $block
+ */
+?>
+
+
+<?php
+$collection = $block->getCollection();
+/** @var \Blackbird\ContentManager\Model\ContentList $contentList */
+$contentList = $block->getContentList();
+$link = $block->getLink();
+?>
+<!-- <div class="block widget contents-grid grid ct-view ct-listing-<?= $contentList->getUrlKey() ?>"
+     id="ct-listing-<?= $contentList->getId() ?>">
+    <?php if (!empty($block->getTitle())) : ?>
+        <div class="block-title">
+            <strong><?= $block->getTitle() ?></strong>
+        </div>
+    <?php endif; ?>
+    <div class="block-content">
+
+        <div class="text-before"><?= $block->getTextBefore() ?></div>
+
+        <?php if ($collection->count()) : ?>
+            <?php if ($block->hasPagerTop()) : ?>
+                <div class="toolbar-bottom">
+                    <div class="toolbar top">
+                        <?= $block->getPagerHtml(); ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <div class="contents-items widget-content-grid">
+                <?php foreach ($collection as $content) : ?>
+                    <div class="content-item">
+                        <?php // Has Link Top ?>
+                        <?php if ($block->hasLinkTop() && $content->getLinkUrl()) : ?>
+                            <a class="contenttype-listing-readmore"
+                               href="<?= $content->getLinkUrl(); ?>"><?= __($link['label']); ?></a>
+                        <?php endif; ?>
+                        <?php // Content List Layout Manager ?>
+                        <?php if (!empty($block->getChildBlock('contentlist_view_layout'))) : ?>
+                            <?php
+                            $listItem = $block->getChildBlock('contentlist_view_layout');
+                            $listItem->setContent($content);
+                            $listItem->setAllHasLink(true);
+
+                            echo $listItem->toHtml();
+                            ?>
+                            <?php // Default Content List Display ?>
+                        <?php else : ?>
+                            <?php if (count($block->getAttributeToShow()) == 0) : ?>
+                                <?= $content->render('title', ['has_link' => true]); ?>
+                            <?php else: ?>
+                                <?php foreach ($block->getAttributeToShow() as $attribute) : ?>
+                                    <?= $content->render($attribute['attribute'], $attribute['params']); ?>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        <?php // Has Link Bottom ?>
+                        <?php if ($block->hasLinkBottom() && $content->getLinkUrl()) : ?>
+                            <a class="contenttype-listing-readmore"
+                               href="<?= $content->getLinkUrl(); ?>"><?= __($link['label']); ?></a>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <div style="clear: both"></div>
+
+            <?php if ($block->hasPagerBottom()) : ?>
+                <div class="toolbar-bottom">
+                    <div class="toolbar bottom">
+                        <?= $block->getPagerHtml(); ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+        <?php else: ?>
+            <div class="message info empty">
+                <span><?= __('We can\'t find contents matching the selection.') ?></span>
+            </div>
+        <?php endif; ?>
+
+        <div class="text-after"><?= $block->getTextAfter() ?></div>
+    </div>
+</div> -->
+
+<div class="category-description">
+
+    
+
+    <div class="container">
+        <div class="row is-flex">
+            <div class="col-md-8 image-container">
+               <div class="background-image" style="background-image:url(/assets/img/2020-10-27.jpg);">
+               </div>
+           </div>
+           <div class="col-md-4 content">
+             <header class="category">
+                <h1>How To</h1>
+                <p>Our destination for all things beauty. This is where we’ll share our how-to tips, guest edits and latest trends for all your inspiration.</p>
+                            </header>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<?php 
+
+$_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); //instance of\Magento\Framework\App\ObjectManager
+$contentCollection = $_objectManager->create('Blackbird\ContentManager\Model\ResourceModel\Content\CollectionFactory'); 
+
+$categoryattributes = array(
+    'entity_id',
+    'title',
+    'url_key',
+
+);
+
+$categories = $contentCollection
+->create()
+->addContentTypeFilter('how_to_category')
+->addAttributeToFilter('status', 1)
+->addAttributeToSelect($categoryattributes);
+?>
+
+<div class="subnav-block no-border" style="padding:20px 0;display:none;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="flex"> 
+                    <nav>
+                        <h2>How To</h2>
+                        <ul>
+                            <li>VIEVE Muse</li>
+                  
+                    </ul>
+                </nav>
+                <select name="" id="" style="display:none;">
+                    <option value="">Sort By</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<div class="video-block container" style="margin-top:30px;">
+    <div class="row">
+
+
+      <?php 
+
+      $contentCollection = $_objectManager->create('Blackbird\ContentManager\Model\ResourceModel\Content\CollectionFactory'); 
+
+      $videoattributes = array(
+        'entity_id',
+        'title',
+        'url_key',
+        'how_to_youtube_code',
+        'how_to_teaser',
+        'how_to_content',
+        'how_to_background_image',
+        'how_to_category',
+        'how_to_author'
+    );
+
+      $videos = $contentCollection
+      ->create()
+      ->addContentTypeFilter('how_to')
+      ->addAttributeToFilter('status', 1)
+      ->addAttributeToSelect($videoattributes);
+      $count = 0;
+      foreach ($videos as $video){
+
+        if ($count > 0 ){
+            $number = 6;
+        }else{
+            $number = 12;
+        }
+        $count++;
+        ?>
+
+
+
+        <div class="col-md-<?php echo $number ?>">
+            <div class="video-item">
+                <a data-video href="<?= $video->getHowToYoutubeCode(); ?>">
+                    <div class="header">
+                        <h3><?= $video->getTitle(); ?></h3>
+                    </div>
+                    <div class="video-content">
+                        <div class="image" style="background-image:url('<?php echo $video->getImage("how_to_background_image"); ?>')"></div>
+                        <div class="content">
+                            <!--<h6><?= $video->getHowToTeaser(); ?></h6>-->
+                            <i class="fa fa-play-circle"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    <?php }?>
+
+</div>
+
+</div>

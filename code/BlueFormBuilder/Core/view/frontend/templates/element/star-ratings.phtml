@@ -1,0 +1,34 @@
+<?php
+/**
+ * @var $block \BlueFormBuilder\Core\Block\Element\Control
+ */
+
+$elemName     = $this->getElemName();
+$elementId    = $this->getElHtmlId();
+$element      = $this->getElement();
+$defaultValue  = $element->getData('default_value');
+$numberOfStars = $element->getData('number_of_stars');
+$validate      = [];
+if ($element->getData('required')) $validate['rating-required'] = true;
+?>
+<div class="bfb-element-stars control review-control-vote star-<?= $numberOfStars ?>">
+	<?php for ($i=1; $i <= $numberOfStars; $i++) { ?>
+		<span>
+			<input
+	            type="radio"
+	            name="<?= $elemName ?>"
+	            id="<?= $elementId . $i ?>"
+	            value="<?= $i ?>"
+	            class="bfb-control <?= $elementId ?> bfb-field-<?= $elemName ?>"
+	            data-validate="{<?= $this->parseJson($validate) ?>}"
+	            aria-labelledby="<?= $elementId . $i ?>_label" <?php if ($i<=$defaultValue) {?>checked="checked"<?php } ?>/>
+	        <label
+	            class="rating-<?= $i ?>"
+	            for="<?= $elementId . $i ?>"
+	            title="<?= $block->escapeHtml(__('%1 %2', $i, $i > 1 ? 'stars' : 'star')) ?>"
+	            id="<?= $elementId . $i ?>_label">
+	            <span><?= $block->escapeHtml(__('%1 %2', $i, $i > 1 ? 'stars' : 'star')) ?></span>
+	        </label>
+	    </span>
+	<?php } ?>
+</div>

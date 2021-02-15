@@ -1,0 +1,228 @@
+@mixin gradient($baseColor, $toColor) {
+    background-color: $baseColor;
+    background-image: -moz-linear-gradient($baseColor, $toColor);
+    background-image: -webkit-gradient($baseColor, $toColor);
+    background-image: linear-gradient($baseColor, $toColor);
+}
+
+@mixin animation($animation, $delay, $duration, $timing, $count) {
+    -webkit-animation-delay: $delay;
+    -webkit-animation-duration: $duration;
+    -webkit-animation-name: $animation;
+    -webkit-animation-timing-function: $timing;
+    -webkit-animation-iteration-count: $count;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-delay: $delay;
+    -moz-animation-duration: $duration;
+    -moz-animation-name: $animation;
+    -moz-animation-timing-function: $timing;
+    -moz-animation-iteration-count: $count;
+    -moz-animation-fill-mode: forwards;
+    -o-animation-delay: $delay;
+    -o-animation-duration: $duration;
+    -o-animation-name: $animation;
+    -o-animation-timing-function: $timing;
+    -o-animation-iteration-count: $count;
+    -o-animation-fill-mode: forwards;
+    animation-delay: $delay;
+    animation-duration: $duration;
+    animation-name: $animation;
+    animation-timing-function: $timing;
+    animation-iteration-count: $count;
+    animation-fill-mode: forwards;
+}
+
+@mixin transform($transform) {
+    -webkit-transform: $transform;
+    -moz-transform: $transform;
+    -ms-transform: $transform;
+    -o-transform: $transform; 
+    transform: $transform;
+}
+
+@mixin linear-gradient($angle, $color-stops...) {
+    $_angle-with-vendor-prefix: "";
+    $_angle: "";
+
+    @if $angle == "to top" or $angle == "bottom" {
+        $_angle-with-vendor-prefix: bottom;
+        $_angle: to top;
+    }
+    @else if $angle == "to right" or $angle == "left" {
+        $_angle-with-vendor-prefix: left;
+        $_angle: to right;
+    }
+    @else if $angle == "to bottom" or $angle == "top" {
+        $_angle-with-vendor-prefix: top;
+        $_angle: to bottom;
+    }
+    @else if $angle == "to left" or $angle == "right" {
+        $_angle-with-vendor-prefix: right;
+        $_angle: to left;
+    }
+    @else if $angle == "to top right" or $angle == "bottom left" {
+        $_angle-with-vendor-prefix: bottom left;
+        $_angle: to top right;
+    }
+    @else if $angle == "to bottom right" or $angle == "top left" {
+        $_angle-with-vendor-prefix: top left;
+        $_angle: to bottom right;
+    }
+    @else if $angle == "to bottom left" or $angle == "top right" {
+        $_angle-with-vendor-prefix: top right;
+        $_angle: to bottom left;
+    }
+    @else if $angle == "to top left" or $angle == "bottom right" {
+        $_angle-with-vendor-prefix: bottom right;
+        $_angle: to top left;
+    }
+    @else {
+        $_angle-with-vendor-prefix: $angle % 360;
+        $_angle: (90 - $angle) % 360;
+    }
+
+    background: -webkit-linear-gradient($_angle-with-vendor-prefix, $color-stops);
+    background: -moz-linear-gradient($_angle-with-vendor-prefix, $color-stops);
+    background: -o-linear-gradient($_angle-with-vendor-prefix, $color-stops);
+    background: linear-gradient($_angle, $color-stops);
+}
+
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+        @content;
+    }
+
+    @-moz-keyframes #{$name} {
+        @content;
+    }
+
+    @-ms-keyframes #{$name} {
+        @content;
+    }
+
+    @keyframes #{$name} {
+        @content;
+    }
+}
+
+@mixin transition-one($speed) {
+    transition: all $speed $transition-one;
+}
+
+
+
+
+// Animation
+@mixin transition($transition...) {
+    -moz-transition:    $transition;
+    -o-transition:      $transition;
+    -webkit-transition: $transition;
+    transition:         $transition;
+}
+
+@mixin transition-property($property...) {
+    -moz-transition-property:    $property;
+    -o-transition-property:      $property;
+    -webkit-transition-property: $property;
+    transition-property:         $property;
+}
+
+@mixin transition-duration($duration...) {
+    -moz-transition-property:    $duration;
+    -o-transition-property:      $duration;
+    -webkit-transition-property: $duration;
+    transition-property:         $duration;
+}
+
+@mixin transition-timing-function($timing...) {
+    -moz-transition-timing-function:    $timing;
+    -o-transition-timing-function:      $timing;
+    -webkit-transition-timing-function: $timing;
+    transition-timing-function:         $timing;
+}
+
+@mixin transition-delay($delay...) {
+    -moz-transition-delay:    $delay;
+    -o-transition-delay:      $delay;
+    -webkit-transition-delay: $delay;
+    transition-delay:         $delay;
+}
+
+@mixin border-radius($property...){
+  -moz-border-radius:     $property;
+  -webkit-border-radius:  $property;
+  border-radius:          $property;
+}
+
+@mixin box-shadow($property...){
+  -moz-box-shadow:     $property;
+  -webkit-box-shadow:  $property;
+  box-shadow:          $property;
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+@mixin transform($property...){
+  transform: $property;
+  -webkit-transform: $property;
+  -moz-transform: $property;
+  -ms-transform: $property;
+}
+
+@mixin filter($property){
+    -webkit-filter: $property; /* Safari 6.0 - 9.0 */
+    filter: $property;
+}
+
+@mixin appearance($appearance) {
+    -ms-appearance:       $appearance;        
+    -moz-appearance:    $appearance;
+    -webkit-appearance: $appearance;
+    appearance:         $appearance;
+}
+
+@mixin column-count($property) {
+  -webkit-column-count: $property;
+     -moz-column-count: $property;
+          column-count: $property;
+}
+
+@mixin column-width($property) {
+  -webkit-column-width: $property;
+     -moz-column-width: $property;
+          column-width: $property;
+}
+
+@mixin column-gap($property){
+  -webkit-column-gap: $property;
+     -moz-column-gap: $property;
+          column-gap: $property;
+}
+
+@mixin column-rule($property){
+  -webkit-column-rule: $property;
+     -moz-column-rule: $property;
+          column-rule: $property;
+}
+
+@mixin column-span($property){
+  -webkit-column-span: $property; 
+          column-span: $property;
+}
+
+@mixin column-fill($property){
+  -moz-column-fill: $property; 
+          column-fill: $property;
+}
+
+@mixin column($property){
+  -webkit-columns: $property;
+     -moz-columns: $property;
+          columns: $property;
+}
+
+

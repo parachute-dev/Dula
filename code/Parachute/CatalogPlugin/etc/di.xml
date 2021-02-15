@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+  <type name="Magento\Catalog\Model\Config">
+      <plugin name="Parachute_CatalogPlugin::addCustomOptions" type="Parachute\CatalogPlugin\Plugin\Model\Config" />
+  </type>
+
+  <type name="Magento\Catalog\Block\Product\ProductList\Toolbar">
+    <plugin name="Parachute_CatalogPlugin::addSortFiltersInProductListToolbar" type="Parachute\CatalogPlugin\Plugin\Product\ProductList\Toolbar" sortOrder="1" disabled="false" />
+  </type>
+
+  <!-- On Sale Custom Collection Settings -->
+  <!-- Magento only includes 2 type of layer resolvers i.e Category and search whereas our custom page is neither a category page nor a search page so we need to add a new layer resolver on our custom page-->
+  <type name="Magento\Catalog\Model\Layer\Resolver">
+      <arguments>
+          <argument name="layersPool" xsi:type="array">
+              <item name="category" xsi:type="string">Magento\Catalog\Model\Layer\Category</item>
+              <item name="search" xsi:type="string">Magento\Catalog\Model\Layer\Search</item>
+              <item name="saleLayer" xsi:type="string">Parachute\CatalogPlugin\Model\Layer</item>
+          </argument>
+      </arguments>
+  </type>
+
+  <!-- To prepare the filterlist for our custom collection which would be passed to the left navigation we need below virtual types for our custom page navigation -->
+  <virtualType name="onSaleFilterList" type="Parachute\CatalogPlugin\Model\Layer\FilterList">
+      <arguments>
+          <argument name="filterableAttributes" xsi:type="object">Parachute\CatalogPlugin\Model\Layer\FilterableAttributeList</argument>
+          <argument name="filters" xsi:type="array">
+              <item name="attribute" xsi:type="string">Parachute\CatalogPlugin\Model\Layer\Filter\Attribute</item>
+              <item name="category" xsi:type="string">Parachute\CatalogPlugin\Model\Layer\Filter\Category</item>
+          </argument>
+      </arguments>
+  </virtualType>
+
+  <virtualType name="Parachute\CatalogPlugin\Block\Navigation\SaleLayerNavigation" type="Magento\LayeredNavigation\Block\Navigation">
+      <arguments>
+          <argument name="filterList" xsi:type="object">onSaleFilterList</argument>
+      </arguments>
+  </virtualType>
+
+  <!-- As we will be modifying the layer model collection we will need to extend the core model layer, Below virtual type will be required to extend the Catalog model layer else it will throw error for the context in construct method-->
+  <virtualType name="Parachute\CatalogPlugin\Model\Layer\Context" type="Magento\Catalog\Model\Layer\Context">
+      <arguments>
+          <argument name="collectionProvider" xsi:type="object">Parachute\CatalogPlugin\Model\Layer\ItemCollectionProvider</argument>
+          <argument name="stateKey" xsi:type="object">Parachute\CatalogPlugin\Model\Layer\StateKey</argument>
+          <argument name="collectionFilter" xsi:type="object">Parachute\CatalogPlugin\Model\Layer\CollectionFilter</argument>
+      </arguments>
+  </virtualType>
+
+  <type name="Parachute\CatalogPlugin\Model\Layer">
+      <arguments>
+          <argument name="context" xsi:type="object">Parachute\CatalogPlugin\Model\Layer\Context</argument>
+      </arguments>
+  </type>
+
+  <!-- End On Sale Custom Collection Settings -->
+</config>

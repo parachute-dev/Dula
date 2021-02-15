@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license.
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  BlueFormBuilder
+ * @package   BlueFormBuilder_Core
+ * @copyright Copyright (C) 2019 Magezon (https://www.magezon.com)
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="formbuilder.files.container">
+            <block class="Magento\Backend\Block\Widget\Grid" name="formbuilder.files.grid" as="grid">
+                <arguments>
+                    <argument name="id" xsi:type="string">filesGrid</argument>
+                    <argument name="dataSource" xsi:type="object">BlueFormBuilder\Core\Model\ResourceModel\File\Collection</argument>
+                    <argument name="default_sort" xsi:type="string">file_id</argument>
+                    <argument name="default_dir" xsi:type="string">DESC</argument>
+                    <argument name="use_ajax" xsi:type="string">1</argument>
+                    <argument name="grid_url" xsi:type="url" path="*/*/grid"/>
+                </arguments>
+                <block class="Magento\Backend\Block\Widget\Grid\Massaction" name="formbuilder.files.grid.massaction" as="grid.massaction">
+                    <arguments>
+                        <argument name="massaction_id_field" xsi:type="string">file_id</argument>
+                        <argument name="form_field_name" xsi:type="string">ids</argument>
+                        <argument name="use_select_all" xsi:type="string">1</argument>
+                        <argument name="options" xsi:type="array">
+                            <item name="delete" xsi:type="array">
+                                <item name="label" xsi:type="string" translate="true">Delete</item>
+                                <item name="url" xsi:type="string">*/*/massDelete</item>
+                                <item name="confirm" xsi:type="string" translate="true">Are you sure you want to delete the selected backup(s)?</item>
+                            </item>
+                        </argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Backend\Block\Widget\Grid\ColumnSet" name="adminhtml.catalog.product.set.grid.columnSet" as="grid.columnSet">
+                    <arguments>
+                        <argument name="id" xsi:type="string">filesGrid</argument>
+                    </arguments>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.catalog.product.set.grid.columnSet.form_id" as="form_id">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Form</argument>
+                            <argument name="type" xsi:type="string">options</argument>
+                            <argument name="options" xsi:type="options" model="BlueFormBuilder\Core\Model\Source\FormList"/>
+                            <argument name="index" xsi:type="string">form_id</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.catalog.product.set.grid.columnSet.file" as="file">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Name</argument>
+                            <argument name="type" xsi:type="string">text</argument>
+                            <argument name="index" xsi:type="string">file</argument>
+                            <argument name="header_css_class" xsi:type="string">bfb-file-grid-name</argument>
+                            <argument name="renderer" xsi:type="string">BlueFormBuilder\Core\Block\Adminhtml\File\Grid\Renderer\Name</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.catalog.product.set.grid.columnSet.mine_type" as="mine_type">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Type</argument>
+                            <argument name="type" xsi:type="string">options</argument>
+                            <argument name="options" xsi:type="options" model="BlueFormBuilder\Core\Model\Source\FileType"/>
+                            <argument name="index" xsi:type="string">mine_type</argument>
+                            <argument name="header_css_class" xsi:type="string">bfb-file-grid-type</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.catalog.product.set.grid.columnSet.size" as="size">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Size</argument>
+                            <argument name="type" xsi:type="string">number</argument>
+                            <argument name="index" xsi:type="string">size</argument>
+                            <argument name="header_css_class" xsi:type="string">bfb-file-grid-size</argument>
+                            <argument name="renderer" xsi:type="string">BlueFormBuilder\Core\Block\Adminhtml\File\Grid\Renderer\Size</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.catalog.product.set.grid.columnSet.number_of_downloads" as="number_of_downloads">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Downloads</argument>
+                            <argument name="type" xsi:type="string">number</argument>
+                            <argument name="index" xsi:type="string">number_of_downloads</argument>
+                            <argument name="header_css_class" xsi:type="string">_fit bfb-file-grid-downloads</argument>
+                            <argument name="column_css_class" xsi:type="string">_center</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.catalog.product.set.grid.columnSet.created_at" as="created_at">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Time</argument>
+                            <argument name="index" xsi:type="string">created_at</argument>
+                            <argument name="type" xsi:type="string">datetime</argument>
+                            <argument name="column_css_class" xsi:type="string">col-date</argument>
+                            <argument name="header_css_class" xsi:type="string">col-date bfb-file-grid-date</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.catalog.product.set.grid.columnSet.action" as="action">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Action</argument>
+                            <argument name="index" xsi:type="string">type</argument>
+                            <argument name="filter" xsi:type="string">0</argument>
+                            <argument name="sortable" xsi:type="string">0</argument>
+                            <argument name="type" xsi:type="string">action</argument>
+                            <argument name="column_css_class" xsi:type="string">_center bfb-file-grid-action</argument>
+                            <argument name="renderer" xsi:type="string">BlueFormBuilder\Core\Block\Adminhtml\File\Grid\Renderer\Action</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

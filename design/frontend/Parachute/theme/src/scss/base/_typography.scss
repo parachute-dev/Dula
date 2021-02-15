@@ -1,0 +1,76 @@
+
+html {
+    @include font-size(16px, "body");
+    line-height: 1;
+            color:#333;
+
+} 
+
+
+h1, .h1 {
+    @include font-size(68px,  "heading");
+    @include padding-bottom(15px);
+    line-height:1;
+    letter-spacing:-0.75px;
+}
+
+h2, .h2 {
+    @include font-size(52px,  "heading");
+    @include padding-bottom(15px);
+
+} 
+
+h3, .h3 {
+    @include font-size(28px, "body_bold");
+    @include padding-bottom(15px);
+
+}
+
+h4, .h4 {
+    @include font-size(26px, "body_bold");
+    @include padding-bottom(15px);
+
+}
+
+h5, .h5 {
+
+    @include font-size(18px, "body_bold");
+    @include padding-bottom(15px);
+}
+
+h6, .h6 {
+
+    @include font-size(16px, "body_bold");
+    @include padding-bottom(15px);
+}
+
+p {
+    @include font-size(15px, "body");
+    @include padding-bottom(20px);
+    font-weight:300;
+        letter-spacing:0.25px;
+        line-height:1.8;
+        font-weight:500;
+}
+
+table {
+    h2, h3, h4, h5, h6 {
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+}
+
+a {
+    text-decoration: underline;
+    &:visited{
+          text-decoration: none;
+          color:inherit;
+  
+    }
+    &:hover {
+    text-decoration: underline;
+}
+}
+
+
+

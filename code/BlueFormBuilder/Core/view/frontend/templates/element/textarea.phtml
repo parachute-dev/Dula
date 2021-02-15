@@ -1,0 +1,27 @@
+<?php
+/**
+ * @var $block \BlueFormBuilder\Core\Block\Element\Textarea
+ */
+
+$elementId = $this->getElHtmlId();
+$element   = $this->getElement();
+$max       = $element->getData('max');
+$showCount = $element->getData('show_count');
+$limitMsg  = $element->getData('limit_message');
+$validate  = $this->getElementValidate();
+$attrs     = $this->getControlAttributes();
+if($element->getData('rows')) $attrs['rows'] = $element->getData('rows');
+?>
+<div class="bfb-element-text-wrapper" data-bind="outerClick: outerClick.bind($data)">
+	<textarea <?= $this->parseAttributes($attrs) ?> data-bind="textInput: value" data-validate="{<?= $this->parseJson($validate) ?>}"><?= $attrs['value'] ?></textarea>
+	<?php if ($showCount) { ?>
+		<div class="bfb-element-input-limit" style="display: none" data-bind="visible: showMsg">
+			<?php if ($max) { ?>
+				<span data-bind="text: limit"></span> <?= __('of') ?> <?= $max ?> <?= $limitMsg ?>
+			<?php } else { ?>
+				<span data-bind="text: limit"></span>
+			<?php } ?>
+		</div>
+	<?php } ?>
+</div>
+<script type="text/x-magento-init">{"*": {"Magento_Ui/js/core/app": {"components": {"<?= $elementId ?>": <?= $block->getJsLayout() ?>}}}}</script>

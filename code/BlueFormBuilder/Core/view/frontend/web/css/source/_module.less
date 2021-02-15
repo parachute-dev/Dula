@@ -1,0 +1,159 @@
+@import 'module/_datepicker.less';
+@import 'module/_animate.less';
+@import 'module/_spinner.less';
+@import 'module/_popup.less';
+@import 'module/_form.less';
+@import 'module/_success_message.less';
+@import 'module/_inputmask.less';
+
+@bfb-main-color: #007dbd;
+@bfb-main-hover-color: #0077b3;
+@bfb-box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+
+.bfb-box-shadow {
+	.mgz-box-shadow(@bfb-box-shadow);
+}
+
+.bfb-state-hidden {
+	display: none;
+}
+
+.bfb-state-shown {
+	display: block;
+}
+
+.bfb-form-js {
+	display: none;
+}
+
+.bfb-others {
+	display: none;
+	margin-top: 5px;
+}
+
+.bfb-column {
+	float: left;
+	width: 100%;
+}
+
+.bfb-columnauto > div {
+	width: auto;
+	display: inline-block;
+}
+
+.bfb-column1 > div {
+	width: 100%;
+}
+
+.bfb-column2 > div {
+	width: 50%;
+	float: left;
+
+	&:nth-child(2n+1) {	
+		clear: left;
+	}
+}
+
+.bfb-column3 > div {
+	width: 33.333%;
+	float: left;
+
+	&:nth-child(3n+1) {	
+		clear: left;
+	}
+}
+
+.bfb-column4 > div {
+	width: 25%;
+	float: left;
+
+	&:nth-child(4n+1) {	
+		clear: left;
+	}
+}
+
+.bfb-column5 > div {
+	width: 20%;
+	float: left;
+
+	&:nth-child(5n+1) {	
+		clear: left;
+	}
+}
+
+.bfb-column6 > div {
+	width: 16.666%;
+	float: left;
+
+	&:nth-child(6n+1) {	
+		clear: left;
+	}
+}
+
+.bfb-loading-mask {
+	background: rgba(255, 255, 255, 0.5);
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 399;
+	display: none;
+}
+
+.block.bfb {
+	.mgz-box-sizing();
+	position: relative;
+	margin: 0 auto;
+	max-width: 100%;
+
+	&.bfb-loading {
+		.bfb-loading-mask {
+			display: block;
+		}
+	}
+}
+
+.bfb-submission-confirmed {
+	.bfb-submission-title {
+		font-weight: 500;
+	}
+
+	.bfb-submission-summary {
+		margin-bottom: 40px;
+	}
+
+	table {
+		border: 1px solid #d6d6d6;
+
+		tr {
+			&:nth-child(odd) {
+				td {
+					background: #f2f2f2;
+				}
+			}
+
+			td {
+				padding: 1.2rem 1.2rem;
+
+				&:first-child {
+					width: 20%;
+				}
+
+				&:last-child {
+					border-left: 1px dashed #d6d6d6;
+				}
+			}
+		}
+	}
+}
+
+.bfb-widget {
+	.bfb {
+		margin: 0;
+	}
+}
+
+.iti--allow-dropdown {
+	display: block;
+}

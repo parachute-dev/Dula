@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Controller\Index\Index">
+        <plugin name="restrictCartQuantity" type="Meetanshi\RestrictProductQuantity\Plugin\Checkout\Controller\RestrictProductQuantity"/>
+    </type>
+
+    <type name="Magento\Multishipping\Controller\Checkout\Shipping">
+        <plugin name="restrictCartQuantityMulti" type="Meetanshi\RestrictProductQuantity\Plugin\Checkout\Controller\RestrictProductQuantityMulti"/>
+    </type>
+</config>

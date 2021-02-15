@@ -1,0 +1,36 @@
+.banners-container{
+
+
+
+}
+
+.banner {
+  padding-top:0;
+  position:relative;
+  display:flex!important;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;  
+  color:black;
+  a{
+    text-decoration:none;
+  }
+  @include media-breakpoint-up(lg) { 
+   color:white;
+   &__image-container {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+  }
+}
+&__content {
+  padding:15px;
+
+  position:relative;
+
+}
+&__title {
+}
+}

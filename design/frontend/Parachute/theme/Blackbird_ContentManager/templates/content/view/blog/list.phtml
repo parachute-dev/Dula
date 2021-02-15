@@ -1,0 +1,270 @@
+<?php
+/**
+ * Blackbird ContentManager Module
+ *
+ * NOTICE OF LICENSE
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bird.eu so we can send you a copy immediately.
+ *
+ * @category        Blackbird
+ * @package         Blackbird_ContentManager
+ * @copyright       Copyright (c) 2018 Blackbird (https://black.bird.eu)
+ * @author          Blackbird Team
+ * @license         https://www.advancedcontentmanager.com/license/
+ */
+?>
+<?php
+/**
+ * @see \Blackbird\ContentManager\Block\ContentList
+ * @var \Blackbird\ContentManager\Block\ContentList $block
+ */
+?>
+
+
+<?php
+$collection = $block->getCollection();
+/** @var \Blackbird\ContentManager\Model\ContentList $contentList */
+$contentList = $block->getContentList();
+$link = $block->getLink();
+?>
+<!-- <div class="block widget contents-grid grid ct-view ct-listing-<?= $contentList->getUrlKey() ?>"
+     id="ct-listing-<?= $contentList->getId() ?>">
+    <?php if (!empty($block->getTitle())) : ?>
+        <div class="block-title">
+            <strong><?= $block->getTitle() ?></strong>
+        </div>
+    <?php endif; ?>
+    <div class="block-content">
+
+        <div class="text-before"><?= $block->getTextBefore() ?></div>
+
+        <?php if ($collection->count()) : ?>
+            <?php if ($block->hasPagerTop()) : ?>
+                <div class="toolbar-bottom">
+                    <div class="toolbar top">
+                        <?= $block->getPagerHtml(); ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <div class="contents-items widget-content-grid">
+                <?php foreach ($collection as $content) : ?>
+                    <div class="content-item">
+                        <?php // Has Link Top ?>
+                        <?php if ($block->hasLinkTop() && $content->getLinkUrl()) : ?>
+                            <a class="contenttype-listing-readmore"
+                               href="<?= $content->getLinkUrl(); ?>"><?= __($link['label']); ?></a>
+                        <?php endif; ?>
+                        <?php // Content List Layout Manager ?>
+                        <?php if (!empty($block->getChildBlock('contentlist_view_layout'))) : ?>
+                            <?php
+                            $listItem = $block->getChildBlock('contentlist_view_layout');
+                            $listItem->setContent($content);
+                            $listItem->setAllHasLink(true);
+
+                            echo $listItem->toHtml();
+                            ?>
+                            <?php // Default Content List Display ?>
+                        <?php else : ?>
+                            <?php if (count($block->getAttributeToShow()) == 0) : ?>
+                                <?= $content->render('title', ['has_link' => true]); ?>
+                            <?php else: ?>
+                                <?php foreach ($block->getAttributeToShow() as $attribute) : ?>
+                                    <?= $content->render($attribute['attribute'], $attribute['params']); ?>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        <?php // Has Link Bottom ?>
+                        <?php if ($block->hasLinkBottom() && $content->getLinkUrl()) : ?>
+                            <a class="contenttype-listing-readmore"
+                               href="<?= $content->getLinkUrl(); ?>"><?= __($link['label']); ?></a>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <div style="clear: both"></div>
+
+            <?php if ($block->hasPagerBottom()) : ?>
+                <div class="toolbar-bottom">
+                    <div class="toolbar bottom">
+                        <?= $block->getPagerHtml(); ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+        <?php else: ?>
+            <div class="message info empty">
+                <span><?= __('We can\'t find contents matching the selection.') ?></span>
+            </div>
+        <?php endif; ?>
+
+        <div class="text-after"><?= $block->getTextAfter() ?></div>
+    </div>
+</div>
+-->
+<?php
+$_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); //instance of\Magento\Framework\App\ObjectManager
+
+
+            $contentCollection = $_objectManager->create('Blackbird\ContentManager\Model\ResourceModel\Content\CollectionFactory'); 
+
+            $blogattributes = array(
+                'entity_id',
+                'title',
+                'url_key',
+                'blog_preview_image',
+                'blog_entry_date',
+                'blog_teaser',
+                'blog_blog_author'
+
+            );
+
+            $blogs = $contentCollection
+            ->create()
+            ->addContentTypeFilter('blog')
+            ->addAttributeToFilter('status', 1)
+            ->setPageSize(1)
+            ->setCurPage(1)
+            ->addAttributeToSelect($blogattributes);
+            foreach ($blogs as $blog){
+
+
+$image = $blog->getImage("blog_preview_image"); 
+
+if($blog->getBlogPreviewImage() == null || $blog->getBlogPreviewImage() == ""){
+    $image = "/assets/img/banner.png";
+}
+
+
+?>
+<div class="media-text-block content-block container-height-large" style="margin:0;">
+    <div class="container">
+        <div class="row is-flex">
+            <div class="col-md-6 image-container ">
+                <div class="image" style="background-image:url('<?php echo $image; ?>')">
+                </div>
+            </div>
+            <div class="col-md-6 content-container  ">
+                <div class="content">
+                    <h6>Discover</h6>
+                    <h3><?php echo $blog->getTitle()?></h3>
+                    <div class="user-content">
+                       <p><?php echo $blog->getBlogTeaser()?></p>
+                   </div>
+                   <a href="<?php echo $blog->getLinkUrl()?>" class="button">
+                    Read more
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<?php }?>
+
+
+<?php 
+
+$contentCollection = $_objectManager->create('Blackbird\ContentManager\Model\ResourceModel\Content\CollectionFactory'); 
+
+$categoryattributes = array(
+    'entity_id',
+    'title',
+    'url_key',
+
+);
+
+$categories = $contentCollection
+->create()
+->addContentTypeFilter('blog_category')
+->addAttributeToFilter('status', 1)
+->addAttributeToSelect($categoryattributes);
+
+
+
+?>
+
+
+<div class="blog-nav-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul>
+                    <li><a href="/blog">All</a></li>
+                    <?php foreach ($categories as $category) { ?>
+                      <li><a href="<?= $category->getLinkUrl(); ?>"><?= $category->getTitle(); ?></a></li>
+
+                  <?php }?>
+
+              </ul>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+<div class="blog-row-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <header>
+                    <h2>Make Up Tips</h2>
+                </header>
+            </div>
+        </div>
+        <div class="row">
+
+            <?php 
+
+$count = 0; 
+            $contentCollection = $_objectManager->create('Blackbird\ContentManager\Model\ResourceModel\Content\CollectionFactory'); 
+
+            $blogattributes = array(
+                'entity_id',
+                'title',
+                'url_key',
+                'blog_preview_image',
+                'blog_entry_date',
+                'blog_teaser',
+                'blog_blog_author'
+
+            );
+
+            $blogs = $contentCollection
+            ->create()
+            ->addContentTypeFilter('blog')
+            ->addAttributeToFilter('status', 1)
+            ->addAttributeToSelect($blogattributes);
+
+            foreach ($blogs as $blog){
+               
+                ?>
+                <div class="col-md-4">
+                    <div class="blog-item">
+                        <a href="<?= $blog->getLinkUrl(); ?>">
+                            <div class="image" style="background-image:url('/assets/img/lip-liner.png')"></div>
+                            <div class="content">
+                                <h6><?= $blog->getBlogEntryDate() ?> | Authors Name</h6>
+                                <h3><?= $blog->getTitle(); ?></h3>
+                                <p><?= $blog->getBlogTeaser() ?> </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            <?php } ?>
+
+        </div>
+        <div class="row footer-row">
+            <div class="col-md-12">
+                <a href="/blog/category/makeup-tips" class="more-blog-button button button-black">
+                    More Tips
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

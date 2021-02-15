@@ -1,0 +1,56 @@
+.media-text {
+    &__image-container {
+        padding:0;
+
+        &.order-2{
+            direction: rtl;
+        }
+    }
+    &__image {
+        @include media-breakpoint-up(md) { 
+
+            width:115%!important;
+            max-width:initial;
+        }
+
+
+    }
+    &__content-container {
+        align-items:center;
+        display:flex;
+        background:colours(brand,grey);;
+        position:relative;
+        z-index:10;
+        @include media-breakpoint-up(md) { 
+
+            @include padding(50px);
+
+        }
+
+        @include media-breakpoint-down(md) { 
+            order:4!important;
+        }
+
+        &.order-1{
+            @include media-breakpoint-up(md) { 
+               border-right:5px solid colours(brand,blue);
+           }
+
+       }
+       &.order-2{
+        @include media-breakpoint-up(md) { 
+            border-left:5px solid colours(brand,blue);
+
+
+    }
+}
+&__content {
+    position:relative;
+}
+&__content-header {
+}
+
+
+
+} 
+}

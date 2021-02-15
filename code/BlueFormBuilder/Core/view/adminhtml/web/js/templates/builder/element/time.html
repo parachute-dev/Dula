@@ -1,0 +1,8 @@
+<select class="admin__control-select">
+	<option ng-repeat="n in range(element.min_hour, element.max_hour, element.hour_step)" ng-selected="n==element.default_hour">{{ n < 10 ? '0' + n : n }}</option>
+</select><span>:</span><select class="admin__control-select">
+	<option ng-repeat="n in range(element.min_minute, element.max_minute, element.minute_step)" ng-selected="n==element.default_minute">{{ n < 10 ? '0' + n : n }}</option>
+</select><span ng-if="!element.hide_am_pm">:</span><select class="admin__control-select" ng-if="!element.hide_am_pm">
+	<option>AM</option>
+	<option>PM</option>
+</select>

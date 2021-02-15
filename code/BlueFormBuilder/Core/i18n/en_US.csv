@@ -1,0 +1,633 @@
+Download,Download
+Back,Back
+Delete,Delete
+"Are you sure you want to do this?","Are you sure you want to do this?"
+"Export Submissions(' . . ')","Export Submissions(' . . ')"
+Save,Save
+"Save & New","Save & New"
+"Save & Duplicate","Save & Duplicate"
+"Save & Close","Save & Close"
+View,View
+Action,Action
+ID,ID
+"Customer Name","Customer Name"
+"Customer Email","Customer Email"
+Store,Store
+CSV,CSV
+"Excel XML","Excel XML"
+"URL Key","URL Key"
+Name,Name
+Status,Status
+Disabled,Disabled
+Enabled,Enabled
+"Mark as unread","Mark as unread"
+Edit,Edit
+"Are you sure you want to send an email to admin?","Are you sure you want to send an email to admin?"
+"Send Admin Email","Send Admin Email"
+"Are you sure you want to send an email to customer?","Are you sure you want to send an email to customer?"
+"Send Customer Email","Send Customer Email"
+"Sender Name","Sender Name"
+"Sender Email","Sender Email"
+"Reply To","Reply To"
+"Send Email(s) To","Send Email(s) To"
+BBC,BBC
+"Email Subject","Email Subject"
+"Email Body","Email Body"
+"Admin Notification","Admin Notification"
+"Trackback Page","Trackback Page"
+No,No
+Yes,Yes
+"Trackback Link","Trackback Link"
+"More Informations","More Informations"
+"Customer Notification","Customer Notification"
+Form,Form
+Customer,Customer
+Email,Email
+Product,Product
+Referer,Referer
+"Store View","Store View"
+"Created At","Created At"
+"IP Address","IP Address"
+"User Agent","User Agent"
+"Submission Data","Submission Data"
+Advanced,Advanced
+"Add New Form","Add New Form"
+"Manage Forms","Manage Forms"
+Plugins,Plugins
+"File Uploads","File Uploads"
+Settings,Settings
+"Form Submissions","Form Submissions"
+"User Guide","User Guide"
+"Change Log","Change Log"
+"Get Support","Get Support"
+"Max file size: %1 KB","Max file size: %1 KB"
+"Min file size: %1 KB","Min file size: %1 KB"
+"Allow file types: %1","Allow file types: %1"
+"Max number of files: %1","Max number of files: %1"
+"Min number of files: %1","Min number of files: %1"
+"Submission Confirmed","Submission Confirmed"
+"A total of %1 file(s) have been deleted.","A total of %1 file(s) have been deleted."
+"Something went wrong while saving the form.","Something went wrong while saving the form."
+"The form has been deleted.","The form has been deleted."
+"We can't find a form to delete.","We can't find a form to delete."
+"Blue Form Builder","Blue Form Builder"
+"This form no longer exists.","This form no longer exists."
+"Edit Form","Edit Form"
+"New Form","New Form"
+Forms,Forms
+"Blue Form Builder Forms","Blue Form Builder Forms"
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"You saved the form.","You saved the form."
+"You duplicated the form","You duplicated the form"
+"This submission no longer exists.","This submission no longer exists."
+"You sent the email to admin.","You sent the email to admin."
+"We can't send the email right now.","We can't send the email right now."
+"You deleted the submission.","You deleted the submission."
+"We can't find a submission to delete.","We can't find a submission to delete."
+"Manage Submissions","Manage Submissions"
+"A total of %1 record(s) have been updated.","A total of %1 record(s) have been updated."
+"You saved the submission.","You saved the submission."
+"Something went wrong while saving the submission.","Something went wrong while saving the submission."
+"Something went wrong while getting the requested content.","Something went wrong while getting the requested content."
+"We can't find the file you requested.","We can't find the file you requested."
+"Not Logged In","Not Logged In"
+"An error occurred while processing your form. Please try again later.","An error occurred while processing your form. Please try again later."
+"Incorrect CAPTCHA.","Incorrect CAPTCHA."
+"This element no longer exists.","This element no longer exists."
+"Files bigger than %1 KB not allowed","Files bigger than %1 KB not allowed"
+"Files smaller than %1 KB not allowed","Files smaller than %1 KB not allowed"
+"Something went wrong while uploading the file.","Something went wrong while uploading the file."
+"Something went wrong while processing.","Something went wrong while processing."
+"The submission has beend updated.","The submission has beend updated."
+Appearance,Appearance
+Label,Label
+"Email Label","Email Label"
+"Label Position","Label Position"
+"Label Alignment","Label Alignment"
+"Label Width(percent)","Label Width(percent)"
+"Control Width","Control Width"
+"Enter ""auto"" to display default control width","Enter ""auto"" to display default control width"
+"Element Name","Element Name"
+"Make sure it is unique.","Make sure it is unique."
+"Exclude from Email","Exclude from Email"
+Description,Description
+Tooltip,Tooltip
+Icon,Icon
+"Show Icon","Show Icon"
+"Icon Color","Icon Color"
+"Icon Position","Icon Position"
+Left,Left
+Right,Right
+Center,Center
+"Above Element","Above Element"
+"Below Element","Below Element"
+"Left of Element","Left of Element"
+"Right of Element","Right of Element"
+Hidden,Hidden
+"Required Field","Required Field"
+"Show Address1","Show Address1"
+"Show Address2","Show Address2"
+"Show City","Show City"
+"Show State","Show State"
+"Show Zip Code","Show Zip Code"
+"Show Country","Show Country"
+Options,Options
+Value,Value
+Classes,Classes
+Image,Image
+Default,Default
+"Shuffle Options","Shuffle Options"
+Auto,Auto
+"Options Column","Options Column"
+"Image Choice Style","Image Choice Style"
+"Image Width","Image Width"
+"Image Height","Image Height"
+"Show Others Option","Show Others Option"
+"Others Label","Others Label"
+"Others Description","Others Description"
+Modern,Modern
+Classic,Classic
+None,None
+Columns,Columns
+Title,Title
+Rows,Rows
+"Multiple Select","Multiple Select"
+"Heading Color","Heading Color"
+"Heading Background Color","Heading Background Color"
+"Odd Rows Color","Odd Rows Color"
+"Odd Rows Background Color","Odd Rows Background Color"
+"Even Rows Color","Even Rows Color"
+"Even Rows Background Color","Even Rows Background Color"
+"Cell Boder Width","Cell Boder Width"
+"Cell Border Style","Cell Border Style"
+"Cell Border Color","Cell Border Color"
+"Heading Cell Border Color","Heading Cell Border Color"
+"Default Value","Default Value"
+Placeholder,Placeholder
+Validation,Validation
+"Min Date","Min Date"
+"Max Date","Max Date"
+Language,Language
+Format,Format
+"Days Allowed","Days Allowed"
+"Show Time","Show Time"
+"Show Hour","Show Hour"
+"Min Hour","Min Hour"
+"Max Hour","Max Hour"
+"Hour Step","Hour Step"
+"Show Minute","Show Minute"
+"Min Minute","Min Minute"
+"Max Minute","Max Minute"
+"Minute Step","Minute Step"
+Autofocus,Autofocus
+"When present, it specifies that the element should automatically get focus when the page loads.","When present, it specifies that the element should automatically get focus when the page loads."
+"Show Year in Select box","Show Year in Select box"
+"Show Month in Select box","Show Month in Select box"
+"Disable Past Dates","Disable Past Dates"
+"Read-Only Field","Read-Only Field"
+"Default Date","Default Date"
+"Enter 0 to display current date time","Enter 0 to display current date time"
+"Year Range","Year Range"
+Monday,Monday
+Tuesday,Tuesday
+Wednesday,Wednesday
+Thursday,Thursday
+Friday,Friday
+Saturday,Saturday
+Sunday,Sunday
+English,English
+Afrikaans,Afrikaans
+"Algerian Arabic","Algerian Arabic"
+Arabic,Arabic
+Azerbaijani,Azerbaijani
+Belarusian,Belarusian
+Bulgarian,Bulgarian
+Bosnian,Bosnian
+Inicialització,Inicialització
+Czech,Czech
+Welsh/UK,Welsh/UK
+Danish,Danish
+German,German
+Greek,Greek
+English/Australia,English/Australia
+English/UK,English/UK
+"English/New Zealand","English/New Zealand"
+Esperanto,Esperanto
+es,es
+Estonian,Estonian
+Karrikas-ek,Karrikas-ek
+"Persian (Farsi)","Persian (Farsi)"
+Finnish,Finnish
+Faroese,Faroese
+Canadian-French,Canadian-French
+Swiss-French,Swiss-French
+French,French
+Galician,Galician
+Hebrew,Hebrew
+Hindi,Hindi
+Croatian,Croatian
+Hungarian,Hungarian
+Armenian,Armenian
+Indonesian,Indonesian
+Icelandic,Icelandic
+Japanese,Japanese
+Georgian,Georgian
+Kazakh,Kazakh
+Khmer,Khmer
+Korean,Korean
+Kyrgyz,Kyrgyz
+Luxembourgish,Luxembourgish
+Lithuanian,Lithuanian
+Latvian,Latvian
+Macedonian,Macedonian
+Malayalam,Malayalam
+Malaysian,Malaysian
+"Norwegian Bokmål","Norwegian Bokmål"
+"Dutch (Belgium)","Dutch (Belgium)"
+Dutch,Dutch
+"Norwegian Nynorsk","Norwegian Nynorsk"
+Norwegian,Norwegian
+Polish,Polish
+Brazilian,Brazilian
+Portuguese,Portuguese
+Romansh,Romansh
+Romanian,Romanian
+Russian,Russian
+Slovak,Slovak
+Slovenian,Slovenian
+Albanian,Albanian
+Serbian,Serbian
+Swedish,Swedish
+Tamil,Tamil
+Thai,Thai
+Tajiki,Tajiki
+Turkish,Turkish
+Ukrainian,Ukrainian
+Vietnamese,Vietnamese
+Chinese,Chinese
+"Hidden Field","Hidden Field"
+"Browser Autocomplete","Browser Autocomplete"
+"Send Autoresponder","Send Autoresponder"
+"Autoresponder settings are available under <b>Settings > Email Notifications > Customer</b>","Autoresponder settings are available under <b>Settings > Email Notifications > Customer</b>"
+"Title Alignment","Title Alignment"
+"Title Tag","Title Tag"
+Padding,Padding
+"Allowed Extensions","Allowed Extensions"
+"Enter the file extensions users are allowed to upload, separated by a comma. Leave blank to allow all file-types.","Enter the file extensions users are allowed to upload, separated by a comma. Leave blank to allow all file-types."
+"Min Files","Min Files"
+"Max Files","Max Files"
+"Min File Size(KB)","Min File Size(KB)"
+"Max File Size(KB)","Max File Size(KB)"
+"Select multiple files at a time","Select multiple files at a time"
+"Drag and Drop Interface","Drag and Drop Interface"
+"Drag and Drop Description","Drag and Drop Description"
+"Upload Button text","Upload Button text"
+"Options Height(px)","Options Height(px)"
+Min,Min
+Max,Max
+Step,Step
+Colors,Colors
+Normal,Normal
+"Text Color","Text Color"
+"Background Color","Background Color"
+Hover,Hover
+"Add Icon","Add Icon"
+Page,Page
+"Progress Indicator","Progress Indicator"
+"Page Indicator Color","Page Indicator Color"
+"Enable Box Shadow","Enable Box Shadow"
+"Heading Border Color","Heading Border Color"
+Gap,Gap
+"Active Page","Active Page"
+"Enter active page number. Leave empty or enter non-existing number to close all tabs on page load.","Enter active page number. Leave empty or enter non-existing number to close all tabs on page load."
+"Hide Empty Page","Hide Empty Page"
+"Tab Item","Tab Item"
+Alignment,Alignment
+Position,Position
+Spacing,Spacing
+"Border Width","Border Width"
+"Border Radius","Border Radius"
+"Border Style","Border Style"
+"Theme defaults","Theme defaults"
+"Border Color","Border Color"
+Active,Active
+Button,Button
+"Next Label","Next Label"
+"Previous Label","Previous Label"
+"Next Button Colors","Next Button Colors"
+"Previous Button Colors","Previous Button Colors"
+"Progress Bar","Progress Bar"
+Circles,Circles
+Connector,Connector
+Tabs,Tabs
+Split,Split
+Top,Top
+Bottom,Bottom
+"reCaptcha Type","reCaptcha Type"
+"reCaptcha Language","reCaptcha Language"
+"reCaptcha Theme","reCaptcha Theme"
+"reCaptcha Size","reCaptcha Size"
+"Hide if user is logged in","Hide if user is logged in"
+Audio,Audio
+"Light Color Scheme","Light Color Scheme"
+"Dark Color Scheme","Dark Color Scheme"
+Compact,Compact
+"Checked by default","Checked by default"
+"Sub Label","Sub Label"
+"Sub Label Font Weight","Sub Label Font Weight"
+"Checked Value","Checked Value"
+"Unchecked Value","Unchecked Value"
+"Do not accept minimum value","Do not accept minimum value"
+Skin,Skin
+"Slider Color","Slider Color"
+Prefix,Prefix
+Postfix,Postfix
+"Flat UI","Flat UI"
+HTML5,HTML5
+"Nice White","Nice White"
+"Simple Dark","Simple Dark"
+"Number of Stars","Number of Stars"
+"Default Score","Default Score"
+"Star Color","Star Color"
+"Star Active Color","Star Active Color"
+Values,Values
+Text,Text
+"Button Design","Button Design"
+"Button Style","Button Style"
+"Button Size","Button Size"
+"Set Full Width Button","Set Full Width Button"
+"Gradient Color 1","Gradient Color 1"
+"Gradient Color 2","Gradient Color 2"
+"Inline CSS","Inline CSS"
+Flat,Flat
+Gradient,Gradient
+"Add field value to the Newsletter List","Add field value to the Newsletter List"
+"Send Success Email","Send Success Email"
+"Need to Confirm","Need to Confirm"
+"Limit By","Limit By"
+"Text To Appear After Counter","Text To Appear After Counter"
+"Show Character Count","Show Character Count"
+"Input Mask","Input Mask"
+"Auto Suggest","Auto Suggest"
+"Seperate the suggests with new line.","Seperate the suggests with new line."
+Characters,Characters
+Words,Words
+"Hide AM / PM","Hide AM / PM"
+"Default Hour","Default Hour"
+"Default Minute","Default Minute"
+Color,Color
+"Checked State Label","Checked State Label"
+"Unchecked State Label","Unchecked State Label"
+"Unknown template type","Unknown template type"
+"is equal to","is equal to"
+"is not equal to","is not equal to"
+"is greater than","is greater than"
+"is less than","is less than"
+contains,contains
+"does not contain","does not contain"
+"starts with","starts with"
+"ends with","ends with"
+"is empty","is empty"
+"is not empty","is not empty"
+Inline,Inline
+"Bottom Left","Bottom Left"
+"Bottom Right","Bottom Right"
+"Inline Form","Inline Form"
+"Popup Form","Popup Form"
+"Slide In Form","Slide In Form"
+"Link Form","Link Form"
+"Something went wrong while saving the file(s).","Something went wrong while saving the file(s)."
+". ' doessn'n not implement \BlueFormBuilder\Core\Model\ElementInterface'",". ' doessn'n not implement \BlueFormBuilder\Core\Model\ElementInterface'"
+"Could not save form: %1","Could not save form: %1"
+"Cannot delete form with id %1","Cannot delete form with id %1"
+"A form url with the same properties already exists in the selected store.","A form url with the same properties already exists in the selected store."
+"Page Url Key [page.url_key]","Page Url Key [page.url_key]"
+"Page Title [page.title]","Page Title [page.title]"
+"Product ID [product.id]","Product ID [product.id]"
+"Product Name [product.name]","Product Name [product.name]"
+"Product SKU [product.sku]","Product SKU [product.sku]"
+"Product Price [product.price]","Product Price [product.price]"
+"Product Special Price [product.special_price]","Product Special Price [product.special_price]"
+"Product Short Description [product.short_description]","Product Short Description [product.short_description]"
+"Product Url Key [product.url_key]","Product Url Key [product.url_key]"
+"Product Price From Date [product.special_from_date]","Product Price From Date [product.special_from_date]"
+"Special Price To Date [product.special_to_date]","Special Price To Date [product.special_to_date]"
+"Product New From Date [product.news_from_date]","Product New From Date [product.news_from_date]"
+"Special New To Date [product.news_to_date]","Special New To Date [product.news_to_date]"
+"Customer ID [customer.id]","Customer ID [customer.id]"
+"Customer First Name [customer.firstname]","Customer First Name [customer.firstname]"
+"Customer Middle Name [customer.middlename]","Customer Middle Name [customer.middlename]"
+"Customer Last Name [customer.lastname]","Customer Last Name [customer.lastname]"
+"Customer Full Name [customer.fullname]","Customer Full Name [customer.fullname]"
+"Customer Email [customer.email]","Customer Email [customer.email]"
+"Customer Date of Birth [customer.dob]","Customer Date of Birth [customer.dob]"
+"Customer Prefix [customer.prefix]","Customer Prefix [customer.prefix]"
+"Customer Suffix [customer.suffix]","Customer Suffix [customer.suffix]"
+"Customer IP [customer.ip]","Customer IP [customer.ip]"
+"Customer Group [customer.group]","Customer Group [customer.group]"
+"Customer Tax/VAT Number [customer.taxvat]","Customer Tax/VAT Number [customer.taxvat]"
+"Customer Gender [customer.gender]","Customer Gender [customer.gender]"
+"Customer Billing Address [customer.billing_address]","Customer Billing Address [customer.billing_address]"
+Style1,Style1
+Style2,Style2
+"HTML tags are not allowed.","HTML tags are not allowed."
+"Please select an option.","Please select an option."
+"Empty Value.","Empty Value."
+"Please use only letters (a-z or A-Z), numbers (0-9) or spaces only in this field.","Please use only letters (a-z or A-Z), numbers (0-9) or spaces only in this field."
+"Please use only letters (a-z or A-Z), numbers (0-9) or underscore (_) in this field, and the first character should be a letter.","Please use only letters (a-z or A-Z), numbers (0-9) or underscore (_) in this field, and the first character should be a letter."
+"Please use only letters (a-z or A-Z), numbers (0-9), spaces and ""#"" in this field.","Please use only letters (a-z or A-Z), numbers (0-9), spaces and ""#"" in this field."
+"Please enter a valid phone number. For example (123) 456-7890 or 123-456-7890.","Please enter a valid phone number. For example (123) 456-7890 or 123-456-7890."
+"Please enter a valid fax number (Ex: 123-456-7890).","Please enter a valid fax number (Ex: 123-456-7890)."
+"Please enter a valid email address (Ex: johndoe@domain.com).","Please enter a valid email address (Ex: johndoe@domain.com)."
+"Please enter 6 or more characters. Leading and trailing spaces will be ignored.","Please enter 6 or more characters. Leading and trailing spaces will be ignored."
+"Please enter 7 or more characters, using both numeric and alphabetic.","Please enter 7 or more characters, using both numeric and alphabetic."
+"Please enter a valid URL. Protocol is required (http://, https:// or ftp://).","Please enter a valid URL. Protocol is required (http://, https:// or ftp://)."
+"Please enter a valid URL. For example http://www.example.com or www.example.com.","Please enter a valid URL. For example http://www.example.com or www.example.com."
+"Please enter a valid XML-identifier (Ex: something_1, block5, id-4).","Please enter a valid XML-identifier (Ex: something_1, block5, id-4)."
+"Please enter a valid social security number (Ex: 123-45-6789).","Please enter a valid social security number (Ex: 123-45-6789)."
+"Please enter a valid zip code (Ex: 90602 or 90602-1234).","Please enter a valid zip code (Ex: 90602 or 90602-1234)."
+"Please use this date format: dd/mm/yyyy. For example 17/03/2006 for the 17th of March, 2006.","Please use this date format: dd/mm/yyyy. For example 17/03/2006 for the 17th of March, 2006."
+"Please enter a valid $ amount. For example $100.00.","Please enter a valid $ amount. For example $100.00."
+"Please enter a number 0 or greater in this field.","Please enter a number 0 or greater in this field."
+"Please enter a number greater than 0 in this field.","Please enter a number greater than 0 in this field."
+"Please input a valid CSS-length (Ex: 100px, 77pt, 20em, .5ex or 50%).","Please input a valid CSS-length (Ex: 100px, 77pt, 20em, .5ex or 50%)."
+"Please enter a valid number in this field.","Please enter a valid number in this field."
+"Please enter a valid integer in this field.","Please enter a valid integer in this field."
+"The value is not within the specified range.","The value is not within the specified range."
+"Please use letters only (a-z or A-Z) in this field.","Please use letters only (a-z or A-Z) in this field."
+"Please use only letters (a-z), numbers (0-9) or underscore (_) in this field, and the first character should be a letter.","Please use only letters (a-z), numbers (0-9) or underscore (_) in this field, and the first character should be a letter."
+"Please use only letters (a-z or A-Z) or numbers (0-9) in this field. No spaces or other characters are allowed.","Please use only letters (a-z or A-Z) or numbers (0-9) in this field. No spaces or other characters are allowed."
+"Please enter a valid date.","Please enter a valid date."
+"Please enter a valid URL Key (Ex: ""example-page"", ""example-page.html"" or ""anotherlevel/example-page"").","Please enter a valid URL Key (Ex: ""example-page"", ""example-page.html"" or ""anotherlevel/example-page"")."
+"Please enter a valid zip code.","Please enter a valid zip code."
+"Please select State/Province.","Please select State/Province."
+"Please enter valid email addresses, separated by commas. For example, johndoe@domain.com, johnsmith@domain.com.","Please enter valid email addresses, separated by commas. For example, johndoe@domain.com, johnsmith@domain.com."
+"Please enter a valid credit card number.","Please enter a valid credit card number."
+"Please enter issue number or start date for switch/solo card type.","Please enter issue number or start date for switch/solo card type."
+"Please enter a valid value, ex: 10,20,30","Please enter a valid value, ex: 10,20,30"
+Read,Read
+Unread,Unread
+"Could not save submission: %1","Could not save submission: %1"
+"Cannot delete submission with id %1","Cannot delete submission with id %1"
+Guest,Guest
+"Delete %1","Delete %1"
+"Are you sure you want to delete a %1 record?","Are you sure you want to delete a %1 record?"
+"Magezon Blue Form Builder","Magezon Blue Form Builder"
+"Custom Javascript","Custom Javascript"
+"On Page Load","On Page Load"
+"Javascript to be executed on page load.","Javascript to be executed on page load."
+"Before Submit","Before Submit"
+"Javascript to be executed before form submission.","Javascript to be executed before form submission."
+"After Submit","After Submit"
+"Javascript to be executed after form submission, for example a Google Analytics tracking event.","Javascript to be executed after form submission, for example a Google Analytics tracking event."
+"Short Code","Short Code"
+Embed,Embed
+General,General
+"Form Name","Form Name"
+"Enable Form","Enable Form"
+"Enable reCaptcha3","Enable reCaptcha3"
+"Disable Form Page","Disable Form Page"
+"Show in Top Links","Show in Top Links"
+"Form in Websites","Form in Websites"
+"Customer Groups","Customer Groups"
+"Search Engine Optimization","Search Engine Optimization"
+"Meta Title","Meta Title"
+"Meta Description","Meta Description"
+"Meta Keywords","Meta Keywords"
+Width,Width
+"Auto Save Form Process","Auto Save Form Process"
+"Disable multiple submissions from same device","Disable multiple submissions from same device"
+"Disable Condition","Disable Condition"
+"Form Fields","Form Fields"
+(field),(field)
+"Message when disabled","Message when disabled"
+"You are already submit","You are already submit"
+"Disable form when it reaches X submissions","Disable form when it reaches X submissions"
+"Current submission counter: %1","Current submission counter: %1"
+"Redirect on Submit","Redirect on Submit"
+"Use ""/"" to stay on the same page after submitting.","Use ""/"" to stay on the same page after submitting."
+"Redirect X seconds after form submit","Redirect X seconds after form submit"
+"Submission Prefix","Submission Prefix"
+"Ex: BFB => BFB000000001","Ex: BFB => BFB000000001"
+Layout,Layout
+"Custom CSS","Custom CSS"
+"Custom Classes","Custom Classes"
+Styling,Styling
+"Enable Shadow","Enable Shadow"
+"Theme Default","Theme Default"
+"Background Image","Background Image"
+"Background Position","Background Position"
+"Background Style","Background Style"
+"Custom Class","Custom Class"
+Blank,Blank
+Template,Template
+Duplicate,Duplicate
+Import,Import
+"(blank form)","(blank form)"
+"Upload Form File","Upload Form File"
+"Save Form","Save Form"
+"Please type the letters and numbers below","Please type the letters and numbers below"
+"Reload captcha","Reload captcha"
+"<strong>Attention</strong>: Captcha is case sensitive.","<strong>Attention</strong>: Captcha is case sensitive."
+"Street Address","Street Address"
+"Address Line 2","Address Line 2"
+City,City
+State/Province,State/Province
+"Please select a region, state or province.","Please select a region, state or province."
+State/Prov/Region,State/Prov/Region
+Postal/Zip,Postal/Zip
+Close,Close
+"Go Today","Go Today"
+of,of
+"%1 %2","%1 %2"
+AM,AM
+PM,PM
+"* Required Fields","* Required Fields"
+Link,Link
+Date,Date
+"Submitted From Page","Submitted From Page"
+"Submission Summary","Submission Summary"
+"Maximum number of files exceeded.","Maximum number of files exceeded."
+"We could not detect a size.","We could not detect a size."
+"We don't recognize or support this file extension type.","We don't recognize or support this file extension type."
+"Minimum number of required files: %0","Minimum number of required files: %0"
+"Maximum number of required files: %0","Maximum number of required files: %0"
+"Please enter a valid phone number.","Please enter a valid phone number."
+"Please select one of each of the ratings above.","Please select one of each of the ratings above."
+Submission,Submission
+BlueFormBuilder,BlueFormBuilder
+"General Settings","General Settings"
+"Current Version","Current Version"
+"Form Route","Form Route"
+https://domain.com/<strong>FORM_ROUTE</strong>,https://domain.com/<strong>FORM_ROUTE</strong>
+reCaptcha,reCaptcha
+"Site key","Site key"
+"Secret key","Secret key"
+reCaptcha3,reCaptcha3
+Pages,Pages
+"Field Set","Field Set"
+"Single Line Text","Single Line Text"
+Paragraph,Paragraph
+"Date Picker","Date Picker"
+"Time Picker","Time Picker"
+"File Upload","File Upload"
+Number,Number
+Address,Address
+"Star Ratings","Star Ratings"
+Website,Website
+"Single Checkbox","Single Checkbox"
+Submit,Submit
+Select,Select
+"Checkbox List","Checkbox List"
+"Radio List","Radio List"
+"Choice Matrix","Choice Matrix"
+"Single Slider","Single Slider"
+"Magento2 Captcha","Magento2 Captcha"
+ReCaptcha,ReCaptcha
+Currency,Currency
+Toggle,Toggle
+Phone,Phone
+Subscribe,Subscribe
+"BlueFormBuilder Form","BlueFormBuilder Form"
+"Select Form...","Select Form..."
+"Display Type","Display Type"
+Width(px),Width(px)
+"Button Text","Button Text"
+"Button Align","Button Align"
+"Popup Selectors","Popup Selectors"
+Comma-separated.,Comma-separated.
+"Show Popup Automatically","Show Popup Automatically"
+"Show after X seconds","Show after X seconds"
+"After how many seconds popup should show again.","After how many seconds popup should show again."
+"Cookie lifetime in X seconds","Cookie lifetime in X seconds"
+"After how many seconds popup should show again. <br/>5minutes: 300 <br/>30minutes: 1800 <br/>1hour: 3600 <br/>3hours: 10800 <br/>6hours: 21600 <br/>12hours: 43200 <br/>24hours: 86400","After how many seconds popup should show again. <br/>5minutes: 300 <br/>30minutes: 1800 <br/>1hour: 3600 <br/>3hours: 10800 <br/>6hours: 21600 <br/>12hours: 43200 <br/>24hours: 86400"
+"Button Color","Button Color"
+"Button Color on Hover","Button Color on Hover"
+"Background Color on Hover","Background Color on Hover"
+"Button Font Size(px)","Button Font Size(px)"
+"Are you sure you want to delete the selected backup(s)?","Are you sure you want to delete the selected backup(s)?"
+Type,Type
+Size,Size
+Downloads,Downloads
+Time,Time
+"Form Information","Form Information"
+"Email Notifications","Email Notifications"
+Admin,Admin
+"Enable Admin Notification","Enable Admin Notification"
+"Attach file uploads to emails","Attach file uploads to emails"
+"Enable Customer Notification","Enable Customer Notification"
+"Success Message","Success Message"
+"Header Content","Header Content"
+"Footer Content","Footer Content"
+Style,Style
+"Border & Circle Color","Border & Circle Color"
+"Delete items","Delete items"
+"Are you sure you wan't to delete selected items?","Are you sure you wan't to delete selected items?"
+DESC,DESC
+Submissions,Submissions
+BCC,BCC
+Created,Created
+Modified,Modified
+"Mark Unread","Mark Unread"
+"Mark Read","Mark Read"
+"Product Sku","Product Sku"

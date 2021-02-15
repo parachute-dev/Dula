@@ -1,0 +1,29 @@
+@mixin button{
+	background:colours(brand,one); 
+	color:#000;
+	text-transform:uppercase;
+	line-height:1;
+	border:2px solid colours(brand,one); 
+		@include font-size(15px,"body");
+	font-weight:700;
+
+	letter-spacing:1px;
+	@include padding-top(12px);
+	@include padding-bottom(13px);
+	@include padding-left(45px);
+	@include padding-right(45px);
+	display:inline-block;
+	text-decoration:none;
+	&--transparent-white{
+		background:transparent;
+		border:2px solid white;
+		color:white;
+	}
+	&:visited{
+		color:white;
+	}
+}
+
+.button, form button{
+	@include button;
+} 

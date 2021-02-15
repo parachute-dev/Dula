@@ -1,0 +1,230 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+namespace Parachute\CatalogPlugin\Pricing\Render;
+
+use Magento\Framework\Pricing\Amount\Base;
+use Magento\Framework\Registry;
+use Magento\Catalog\Pricing\Price;
+use Magento\Framework\Pricing\Render\PriceBox as BasePriceBox;
+use Magento\Msrp\Pricing\Price\MsrpPrice;
+use Magento\Catalog\Model\Product\Pricing\Renderer\SalableResolverInterface;
+use Magento\Framework\View\Element\Template\Context;
+use Magento\Framework\Pricing\SaleableInterface;
+use Magento\Framework\Pricing\Price\PriceInterface;
+use Magento\Framework\Pricing\Render\RendererPool;
+use Magento\Framework\App\ObjectManager;
+use Magento\Catalog\Pricing\Price\MinimalPriceCalculatorInterface;
+
+/**
+ * Class for final_price rendering
+ *
+ * @method bool getUseLinkForAsLowAs()
+ * @method bool getDisplayMinimalPrice()
+ */
+class BundleFinalPriceBox extends \Magento\Catalog\Pricing\Render\FinalPriceBox
+{
+    /**
+     * @var \Magento\Framework\Registry
+     */
+    protected $registry;
+
+    /**
+     * @var SalableResolverInterface
+     */
+    private $salableResolver;
+
+    /**
+     * @var MinimalPriceCalculatorInterface
+     */
+    private $minimalPriceCalculator;
+
+    /**
+     * @param Context $context
+     * @param SaleableInterface $saleableItem
+     * @param PriceInterface $price
+     * @param RendererPool $rendererPool
+     * @param array $data
+     * @param SalableResolverInterface $salableResolver
+     * @param MinimalPriceCalculatorInterface $minimalPriceCalculator
+     */
+    public function __construct(
+        Context $context,
+        SaleableInterface $saleableItem,
+        PriceInterface $price,
+        RendererPool $rendererPool,
+        array $data = [],
+        SalableResolverInterface $salableResolver = null,
+        MinimalPriceCalculatorInterface $minimalPriceCalculator = null,
+        Registry $registry
+    ) {
+        $this->salableResolver = $salableResolver ?: ObjectManager::getInstance()->get(SalableResolverInterface::class);
+        $this->minimalPriceCalculator = $minimalPriceCalculator ? : ObjectManager::getInstance()->get(MinimalPriceCalculatorInterface::class);
+        $this->registry = $registry;
+        parent::__construct($context, $saleableItem, $price, $rendererPool, $data, $this->salableResolver, $this->minimalPriceCalculator);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function _toHtml()
+    {
+        if (!$this->salableResolver->isSalable($this->getSaleableItem())) {
+            return '';
+        }
+
+        $result = parent::_toHtml();
+        //Renders MSRP in case it is enabled
+        if ($this->isMsrpPriceApplicable()) {
+            /** @var BasePriceBox $msrpBlock */
+            $msrpBlock = $this->rendererPool->createPriceRender(
+                MsrpPrice::PRICE_CODE,
+                $this->getSaleableItem(),
+                [
+                    'real_price_html' => $result,
+                    'zone' => $this->getZone(),
+                ]
+            );
+            $result = $msrpBlock->toHtml();
+        }
+
+        return $this->wrapResult($result);
+    }
+
+    /**
+     * Check is MSRP applicable for the current product.
+     *
+     * @return bool
+     */
+    protected function isMsrpPriceApplicable()
+    {
+        try {
+            /** @var MsrpPrice $msrpPriceType */
+            $msrpPriceType = $this->getSaleableItem()->getPriceInfo()->getPrice('msrp_price');
+        } catch (\InvalidArgumentException $e) {
+            $this->_logger->critical($e);
+            return false;
+        }
+
+        $product = $this->getSaleableItem();
+        return $msrpPriceType->canApplyMsrp($product) && $msrpPriceType->isMinimalPriceLessMsrp($product);
+    }
+
+    /**
+     * Wrap with standard required container
+     *
+     * @param string $html
+     * @return string
+     */
+    protected function wrapResult($html)
+    {
+        return '<div class="price-box ' . $this->getData('css_classes') . '" ' .
+            'data-role="priceBox" ' .
+            'data-product-id="' . $this->getSaleableItem()->getId() . '" ' .
+            'data-price-box="product-id-' . $this->getSaleableItem()->getId() . '"' .
+            '>' . $html . '</div>';
+    }
+
+    public function areAllBundleOptionsRequired()
+    {
+        $product = $this->getProduct();
+        
+        if(!is_null($product))
+        {
+            if($product->getTypeId() == 'bundle')
+            {
+                $isRequired = false;
+                $typeInstance = $product->getTypeInstance(true);
+    
+                $selectionsCollection = $typeInstance->getSelectionsCollection(
+                    $typeInstance->getOptionsIds($product), $product
+                );
+
+                if(!is_null($selectionsCollection) && $selectionsCollection->count() > 0)
+                {
+                    foreach($selectionsCollection as $opt)
+                    {
+                        $_selections = $opt->getSelections();
+                        $_default = $opt->getDefaultSelection();
+                        $isRequired = $opt->getIsDefault();
+                        if(!$isRequired) return false;
+                    }
+
+                    return $isRequired;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public function getAmountAllRequiredOptions()
+    {
+        $product = $this->getProduct();
+        $productDefaultPrice = floatval($product->getPrice());
+        $amount = $productDefaultPrice > 0 ? $productDefaultPrice : null;
+        
+        if(!is_null($product))
+        {
+            if($product->getTypeId() == 'bundle')
+            {
+                $isRequired = false;
+                $typeInstance = $product->getTypeInstance(true);
+    
+                $selectionsCollection = $typeInstance->getSelectionsCollection(
+                    $typeInstance->getOptionsIds($product), $product
+                );
+
+                if(!is_null($selectionsCollection) && $selectionsCollection->count() > 0)
+                {
+                    foreach($selectionsCollection as $opt)
+                    {
+                        $_selections = $opt->getSelections();
+                        $_default = $opt->getDefaultSelection();
+                        $_selectionTotal = floatval($opt->getSelectionPriceValue()) * intval($opt->getSelectionQty());
+                        $amount = is_null($amount) ? $_selectionTotal : $amount + $_selectionTotal;
+                    }
+                }
+            }
+        }
+
+        return new Base($amount, []);
+    }
+
+    public function renderAmountAllRequiredOptions()
+    {
+        $id = $this->getPriceId() ? $this->getPriceId() : 'product-bundle-all-default-price-' . $this->getSaleableItem()->getId();
+        $amount = $this->getAmountAllRequiredOptions();
+
+        if ($amount === null) {
+            return '';
+        }
+
+        return $this->renderAmount(
+            $amount,
+            [
+                'price_id'          => $id,
+                'include_container' => false,
+                'skip_adjustments' => true
+            ]
+        );
+    }
+
+    /**
+     * Returns saleable item instance
+     *
+     * @return Product
+     */
+    protected function getProduct()
+    {
+        $parentBlock = $this->getParentBlock();
+
+        $product = $parentBlock && $parentBlock->getProductItem()
+            ? $parentBlock->getProductItem()
+            : $this->registry->registry('product');
+        return $product;
+    }
+}

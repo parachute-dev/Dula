@@ -1,0 +1,60 @@
+<?php
+/**
+ * @var $block \BlueFormBuilder\Core\Block\Element\Control
+ */
+
+$elementId        = $this->getElHtmlId();
+$elemName         = $this->getElemName();
+$element          = $this->getElement();
+$options          = $element->getData('options');
+$others           = $element->getData('others');
+$othersLabel      = $element->getData('others_label');
+$othersDescrition = $element->getData('others_description');
+$placeholder      = $element->getData('placeholder');
+$hasDefault       = false;
+if ($element->getShuffle()) shuffle($options);
+foreach ($options as $k => $option) {
+	if (isset($option['default']) && $option['default']) $hasDefault = true;
+	if (!isset($option['label'])) unset($options[$k]);
+}
+if ($others && $othersLabel) {
+	$options[] = [
+		'value' => 'bfb_others',
+		'label' => $othersLabel
+	];
+}
+$validate = [];
+if ($element->getData('required')) $validate['required'] = true;
+?>
+<select name="<?= $elemName ?>" id="<?= $elementId ?>" class="bfb-control" data-validate="{<?= $this->parseJson($validate) ?>}">
+	<?php if (!$hasDefault && $placeholder) { ?>
+	<option value=""><?= $placeholder ?></option>
+	<?php } ?>
+	<?php foreach ($options as $option) { ?>
+	<?php $optionValue = (isset($option['value']) && $option['value']) ? $option['value'] : $option['label']; ?>
+	<?php if (!$optionValue) continue; ?>
+	<option value="<?= $optionValue ?>" <?php if (isset($option['default']) && $option['default']) { ?>selected<?php } ?>><?= $option['label'] ?></option>
+	<?php } ?>
+</select>
+<?php if ($others) { ?>
+	<div id="<?= $elementId ?>-others" class="bfb-others">
+		<textarea name="<?= $elemName ?>_others" rows="4" data-validate="{required: true}" disabled></textarea>
+		<?php if ($othersDescrition) { ?>
+			<div class="bfb-element-description"><?= $othersDescrition ?></div>
+		<?php } ?>
+	</div>
+	<script>
+		require(['jquery'], function($) {
+			$('.<?= $element->getHtmlId() ?> select').change(function(e) {
+				var val = $(this).val();
+				if (val == 'bfb_others') {
+					$('.<?= $element->getHtmlId() ?> .bfb-others').show();
+	                $('.<?= $element->getHtmlId() ?> .bfb-others *').prop("disabled", false);
+				} else {
+					$('.<?= $element->getHtmlId() ?> .bfb-others').hide();
+	                $('.<?= $element->getHtmlId() ?> .bfb-others *').prop("disabled", true);
+				}
+			}).change();
+		});
+	</script>
+<?php } ?>

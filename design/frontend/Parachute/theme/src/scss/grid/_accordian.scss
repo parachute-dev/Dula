@@ -1,0 +1,59 @@
+
+.accordians {
+    &__header-row {
+     @include padding-bottom(25px);
+
+ }
+ &__header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    @include padding-bottom(25px);
+
+    h2{
+        padding-bottom:0;
+    }
+
+}
+&__header-content {
+}
+&__card-row {
+}
+}
+
+
+.accordian {
+
+    text-decoration:none;
+    @include margin-bottom(20px);
+
+    &__title{
+        cursor:pointer;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        h3{
+            padding-bottom:0;
+        }
+    }
+    &__content {
+        display:none;
+        @include padding(10px);
+        @include padding-left(20px);
+        @include padding-right(20px);
+
+        h4{
+         @include padding-bottom(5px);
+
+     }
+     p{
+     }
+     padding-bottom:0;
+ }
+
+ &.-active{
+  .accordian__title i{
+    transform:rotate(180deg);
+}
+}
+}

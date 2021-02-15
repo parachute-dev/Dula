@@ -1,0 +1,54 @@
+<?php
+/**
+ * @category Mageants SimpleConfigurable
+ * @package Mageants_SimpleConfigurable
+ * @copyright Copyright (c) 2017 Mageants
+ * @author Mageants Team <info@mageants.com>
+ */
+?>
+<?php /** @var $block \Magento\Swatches\Block\Product\Renderer\Configurable */ ?>
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$current_product = $objectManager->get('Magento\Framework\Registry')->registry('current_product');
+?>
+<div class="swatch-opt" data-role="swatch-options"></div>
+<?php $isEnable = $block->isEnable(); ?>
+<?php if($isEnable && $block->getcustomAttributes()) {?>
+<script type="text/x-magento-init">
+    {
+        "[data-role=swatch-options]": {
+            "Magento_Swatches/js/swatch-renderer": {
+                "jsonConfig": <?= /* @escapeNotVerified */ $swatchOptions = $block->getJsonConfig() ?>,
+                "jsonSwatchConfig": <?php /* @escapeNotVerified */
+                    echo $swatchOptions = $block->getJsonSwatchConfig(); ?>,
+                "mediaCallback": "<?= /* @escapeNotVerified */ $block->getMediaCallback() ?>",
+                "gallerySwitchStrategy": "<?php /* @escapeNotVerified */ echo $block->getVar('gallery_switch_strategy',
+                    'Magento_ConfigurableProduct') ?: 'replace'; ?>",
+                "customAttributes": <?php echo $block->getcustomAttributes() ?>,
+                <?php if($block->getPreselectOptionId()) {?>
+                "preSelectedOption": <?php echo $block->getPreselectOptionId() ?>,
+                <?php } ?>
+                <?php if($block->getProductUrls()) {?>
+                "productUrls": <?php echo $block->getProductUrls() ?>,
+                <?php } ?>
+                "replaceUrl" : <?php echo $block->replaceUrl() ?>
+            }
+        }
+    }
+</script>
+<?php } else { ?>
+	<script type="text/x-magento-init">
+	    {
+	        "[data-role=swatch-options]": {
+	            "Magento_Swatches/js/swatch-renderer": {
+	                "jsonConfig": <?= /* @escapeNotVerified */ $swatchOptions = $block->getJsonConfig() ?>,
+	                "jsonSwatchConfig": <?php /* @escapeNotVerified */
+	                    echo $swatchOptions = $block->getJsonSwatchConfig(); ?>,
+	                "mediaCallback": "<?= /* @escapeNotVerified */ $block->getMediaCallback() ?>",
+	                "gallerySwitchStrategy": "<?php /* @escapeNotVerified */ echo $block->getVar('gallery_switch_strategy',
+	                    'Magento_ConfigurableProduct') ?: 'replace'; ?>"
+	            }
+	        }
+	    }
+	</script>
+<?php } ?>

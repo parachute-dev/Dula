@@ -1,0 +1,52 @@
+<?php
+/**
+ * @var $block \BlueFormBuilder\Core\Block\Element\Control
+ */
+
+$elementId    = $this->getElHtmlId();
+$elemName     = $this->getElemName();
+$element      = $this->getElement();
+$max          = (float)$element->getData('max');
+$min          = (float)$element->getData('min');
+$step         = (float)$element->getData('step');
+$defaultValue = (float)$element->getData('default_value');
+$skin         = $element->getData('skin');
+$prefix       = $element->getData('prefix');
+$postfix      = $element->getData('postfix');
+$required     = $element->getData('required');
+$validate     = [];
+if ($required) $validate['required'] = true;
+?>
+<?php if ($max > $min) { ?>
+<div class="bfb-ionslider-<?= $skin ?>">
+	<div id="<?= $elementId ?>-ionslider">
+		<div id="<?= $elementId ?>-ionslider-tip" class="bfb-ionslider-tip ui-ionslider-handle" data-from="80"></div>
+	</div>
+	<input type="text" id="<?= $elementId ?>" class="bfb-control" name="<?= $elemName ?>" value="<?= ($required && $defaultValue != $min) ? $defaultValue : '' ?>"  data-validate="{<?= $this->parseJson($validate) ?>}"/>
+</div>
+<script type="text/javascript">
+	require(['jquery', 'Magezon_Core/js/ion.rangeSlider.min'], function($) {
+		$('#<?= $elementId ?>-ionslider').ionRangeSlider({
+			min: <?= $min ?>,
+			max: <?= $max ?>,
+			from: <?= $defaultValue ?>,
+			step: <?= $step ?>,
+			grid: true,
+			prefix: "<?= $prefix ?> ",
+			postfix: " <?= $postfix ?>"
+		}).on("change", function (value) {
+		    var value = $(this).prop("value");
+		    <?php if ($required) { ?>
+			    if (value == <?= $min ?>) {
+			    	$('#<?= $elementId ?>').val(null);	
+			    } else {
+			    	$('#<?= $elementId ?>').val("<?= $prefix ?>" + value);	
+			    }
+			<?php } else { ?>
+				$('#<?= $elementId ?>').val("<?= $prefix ?>" + value);
+			<?php } ?>
+			$('#<?= $elementId ?>').trigger('change');
+		}).change();
+	})
+</script>
+<?php } ?>

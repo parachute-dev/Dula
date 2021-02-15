@@ -1,0 +1,165 @@
+#footer{
+	text-align:center;
+	background:colours(brand,three);
+	@include padding-top(35px);
+
+	.logo{
+
+	}
+	.footer-navigation{
+		> ul{
+			max-width:1000px;
+			margin:0 auto;
+			justify-content:center;
+			margin-bottom:40px;
+
+				@include media-breakpoint-up(lg) { 
+			display:flex;
+
+
+}
+
+			> li{
+				display:inline-block;
+				vertical-align:top;
+				flex:1;
+						@include media-breakpoint-down(lg) { 
+width:40%;
+margin-bottom:30px;
+						}
+				@include font-size(17px,"body");
+				font-weight:600;
+
+
+				a{
+					color:white;
+					text-decoration:none;
+				}
+
+				ul{
+					margin-top:20px;
+				}
+				li{
+					@include font-size(15px,"body");
+					font-weight:300;
+					margin-bottom:8px;
+				}
+			}
+		}
+	}
+	.footer-bottom{
+		border-top:1px solid white;
+		padding:20px 0;
+		h5{
+			color:white;
+			font-weight:300;
+			strong{
+				font-weight:600;
+			}
+			a{
+				font-weight:500;
+			}
+		}
+		ul{
+			li{
+				display:inline-block;
+				font-size:13px;
+				font-size:300;
+
+				a{
+					color:white;
+					padding:5px 10px;
+				}
+			}
+		}
+	}
+}
+
+.top-navigation{
+	@include padding-top(30px);
+	@include padding-bottom(20px);	
+
+
+
+}
+
+.bottom-footer{
+	background:colours(brand,three);
+	@include padding-top(15px);
+	@include padding-bottom(15px);
+	p{
+		padding-bottom:0;
+		color:white;
+		@include font-size(14px,"body");
+	}
+}
+
+
+.newsletter{
+	background:colours(brand,one);
+	border-top:1px solid #333;
+
+	text-align:center;
+	::-webkit-input-placeholder {
+	   color: black;
+	}
+	:-moz-placeholder { 
+	   color: black;  
+	}
+	::-moz-placeholder {  
+	   color: black;  
+	}
+	:-ms-input-placeholder {  
+	   color: black;  
+	}
+	form{
+		position:relative;
+		margin:0 auto;
+		max-width:500px;
+	}
+	input{
+		background:transparent;
+		margin-bottom:0;
+	}
+	button{
+		position:absolute;
+		top:50%;
+		right:20px;
+		transform:translate(0,-50%);
+		padding:0;
+		border:0;
+		outline:0;
+	}
+	.col-12{
+		max-width:800px;
+		margin:0 auto;
+	}
+}  
+
+
+
+.our-blog{
+	background:colours(brand,two);
+	.blog-item{
+		background:white;
+		padding:2em;
+	}
+	a{
+		text-decoration:none;
+	}
+	p{
+		font-size:14px;
+	}
+	.image{
+		img{
+			height:100%;
+			width:100%;
+			object-fit:cover;
+
+		}
+	}
+
+}
+
+
+

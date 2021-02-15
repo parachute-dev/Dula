@@ -1,0 +1,74 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ */
+
+$randId               = 'bfb-' . time() . uniqid();
+$coreHelper           = $this->helper('Magezon\Core\Helper\Data');
+$builderHelper        = $this->helper('Magezon\Builder\Helper\Data');
+$form                 = $block->getForm();
+$redirectDelay        = $form->getRedirectDelay();
+$redirectTo           = $this->getRedirectTo();
+$successStyle         = $form->getSuccessMessageStyle();
+$successMessageFooter = $form->getSuccessMessageFooter();
+$successMessageHeader = $form->getSuccessMessageHeader();
+$vars = [
+	'[redirect_time]' => '<span id="' . $randId . '">' . $redirectDelay . '</span>',
+	'[redirect_link]' =>  '<a href="' . $redirectTo . '">' . $redirectTo . '</a>'
+];
+$successMessageFooter = str_replace(array_keys($vars), array_values($vars), $successMessageFooter);
+$successMessageHeadingBorderColor = $builderHelper->getStyleColor($form->getSuccessMessageHeadingBorderColor());
+?>
+<div id="<?= $randId ?>-wrapper" class="bfb-form-success bfb-form-success-<?= $successStyle ?>">
+	<?php if ($successStyle == 'style2') { ?>
+		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+	        <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+	        <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+	    </svg>
+	<?php } ?>
+	<?php if ($successStyle == 'style1' && $successMessageHeader) { ?>
+    	<h3 class="bfb-form-success-title"><i class="mgz-fa mgz-fa-check-circle"></i> <?= $successMessageHeader ?></h3>
+	<?php } ?>
+    <?php if ($form->getSuccessMessage()) { ?>
+    	<div class="bfb-form-success-content"><?= $coreHelper->filter(htmlspecialchars_decode($form->getSuccessMessage())) ?></div>
+    <?php } ?>
+    <?php if ($redirectTo && $redirectDelay && $successMessageFooter) { ?>
+	    <div class="bfb-form-success-footer"><?= $successMessageFooter ?></div>
+    <?php } ?>
+    <?php if ($redirectTo && $redirectDelay) { ?>
+		<script type="text/javascript">
+			var i = <?= $redirectDelay - 1 ?>;
+			var myVar = setInterval(myTimer, 1000);
+			function myTimer() {
+				if (i <= 0) {
+					//window.location.href = '<?= $redirectTo ?>';
+				} else {
+					document.getElementById('<?= $randId ?>').innerHTML = i;
+				}
+				i = i -1;
+			}
+			setTimeout(function() {
+				clearInterval(myVar);
+				window.location.href = '<?= $redirectTo ?>';
+			}, (<?= $redirectDelay ?> + 1) * 1000);
+		</script>
+	<?php } ?>
+</div>
+<style>
+	#<?= $randId ?>-wrapper,
+	#<?= $randId ?>-wrapper h3 {
+		color: <?= $form->getSuccessMessageHeadingColor() ?>;
+		background-color: <?= $form->getSuccessMessageHeadingBackgroundColor() ?>;
+	}
+	<?php if ($successMessageHeadingBorderColor) { ?>
+		#<?= $randId ?>-wrapper h3:before {
+			background: <?= $successMessageHeadingBorderColor ?>;
+		}
+		#<?= $randId ?>-wrapper circle {
+			stroke: <?= $successMessageHeadingBorderColor ?>;
+		}
+		#<?= $randId ?>-wrapper polyline {
+			stroke: <?= $successMessageHeadingBorderColor ?>;
+		}
+	<?php } ?>
+</style>

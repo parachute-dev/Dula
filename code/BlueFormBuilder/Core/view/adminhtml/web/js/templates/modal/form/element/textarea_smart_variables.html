@@ -1,0 +1,38 @@
+<div class="bfb-smart-variables {{ listVisible ? '_active' : ''}} {{ filterOptionsFocus ? 'searching' : ''}}">
+    <div class="bfb-smart-variables-input">
+        <textarea class="mgz__control-textarea" ng-model="model[options.key]" id="{{::id}}"></textarea>
+        <i aria-hidden="true" class="fa fa-list-ul bfb-smart-action" ng-click="listVisible=!listVisible"></i>
+    </div>
+    <div class="bfb-smart-variables-content {{ listVisible ? '_active' : ''}}">
+        <div class="bfb-tab-filter">
+            <input class="admin__control-text" type="text" placeholder="Search for predefined variables" ng-model="filterInputValue">
+        </div>
+        <div class="bfb-smart-variables-container">
+            <div class="bfb-tab-left">
+                <div class="bfb-tab-title" ng-repeat="option in variables">
+                    <div class="bfb-tab-title-item {{ $index==activeTabIndex ? 'active' : '' }}" ng-click="activeTab(option, $index)">
+                        <span ng-bind-html="option.label">
+                    </div>
+                </div>
+            </div>
+            <div class="bfb-tab-right">
+                <div class="bfb-tab-content">
+                    <div class="bfb-tab-content-inner">
+                        <ul class="bfb-tab-content-item {{ $index==activeTabIndex ? 'active' : '' }}" ng-repeat="option in variables" data-index="{{ $index }}">
+                            <li ng-repeat="option1 in option.options">
+                                <span ng-bind-html="option1.label" ng-click="$parent.addOptionSelected(option1)">
+                            </li>
+                        </ul>
+	                </div>
+                    <div class="bfb-tab-content-item-search">
+                        <ul>
+                            <li ng-repeat="option in filterOptions">
+                                <span ng-bind-html="option.label" ng-click="$parent.addOptionSelected(option)">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

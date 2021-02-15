@@ -1,0 +1,17 @@
+{
+  "name": "sweetanalytics/sweet-tracker",
+  "type": "magento2-module",
+  "version": "1.0.2",
+  "license": "OSL-3.0",
+  "description": "Magento module for Sweet Analytics Tracker.",
+  "require": {
+    "php": "^7.1|^7.2|^7.3",
+    "magento/framework": "^100.1.0|101.0.*|^102.0.0"
+  },
+  "autoload": {
+    "files": [ "registration.php" ],
+    "psr-4": {
+      "YelHex\\SweetTracker\\": ""
+    }
+  }
+}

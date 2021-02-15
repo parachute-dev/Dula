@@ -1,0 +1,17 @@
+<?php
+/**
+ * @var \BlueFormBuilder\Core\Block\Adminhtml\Notification $block
+ */
+
+$totalUnread = $block->getTotalUnread();
+?>
+<?php if ($totalUnread) { ?>
+	<script>
+		require(['jquery'], function($) {
+			jQuery(document).ready(function($) {
+				var totalUnread = '<span class="bfb-unread-submissions"><span><?= $block->getTotalUnread() ?></span></span>';
+				$('.item-formbuilder .item-submissions a,a.bfb-submissions,#menu-magento-backend-content > a').append(totalUnread);
+			});
+		});
+	</script>
+<?php } ?>

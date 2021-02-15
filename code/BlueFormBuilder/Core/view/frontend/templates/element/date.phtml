@@ -1,0 +1,143 @@
+<?php
+/**
+ * @var $block \BlueFormBuilder\Core\Block\Element\Date
+ */
+
+$coreHelper       = $this->helper('\Magezon\Core\Helper\Data');
+$elementId        = $this->getElHtmlId();
+$element          = $this->getElement();
+$defaultValue     = $element->getData('default_value');
+$showIcon         = $element->getData('show_icon');
+$icon             = $element->getData('icon');
+$minDate          = $element->getData('min_date');
+$maxDate          = $element->getData('max_date');
+$dateLanguage     = $element->getData('date_language');
+$dateFormat       = $element->getData('date_format');
+$showTime         = $element->getData('show_time');
+$showYear         = $element->getData('show_year');
+$showMonth        = $element->getData('show_month');
+$showHour         = $element->getData('show_hour');
+$hourStep         = $element->getData('hour_step');
+$maxHour          = $element->getData('max_hour');
+$minHour          = $element->getData('min_hour');
+$showMinute       = $element->getData('show_minute');
+$minuteStep       = $element->getData('minute_step');
+$maxMinute        = $element->getData('max_minute');
+$minMinute        = $element->getData('min_minute');
+$daysAllowed      = $element->getData('days_allowed') ? $coreHelper->unserialize($element->getDaysAllowed()) : [];
+$disablePastDates = $element->getData('disable_past_dates');
+$autofocus        = $element->getData('autofocus');
+
+foreach ($daysAllowed as &$_value) {
+	$_value = (int) $_value;
+}
+
+$defaultFormat = str_replace(['mm', 'dd', 'yy', 'M'], ['m', 'd', 'Y', 'm'], $dateFormat);
+if ($showTime && ($showHour || $showMinute)) {
+	$defaultFormat .= ' ';
+	if ($showHour) $defaultFormat .= 'H';
+	if ($showHour && $showMinute) $defaultFormat .= ':';
+	if ($showMinute) $defaultFormat .= 'i';
+}
+if ($defaultValue=='0') $defaultValue = 'now';
+if ($defaultValue) {
+	$date         = date_create($defaultValue);
+	if ($date) $defaultValue = date_format($date, $defaultFormat);
+}
+
+if ($showTime && $minDate) {
+	$date    = date_create($minDate);
+	$minDate = date_format($date, str_replace(['mm', 'dd', 'yy'], ['m', 'd', 'Y'], $dateFormat));
+	if ($minHour) $minDate .= ' ' . $minHour . ':00:00';
+}
+
+if ($element->getMinDate()) {
+	$currentDate = new \DateTime('now');
+	if ($disablePastDates && ($currentDate >= (new \DateTime($minDate)))) {
+		$minDate = 0;
+	} else {
+		$minDate = 'new Date("' . $minDate . '")';
+	}
+
+} else if ($disablePastDates) {
+	$minDate = 0;
+}
+$validate = [];
+if ($element->getData('required')) $validate['required'] = true;
+$yearRange = $element->getData('year_range');
+?>
+<input type="text" class="bfb-control" data-validate="{<?= $this->parseJson($validate) ?>}" name="<?= $this->getElemName() ?>" value="<?= $defaultValue ?>" id="<?= $elementId ?>" <?= $autofocus ? 'autofocus' : '' ?> readonly/>
+<?php if ($showIcon && $icon) { ?>
+	<i class="bfb-element-icon <?= $icon ?>"></i>
+<?php } ?>
+<?php if (!$element->getData('readonly')) { ?>
+<script type="text/javascript">
+require(['jquery','mage/calendar',
+	<?php if ($dateLanguage !== 'en') { ?>'BlueFormBuilder_Core/js/ui/i18n/datepicker-<?= $dateLanguage ?>'<?php } ?>
+	], function($) {
+		$(document).ready(function($) {
+			var daysAllowed = <?= $coreHelper->serialize($daysAllowed) ?>;
+			var options     = $.extend(
+				{},
+				<?= ($dateLanguage!=='en') ? '$.datepicker.regional["' . $dateLanguage .'"]' : '""' ?>,
+				{
+					<?php if ($dateLanguage === 'en') { ?>
+						dayNames: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+						dayNamesMin: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
+						monthNames: ["January","February","March","April","May","June","July","August","September","October","November","December"],
+						monthNamesShort: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+					<?php } ?>
+					firstDay: 0,
+					closeText: "<?= __('Close') ?>",
+					currentText: "<?= __('Go Today') ?>",
+					dateFormat: "<?= $dateFormat ?>",
+					showOn: "button",
+					changeMonth: <?= $showMonth ? 'true' : 'false' ?>,
+					changeYear: <?= $showYear ? 'true' : 'false' ?>,
+					showButtonPanel: true,
+					showOtherMonths: true,
+					yearRange: "<?= $yearRange ? $yearRange : 'c-10:c+10' ?>",
+					showsTime: <?= $showTime ? 'true' : 'false' ?>,
+					showHour: <?= $showHour ? 'true' : 'false' ?>,
+					stepHour: <?= $hourStep ?>,
+					hourMax: <?= $maxHour ?>,
+					hourMin: <?= $minHour ?>,
+					showMinute: <?= $showMinute ? 'true' : 'false' ?>,
+					stepMinute: <?= $minuteStep ?>,
+					minuteMax: <?= $maxMinute ?>,
+					minuteMin: <?= $minMinute ?>,
+					serverTimezoneSeconds: <?= (int) $block->getStoreTimestamp(); ?>,
+					serverTimezoneOffset: <?= (int) $block->getTimezoneOffsetSeconds(); ?>,
+					<?php if ($minDate!==NULL): ?>minDate: <?= $minDate ?>,<?php endif; ?>
+					<?php if (!$showTime && $maxDate): ?>maxDate: new Date('<?= $maxDate ?>'),<?php endif; ?>
+					beforeShowDay: function (date) {
+						var day = date.getDay();
+						return [(daysAllowed.indexOf(day) !== -1)];
+					},
+					beforeShow: function(input, inst) {
+						$('#ui-datepicker-div').addClass('bfb-element-datepicker');
+					},
+					onClose: function () {
+						setTimeout(function() {
+							if ($('#ui-datepicker-div').height() === 0 ) {
+								$('#ui-datepicker-div').removeClass('bfb-element-datepicker');	
+							}
+						}, 100);
+					}
+				}
+			);
+			$(document).on('click', '#<?= $elementId ?>', function() {
+				$('#<?= $elementId ?>').calendar(options);
+				if (!$('#ui-datepicker-div').is(':visible')) {
+					$(this).next('.ui-datepicker-trigger').trigger('click');
+				}
+			});
+			$(document).on('click', '.<?= $element->getHtmlId() ?> .bfb-element-icon', function() {
+				if (!$('#ui-datepicker-div').is(':visible')) {
+					$('#<?= $elementId ?>').trigger('click');
+				}
+			});
+		});
+	});
+</script>
+<?php } ?>

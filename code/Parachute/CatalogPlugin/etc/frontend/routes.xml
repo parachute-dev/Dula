@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Parachute
+ *
+ * @category    Parachute
+ * @package     Parachute_CatalogPlugin
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="ParachuteCatalogPlugin" frontName="parachutecatalogplugin">
+            <module name="Parachute_CatalogPlugin"/>
+        </route>
+    </router>
+</config>

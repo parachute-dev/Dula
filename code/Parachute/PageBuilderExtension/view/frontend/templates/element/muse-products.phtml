@@ -1,0 +1,257 @@
+
+
+<?php
+    // Class ref: \Parachute\PageBuilderExtension\Data\Element\Banner
+
+    // Helpers
+$_coreHelper = $this->helper('\Magezon\Core\Helper\Data');
+$_builderHelper = $this->helper('\Magezon\Builder\Helper\Data');
+
+    // Element data
+$_element = $this->getElement();
+$_id = time() . uniqid();
+
+    // foreach($_element->getData() as $key=>$value):
+    //     echo '<pre>' . $key . '</pre>';
+    //     print_r($value);
+    // endforeach;
+
+    // Layout
+    // Block classes
+$block_class_str = "";
+$block_class_arr = [];
+
+    // Block container classes
+$block_container_class_str = "";
+$block_container_class_arr = [];
+
+    // Block inner classes
+$block_inner_class_str = "";
+$block_inner_class_arr = [];
+
+    // Block inner container classes
+$block_inner_container_class_str = "";
+$block_inner_container_class_arr = [];
+
+    // Listings classes
+$listings_class_str = "";
+$listings_class_arr = [];
+
+    // Block
+$block_active = $_element->getData('block_active');
+$block_title = $_element->getData('block_title');
+
+$block_subtitle = $_element->getData('block_subtitle');
+$block_content = $_element->getData('block_content');
+$block_subcontent = $_element->getData('block_subcontent');
+$block_cta_type = $_element->getData('block_cta_type');
+$block_cta_target = $_element->getData('block_cta_target');
+$block_cta_link = $_element->getData('block_cta_link');
+$block_cta_link_text = $_element->getData('block_cta_link_text');
+$block_image = $_element->getData('block_image');
+$block_header_show = boolval($_element->getData('block_header_show')) ? $_element->getData('block_header_show') : false;
+$block_footer_show = boolval($_element->getData('block_footer_show')) ? $_element->getData('block_footer_show') : false;
+$block_layout = !empty($_element->getData("layout_type")) ? $_element->getData("layout_type") : "content";
+$block_header_has_data = false;
+$block_footer_has_data = false;
+
+    // Does our header have any content?
+if(
+    !empty($block_title) || 
+    !empty($block_subtitle) || 
+    !empty($block_content) || 
+    !empty($block_subcontent) || 
+    !empty($block_cta_link)) 
+{
+    $block_header_has_data = true;
+    $block_footer_has_data = true;
+}
+
+    // Layout type classes
+if(!empty($block_layout))
+{
+    $block_class_arr[] = $block_layout;
+    $listings_class_arr[] = $block_layout;
+}
+
+    // Image list
+$block_image_list = $this->toObjectArray($_element->getData('block_image_list'));
+
+    // Items
+$_items = $this->toObjectArray($_element->getItems());
+
+    // Carousel
+$isCarouselActive = boolval($_element->getData('is_carousel_active')) ? $_element->getData('is_carousel_active') : false;
+if($isCarouselActive) { $block_class_arr[] = "is-carousel"; }
+if($isCarouselActive) { $listings_class_arr[] = "is-carousel"; }
+
+    // Layout
+$layout_type = !empty($_element->getData('layout_type')) ? $_element->getData('layout_type') : "";
+$text_align = !empty($_element->getData('text_align')) ? $_element->getData('text_align') : "left";
+$content_align = !empty($_element->getData('content_align')) ? $_element->getData('content_align') : "start";
+$content_justify = !empty($_element->getData('content_justify')) ? $_element->getData('content_justify') : "start";
+$alignment = !empty($_element->getData('alignment')) ? $_element->getData('alignment') : "left";
+$content_size = !empty($_element->getData('content_size')) ? $_element->getData('content_size') : "medium";
+
+$block_class_arr[] = $layout_type;
+$block_class_arr[] = "text-align-" . $text_align;
+$block_class_arr[] = "align-content-" . $content_align;
+$block_class_arr[] = "justify-content-" . $content_justify;
+$block_class_arr[] = "align-" . $alignment;
+$block_class_arr[] = $content_size;
+
+$container_outer_type = !empty($_element->getData('container_type')) ? $_element->getData('container_type') : "container-fluid";
+$container_outer_type_str = $container_outer_type == "fixed" ? "container" : "container-fluid";
+
+$container_inner_type = !empty($_element->getData('container_type_inner')) ? $_element->getData('container_type_inner') : "container";
+$container_inner_type_str = $container_inner_type == "fixed" ? "container" : "container-fluid";
+
+$no_gutter = $_element->getData('no_gutter');
+$no_gutter_inner = $_element->getData('no_gutter_inner');
+
+$block_container_class_arr[] = $container_outer_type_str;
+$block_inner_container_class_arr[] = $container_inner_type_str;
+
+if(!empty($no_gutter)) { $block_class_arr[] = "no-gutter"; }
+if(!empty($no_gutter_inner)) { $block_inner_container_class_arr[] = "no-gutter"; }
+
+
+if(!empty($block_class_arr))
+    $block_class_str = join(" ", $block_class_arr);
+
+    // Block container
+if(!empty($block_container_class_arr))
+    $block_container_class_str = join(" ", $block_container_class_arr);
+
+    // Inner block
+if(!empty($block_inner_class_arr))
+    $block_inner_class_str = join(" ", $block_inner_class_arr);
+
+    // Inner block container
+if(!empty($block_inner_container_class_arr))
+    $block_inner_container_class_str = join(" ", $block_inner_container_class_arr);
+
+    // Listings
+if(!empty($listings_class_arr))
+    $listings_class_str = join(" ", $listings_class_arr);
+
+    // Loop vars
+$item_count = count($_items);
+$counter = 0;
+
+$loop = 1;
+?>
+
+
+<div class="category-callout-block content-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <header class="content-header content-header-line">
+                    <h2><?php echo $block_title; ?></h2>
+                </header>
+            </div>
+        </div>
+        <div class="row">
+            <div class="callout-carousel">
+
+
+
+                <?php foreach($_items as $_item): ?>
+                    <?php 
+                                                // Active
+                    $active = $_item->getData('active');
+
+                    if($active != "1")
+                        continue;
+
+                                                // Content
+                    $title = $_item->getData('title');
+                    $subtitle = $_item->getData('subtitle');
+                    $subcontent = $_item->getData('subcontent');
+                    $content = $_item->getData('content');
+                    $cta_type = $_item->getData('cta_type');
+                    $image = $_item->getData('image');
+                    $image_src = !empty($_builderHelper->getImageUrl($image)) ? $_builderHelper->getImageUrl($image) : "/assets/img/banner-masthead.jpg";
+                    $secondary_image = $_item->getData('secondary_image');
+                    $secondary_image_src = !empty($_builderHelper->getImageUrl($secondary_image)) ? $_builderHelper->getImageUrl($secondary_image) : "";
+
+                                                // Video data
+                    $video_url = $_item->getData('video_url');
+
+                                                // Image list
+                    $image_list = $this->toObjectArray($_item->getData('image_list'));
+
+                                                // CTA
+                    $cta_link = $_item->getData('cta_link');
+                    $cta_link_text = !empty($_item->getData('cta_link_text')) ? $_item->getData('cta_link_text') : "Learn more";
+                    $secondary_cta_link = $_item->getData('secondary_cta_link');
+                    $secondary_cta_link_text = !empty($_item->getData('secondary_cta_link_text')) ? $_item->getData('secondary_cta_link_text') : "Learn more";
+
+                                                // Layout
+                    $class_str = "";
+                    $class_arr = [];
+
+                    $banner_type = !empty($_item->getData('layout_type')) ? $_item->getData('layout_type') : "content";
+                    $text_align = !empty($_item->getData('text_align')) ? $_item->getData('text_align') : "centre";
+                    $content_align = !empty($_item->getData('content_align')) ? $_item->getData('content_align') : "centre";
+                    $content_justify = !empty($_item->getData('content_justify')) ? $_item->getData('content_justify') : "centre";
+                    $alignment = !empty($_item->getData('alignment')) ? $_item->getData('alignment') : "left";
+                    $content_size = !empty($_item->getData('content_size')) ? $_item->getData('content_size') : "medium";
+
+                    $class_arr[] = $banner_type;
+                    $class_arr[] = "text-align-" . $text_align;
+                    $class_arr[] = "align-content-" . $content_align;
+                    $class_arr[] = "justify-content-" . $content_justify;
+                    $class_arr[] = "align-" . $alignment;
+                    $class_arr[] = $content_size;
+
+                    if(!empty($class_arr))
+                    {
+                        $class_str = join(" ", $class_arr);
+                    }
+                    ?>
+                    <div class="col-md-4">
+                        <div class="category-callout">
+                            <a href="">
+                                <div class="image" style="background-image:url('<?php echo $image_src; ?>')">
+                                </div>
+                                <div class="content">
+                                    <h4><?php echo $title; ?></h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<?php if($isCarouselActive == true): ?>
+    <script>
+        require([
+            'jquery',
+            'slick'
+            ], function ($) {
+
+                $(document).ready(function () {
+
+                    $(".banner-link-active").click(function(event){
+                        window.location.href = jQuery(this).data("banner-link");
+                    });
+                    $("#block-<?php echo $_id; ?> .banner-list").slick({
+                        arrows:true,
+                        dots: false,
+                        infinite: true,
+                        speed: 300,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        nextArrow: '<button type="button" class="slick-next slick-arrow"><span class="sr-only">Next</span><i class="fa fa-chevron-right" aria-hidden="true"></i></button>',
+                        prevArrow: '<button type="button" class="slick-prev slick-arrow"><span class="sr-only">Previous</span><i class="fa fa-chevron-left" aria-hidden="true"></i></button>'
+                    });
+                });
+            });
+        </script>
+    <?php endif; ?>

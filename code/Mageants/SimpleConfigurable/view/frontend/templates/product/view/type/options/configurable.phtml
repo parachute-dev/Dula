@@ -1,0 +1,76 @@
+<?php
+/**
+ * @category Mageants ConfigurablePreselect
+ * @package Mageants_ConfigurablePreselect
+ * @copyright Copyright (c) 2017 Mageants
+ * @author Mageants Team <info@mageants.com>
+ */
+?>
+<?php
+/** @var $block \Magento\ConfigurableProduct\Block\Product\View\Type\Configurable*/
+$_product    = $block->getProduct();
+$_attributes = $block->decorateArray($block->getAllowAttributes());
+?>
+<?php if ($_product->isSaleable() && count($_attributes)):?>
+    <?php foreach ($_attributes as $_attribute): ?>
+        <div class="field configurable required test">
+            <label class="label" for="attribute<?= /* @escapeNotVerified */ $_attribute->getAttributeId() ?>">
+                <span><?= $block->escapeHtml($_attribute->getProductAttribute()->getStoreLabel()) ?></span>
+            </label>
+            <div class="control">
+                <select name="super_attribute[<?= /* @escapeNotVerified */ $_attribute->getAttributeId() ?>]"
+                        data-selector="super_attribute[<?= /* @escapeNotVerified */ $_attribute->getAttributeId() ?>]"
+                        data-validate="{required:true}"
+                        id="attribute<?= /* @escapeNotVerified */ $_attribute->getAttributeId() ?>"
+                        class="super-attribute-select">
+                    <option value=""><?= /* @escapeNotVerified */ __('Choose an Option...') ?></option>
+                </select>
+            </div>
+        </div>
+    <?php endforeach; ?>
+
+    <?php
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $current_product = $objectManager->get('Magento\Framework\Registry')->registry('current_product');
+    $preselectBlockObj= $block->getLayout()->createBlock('Mageants\SimpleConfigurable\Block\Product\Renderer\Configurable');
+    $isEnable = $preselectBlockObj->isEnable(); 
+
+    ?>
+    <?php if($isEnable) {  
+      ?>
+    <script type="text/x-magento-init">
+         {
+            "#product_addtocart_form": {
+                "Magento_ConfigurableProduct/js/configurable": {
+                    "spConfig": <?= /* @escapeNotVerified */ $block->getJsonConfig() ?>,
+                    "gallerySwitchStrategy": "<?php /* @escapeNotVerified */ echo $block->getVar('gallery_switch_strategy',
+                        'Magento_ConfigurableProduct') ?: 'replace'; ?>",
+                    "customAttributes": <?php echo $block->getcustomAttributes() ?>,
+                <?php if(!empty($preselectBlockObj->getConfigurablePreselectOption())) {?>
+                "preSelectedOption": <?php echo $block->getConfigurablePreselectOption() ?>,
+                <?php } ?>
+                <?php if($block->getProductUrls()) {?>
+                "productUrls": <?php echo $block->getProductUrls() ?>,
+                <?php } ?>
+                "replaceUrl" : <?php echo $block->replaceUrl() ?>,
+                "isExtensionEnable" : <?php echo $isEnable; ?> ,
+                "isFirstSelected" : <?php echo $block->getPreselectSource(); ?>
+                }
+            }
+        }
+    </script>
+    <?php } else {  ?>
+    <script type="text/x-magento-init">
+        {
+            "#product_addtocart_form": {
+                "Magento_ConfigurableProduct/js/configurable": {
+                    "spConfig": <?= /* @escapeNotVerified */ $block->getJsonConfig() ?>,
+                    "gallerySwitchStrategy": "<?php /* @escapeNotVerified */ echo $block->getVar('gallery_switch_strategy',
+                        'Magento_ConfigurableProduct') ?: 'replace'; ?>",
+                    "isExtensionEnable" : <?php echo $isEnable; ?> 
+                }
+            }
+        }
+    </script>
+<?php } ?>
+<?php endif;?>

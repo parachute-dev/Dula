@@ -1,0 +1,94 @@
+<div class="bfb-smart-variables" data-bind="
+        css: {
+            _active: listVisible,
+            searching: filterOptionsFocus
+        },
+        outerClick: outerClick.bind($data)
+">
+    <div class="bfb-smart-variables-input">
+        <input class="admin__control-text" type="text"
+            data-bind="
+                event: {change: userChanges},
+                value: value,
+                hasFocus: focused,
+                valueUpdate: valueUpdate,
+                attr: {
+                    name: inputName,
+                    placeholder: placeholder,
+                    'aria-describedby': noticeId,
+                    id: uid,
+                    disabled: disabled,
+                    maxlength: 255
+            }"/>
+        <i aria-hidden="true" class="fas mgz-fa-list-ul bfb-smart-action" 
+            data-bind="
+            click: function(data, event) {
+                toggleListVisible(data, event)
+            }
+    "></i>
+    </div>
+    <div class="bfb-smart-variables-content" data-bind="css: { _active: listVisible }" afterRender="onElementRender">
+        <div class="bfb-tab-filter">
+            <input class="admin__control-text" type="text" placeholder="Search for predefined variables"
+                data-bind="
+                event: {
+                    keydown: filterOptionsKeydown
+                },
+                attr: {id: uid+2},
+                valueUpdate: 'afterkeydown',
+                value: filterInputValue,
+                click: function(data, event){
+                    loadFilterOptions($data, $index(), event);
+                }
+                "
+            >
+        </div>
+        <div class="bfb-smart-variables-container">
+            <div class="bfb-tab-left">
+                <div class="bfb-tab-title" data-bind="foreach: {data: options, as: 'elem'}">
+                    <div class="bfb-tab-title-item" attr="'data-index': $index" data-bind="
+                                click: function(data, event){
+                                    $parent.activeTab($data, $index(), event);
+                                },
+                                css: { active: $index()==$parent.activeTabIndex }
+                            ">
+                        <span translate="elem.label"/>
+                    </div>
+                </div>
+            </div>
+            <div class="bfb-tab-right">
+                <div class="bfb-tab-content">
+                    <div class="bfb-tab-content-inner">
+                    <!-- ko foreach: {data: options, as: 'elem'}  -->
+                        <ul class="bfb-tab-content-item" data-bind="foreach: {data: options, as: 'element'},css: { active: $index()==$parent.activeTabIndex }" attr="'data-index': $index">
+                            <li>
+                                <span translate="element.label" data-bind="
+                                    click: function(data, event){
+                                        $parents[1].toggleOptionSelected($data, $index(), event);
+                                    },
+                                    clickBubble: false,
+                                    attr: {
+                                        'data-value': value
+                                    }
+                            "/>
+                            </li>
+                        </ul>
+                    <!-- /ko -->
+                </div>
+                    <div class="bfb-tab-content-item-search">
+                        <ul data-bind="foreach: {data: filterOptions, as: 'element'}" attr="'data-index': $index" css="'active': $index()==0">
+                            <li>
+                                <span translate="element.label" data-bind="
+                                    click: function(data, event){
+                                        $parents[0].toggleOptionSelected($data, $index(), event);
+                                    },
+                                    clickBubble: false
+                            "/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

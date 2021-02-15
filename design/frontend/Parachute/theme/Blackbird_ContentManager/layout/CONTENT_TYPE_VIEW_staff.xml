@@ -1,0 +1,23 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Blackbird_ContentManager::css/content.css" />
+    </head>
+
+    <body>
+        <!-- Adds a banner block that has access to the current view's data -->
+        <referenceContainer name="page.wrapper">
+            <block class="Blackbird\ContentManager\Block\View" name="contentmanager_banner" template="Blackbird_ContentManager::banner.phtml" before="main.content" />
+        </referenceContainer>
+
+        <!-- Adds the content-types view block into the main content container -->
+        <referenceContainer name="content">
+            <container name="content-block" htmlTag="div" htmlClass="acm-content-block container" before="-">
+                <container name="content-block-inner" htmlTag="div" htmlClass="acm-content-block-inner-row row">
+                    <container name="content-block-content" htmlTag="div" htmlClass="acm-content-block-inner-content col-xs-12 col-sm-12 col-md-12">
+                        <block class="Blackbird\ContentManager\Block\View" name="contentmanager_view" />
+                    </container>
+                </container>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

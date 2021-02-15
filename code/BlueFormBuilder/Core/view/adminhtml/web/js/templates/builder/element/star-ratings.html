@@ -1,0 +1,14 @@
+<div class="bfb-element-stars control review-control-vote star-{{ element.number_of_stars }}">
+	<span ng-repeat="n in range(1, element.number_of_stars)">
+		<input
+            type="radio"
+            id="{{ element.id + ($index + 1) }}"
+            value="{{ ($index + 1) }}"
+            ng-checked="$index<element.default_value&&element.default_value"/>
+        <label
+            class="rating-{{ ($index + 1) }}"
+            for="{{ element.id + ($index + 1) }}"
+            id="{{ element.id + ($index + 1) }}_label">
+        </label>
+	</span>
+</div>

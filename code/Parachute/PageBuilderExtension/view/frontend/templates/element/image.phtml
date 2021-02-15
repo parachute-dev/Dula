@@ -1,0 +1,253 @@
+<?php
+    // Class ref: \Parachute\PageBuilderExtension\Data\Element\TextPanel
+
+    // Helpers
+    $_coreHelper = $this->helper('\Magezon\Core\Helper\Data');
+    $_builderHelper = $this->helper('\Magezon\Builder\Helper\Data');
+
+    // Element data
+    $_element = $this->getElement();
+    $_id = time() . uniqid();
+
+    // foreach($_element->getData() as $key=>$value):
+    //     echo '<pre>' . $key . '</pre>';
+    //     print_r($value);
+    // endforeach;
+
+    // Layout
+    // Block classes
+    $block_class_str = "";
+    $block_class_arr = [];
+
+    // Block container classes
+    $block_container_class_str = "";
+    $block_container_class_arr = [];
+
+    // Block inner classes
+    $block_inner_class_str = "";
+    $block_inner_class_arr = [];
+
+    // Block inner container classes
+    $block_inner_container_class_str = "";
+    $block_inner_container_class_arr = [];
+
+    // Listings classes
+    $listings_class_str = "";
+    $listings_class_arr = [];
+
+    // Block
+    $block_active = $_element->getData('block_active');
+    $block_title = $_element->getData('block_title');
+    $block_subtitle = $_element->getData('block_subtitle');
+    $block_content = $_element->getData('block_content');
+    $block_subcontent = $_element->getData('block_subcontent');
+
+    // Block CTA
+    $block_cta_type = $_element->getData('block_cta_type');
+    $block_cta_target = $_element->getData('block_cta_target');
+    $block_cta_link = $_element->getData('block_cta_link');
+    $block_cta_link_text = !empty($_element->getData('block_cta_link_text')) ? $_element->getData('block_cta_link_text') : "Read more";
+
+    // Block sub-content CTA
+    $block_subcontent_cta_type = $_element->getData('block_subcontent_cta_type');
+    $block_subcontent_cta_target = $_element->getData('block_subcontent_cta_target');
+    $block_subcontent_cta_link = $_element->getData('block_cta_subcontent_link');
+    $block_subcontent_cta_link_text = !empty($_element->getData('block_subcontent_cta_link_text')) ? $_element->getData('block_subcontent_cta_link_text') : "Read more";
+
+    $block_header_show = boolval($_element->getData('block_header_show')) ? $_element->getData('block_header_show') : false;
+    $block_footer_show = boolval($_element->getData('block_footer_show')) ? $_element->getData('block_footer_show') : false;
+    $block_layout = !empty($_element->getData("layout_type")) ? $_element->getData("layout_type") : "content";
+    $block_layout = "image-block"; // Hardcoded
+    $block_header_has_data = false;
+    $block_footer_has_data = false;
+
+    // Does our header have any content?
+    if(
+        !empty($block_title) || 
+        !empty($block_subtitle) || 
+        !empty($block_content) || 
+        !empty($block_subcontent) || 
+        !empty($block_cta_link)) 
+    {
+        $block_header_has_data = true;
+        $block_footer_has_data = true;
+    }
+
+    // Layout type classes
+    if(!empty($block_layout))
+    {
+        $block_class_arr[] = $block_layout;
+        $listings_class_arr[] = $block_layout;
+    }
+
+    // Block images
+    // Primary image
+    $block_image = $_element->getData('block_image');
+    $block_image_src = !empty($_builderHelper->getImageUrl($block_image)) ? $_builderHelper->getImageUrl($block_image) : "";
+    $block_image_background_type = $_element->getData('block_image_background_type');
+    $block_image_video_url = $_element->getData('block_image_video_url');
+    $block_image_youtube_id = $_element->getData('block_image_youtube_id');
+    $block_image_vimeo_id = $_element->getData('block_image_vimeo_id');
+
+    // Secondary image
+    $block_secondary_image = $_element->getData('block_secondary_image');
+    $block_secondary_image_src = !empty($_builderHelper->getImageUrl($block_secondary_image)) ? $_builderHelper->getImageUrl($block_secondary_image) : "";
+    $block_secondary_image_background_type = $_element->getData('block_secondary_image_background_type');
+    $block_secondary_image_video_url = $_element->getData('block_secondary_image_video_url');
+    $block_secondary_image_youtube_id = $_element->getData('block_secondary_image_youtube_id');
+    $block_secondary_image_vimeo_id = $_element->getData('block_secondary_image_vimeo_id');
+
+    // Block image list
+    $block_image_list = $this->toObjectArray($_element->getData('block_image_list'));
+
+    // Layout
+    $layout_type = !empty($_element->getData('layout_type')) ? $_element->getData('layout_type') : "image-block";
+    $text_align = !empty($_element->getData('text_align')) ? $_element->getData('text_align') : "left";
+    $content_align = !empty($_element->getData('content_align')) ? $_element->getData('content_align') : "start";
+    $content_justify = !empty($_element->getData('content_justify')) ? $_element->getData('content_justify') : "start";
+    $alignment = !empty($_element->getData('alignment')) ? $_element->getData('alignment') : "left";
+    $content_size = !empty($_element->getData('content_size')) ? $_element->getData('content_size') : "medium";
+
+    $block_class_arr[] = $layout_type;
+    $block_class_arr[] = "text-align-" . $text_align;
+    $block_class_arr[] = "align-content-" . $content_align;
+    $block_class_arr[] = "justify-content-" . $content_justify;
+    $block_class_arr[] = "align-" . $alignment;
+    $block_class_arr[] = $content_size;
+    
+    $container_outer_type = !empty($_element->getData('container_type')) ? $_element->getData('container_type') : "container-fluid";
+    $container_outer_type_str = $container_outer_type == "fixed" ? "container" : "container-fluid";
+
+    $container_inner_type = !empty($_element->getData('container_type_inner')) ? $_element->getData('container_type_inner') : "container";
+    $container_inner_type_str = $container_inner_type == "fixed" ? "container" : "container-fluid";
+
+    $no_gutter = $_element->getData('no_gutter');
+    $no_gutter_inner = $_element->getData('no_gutter_inner');
+
+    $block_container_class_arr[] = $container_outer_type_str;
+    $block_inner_container_class_arr[] = $container_inner_type_str;
+
+    if(!empty($no_gutter)) { $block_class_arr[] = "no-gutter"; }
+    if(!empty($no_gutter_inner)) { $block_inner_container_class_arr[] = "no-gutter"; }
+
+    // Carousel Options
+
+    // General
+
+    // Design Options
+
+    // Generate class string
+    // For the block
+    if(!empty($block_class_arr))
+        $block_class_str = join(" ", $block_class_arr);
+
+    // Block container
+    if(!empty($block_container_class_arr))
+        $block_container_class_str = join(" ", $block_container_class_arr);
+
+    // Inner block
+    if(!empty($block_inner_class_arr))
+        $block_inner_class_str = join(" ", $block_inner_class_arr);
+
+    // Inner block container
+    if(!empty($block_inner_container_class_arr))
+        $block_inner_container_class_str = join(" ", $block_inner_container_class_arr);
+
+    // Listings
+    if(!empty($listings_class_arr))
+        $listings_class_str = join(" ", $listings_class_arr);
+?>
+
+<?php if(!empty($block_active)): ?>
+    <div id="block-<?php echo $_id; ?>" class="image-block content-block<?php echo !empty($block_class_str) ? " " . $block_class_str : ""; ?>">
+        <div class="image-block-inner content-block-inner">
+            <div class="image-block-inner-container content-block-inner-container<?php echo !empty($block_container_class_str) ? " " . $block_container_class_str : " container"; ?>">
+                <div class="image-block-inner-row content-block-inner-row row">
+                    <div class="image-block-inner-content content-block-inner-content col-xs-12 col-sm-12 col-md-12">
+                        <div class="image-block-content-container<?php echo !empty($block_inner_container_class_str) ? " " . $block_inner_container_class_str : " container-fluid no-gutter"; ?>">
+                            <div class="image-block-content-container-row row">
+                                <!-- Content Header -->
+                                <?php if($block_header_has_data == true && $block_header_show == true): ?>
+                                    <div class="image-block-header content-block-header">
+                                        <div class="image-block-header-inner content-block-header-inner">
+                                            <div class="image-block-header-titles content-block-header-titles">
+                                                <?php if(!empty($block_title)): ?>
+                                                    <h3 class="image-block-header-title content-block-header-title">
+                                                        <?php echo $block_title; ?>
+                                                    </h3>
+                                                <?php endif; ?>
+
+                                                <?php if(!empty($block_subtitle)): ?>
+                                                    <h4 class="image-block-header-subtitle content-block-header-subtitle">
+                                                        <?php echo $block_subtitle; ?>
+                                                    </h4>
+                                                <?php endif; ?>
+                                            </div>
+
+                                            <?php if(!empty($block_content)): ?>
+                                                <div class="content-listings-description content-block-description">
+                                                    <?php echo $block_content; ?>
+                                                </div>
+                                            <?php endif; ?>
+
+                                            <?php if(!empty($block_cta_link)): ?>
+                                                <div class="image-block-header-links content-block-links">
+                                                    <div class="image-block-header-links-inner content-block-links-inner">
+                                                        <ul class="image-block-header-links-list content-block-links-list">
+                                                            <li class="image-block-header-link-item content-block-links-list-item link-item item">
+                                                                <a href="<?php echo $block_cta_link; ?>" class="button" title="<?php echo $block_cta_link_text; ?>">
+                                                                    <?php echo $block_cta_link_text; ?>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                <!-- End Content Header -->
+
+                                <!-- Content -->
+                                <div class="content-block-content">
+                                    <div class="image-block">
+                                        <div class="image-block-container-inner">
+                                            <div class="image-block-container-inner-content content">
+                                                <div class="content-inner">
+                                                    <?php if(!empty($block_image_src)): ?>
+                                                        <div class="image">
+                                                            <img src="<?php echo $block_image_src; ?>" alt="<?php echo $block_title; ?> Image" title="<?php echo $block_title; ?>" />
+                                                        </div>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Content -->
+
+                                <!-- Content Footer -->
+                                <?php if($block_footer_has_data == true && $block_footer_show == true && !empty($block_cta_link)): ?>
+                                    <div class="content-block-footer image-block-footer">
+                                        <div class="content-block-footer-inner image-block-footer-inner">
+                                            <?php if(!empty($block_cta_link)): ?>
+                                                <ul class="content-block-footer-links-list image-block-footer-links-list">
+                                                    <li class="content-block-footer-link image-block-footer-link footer-link">
+                                                        <a href="<?php echo $block_cta_link; ?>" title="<?php echo $block_cta_link_text; ?>" class="button">
+                                                            <span class="text"><?php echo $block_cta_link_text; ?></span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                <!-- End Content Footer -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

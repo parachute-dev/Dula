@@ -1,0 +1,67 @@
+<?php
+/**
+ * @var $block \BlueFormBuilder\Core\Block\Element\Control
+ */
+
+$elementId    = $this->getElHtmlId();
+$elemName     = $this->getElemName();
+$element      = $this->getElement();
+$multiple     = $element->getData('multiple');
+$rows         = $element->getData('rows');
+$columns      = $element->getData('columns');
+$defaultValue = $element->getData('default_value');
+$validate     = [];
+if ($element->getData('required')) $validate['validate-one-required-by-name'] = true;
+$values = [];
+if (is_array($defaultValue)) {
+	foreach ($defaultValue as $_row) {
+		if (is_array($_row)) {
+			foreach ($_row as $_row1) {
+				$_row2 = explode(':', $_row1);
+				$values[$_row2[0]][$_row2[1]] = true;
+			}
+		} else {
+			$row = explode(':', $_row);
+			if (count($row)==2) {
+				$values[$row[0]][$row[1]] = true;
+			}
+		}
+	}
+}
+?>
+<?php if ($rows && $columns) { ?>
+<table>
+	<thead>
+		<tr>
+			<th></th>
+			<?php foreach ($columns as $column) { ?>
+				<th class="mgz-text-center"><?= $column['title'] ?></th>
+			<?php } ?>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($rows as $i => $row) { ?>
+		<tr>
+			<td class="matrix-row-label-cell"><?= $row['title'] ?></td>
+			<?php foreach ($columns as $i2 => $column) { ?>
+			<?php $cellId = 'matrix-item' . $elementId . $i . '' . $i2; ?>
+			<td class="mgz-text-center">
+				<label>
+					<?php
+					$checked = '';
+					if (isset($values[$i][$i2])) $checked = 'checked';
+					?>
+					<?php if ($multiple) { ?>
+						<input type="checkbox" id="matrix-item<?= $elementId . $i . '' . $i2 ?>" class="bfb-control mgz-control-checkbox" name="<?= $elemName ?>[<?= $i ?>][]" value="<?= $i . ':' . $i2 ?>" data-validate="{<?= $this->parseJson($validate) ?>}" <?= $checked ?>/>
+					<?php } else { ?>
+						<input type="radio" id="matrix-item<?= $elementId . $i . '' . $i2 ?>" class="bfb-control mgz-control-radio" name="<?= $elemName ?>[<?= $i ?>]" value="<?= $i . ':' . $i2 ?>" data-validate="{<?= $this->parseJson($validate) ?>}" <?= $checked ?>/>
+					<?php } ?>
+					<label for="matrix-item<?= $elementId . $i . '' . $i2 ?>"><span><?= $row['title'] . '-' . $column['title'] ?></span></label>
+				</label>
+			</td>
+			<?php } ?>
+		</tr>
+		<?php } ?>
+	</tbody>
+</table>
+<?php } ?>

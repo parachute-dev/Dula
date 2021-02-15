@@ -1,0 +1,46 @@
+.para-modal-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    visibility:hidden;
+    opacity:0;
+    z-index:-100;
+    transition:all 0.2s ease-in;
+    color:#fff;
+    background:colours(brand,main);
+    &-close-button {
+        position: fixed;
+        top: 20px;
+        right: 30px;
+        font-size: 2.5em;
+        text-transform: uppercase;
+        cursor: pointer;
+        color:#fff;
+    }
+    &-modal-content-box { 
+     visibility:hidden;
+     opacity:0;
+     z-index:-100;
+     position: absolute;
+     top: 50%;
+     text-align: center;
+     left: 50%;
+     margin-top: -90px;
+     transform: translate(-50%, -50%);
+     transition:all 0.8s ease-in;
+     transition-delay:1s;
+ }
+ &.active{
+    z-index:9999999;
+    visibility:visible;
+    opacity:1;
+    &-modal-content-box.active {
+     z-index:9999999;
+     visibility:visible;
+     opacity:1;
+     top: 48%;
+ }
+}
+} 

@@ -1,0 +1,199 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+
+/**
+ * Product view template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View
+ */
+?>
+<?php $_helper = $this->helper(Magento\Catalog\Helper\Output::class); ?>
+<?php $_product = $block->getProduct(); 
+?>
+<div class="description">
+    <?php echo $_product->getShortDescription() ?>
+</div>
+
+ <?php if(!$_product->isSaleable() ): ?>
+        <div class="out-of-stock">
+Out of stock... back soon! 
+</div>
+ <?php endif; ?>
+<?php 
+$attributeHowTo = $_product->getResource()->getAttribute('how_to');
+$attributeHowToValue = $attributeHowTo->getFrontend()->getValue($_product);
+$attributeHowToLabel = $attributeHowTo->getStoreLabel();
+
+$attributeIngredients = $_product->getResource()->getAttribute('Ingredients');
+$attributeIngredientsValue = $attributeIngredients->getFrontend()->getValue($_product);
+$attributeIngredientsLabel = $attributeIngredients->getStoreLabel();
+$attributePerfectValue = null;
+$productImageAttr = $_product->getCustomAttribute( 'perfect_your_pout' );
+if ($productImageAttr){
+    $poutImage = $_product->getCustomAttribute( 'perfect_your_pout' );
+    $productImage = $this->helper('Magento\Catalog\Helper\Image')
+    ->init($_product, 'perfect_your_pout')->setImageFile($productImageAttr->getValue());
+}
+?>
+
+<?php 
+
+$categoryId = 0;
+
+if (in_array(548, $_product->getCategoryIds())) {
+        //Face
+
+    $categoryId = 548;
+}else if (in_array(563, $_product->getCategoryIds())){
+        //Modern Lip Definer
+
+    $categoryId = 563;
+}else if (in_array(564, $_product->getCategoryIds())){
+        // Lipstick
+    $categoryId = 564;
+}
+
+if ($categoryId > 0 ) {
+
+    $objectManager =  \Magento\Framework\App\ObjectManager::getInstance();        
+    $categoryFactory = $objectManager->get('\Magento\Catalog\Model\CategoryFactory');
+    $categoryHelper = $objectManager->get('\Magento\Catalog\Helper\Category');
+    $categoryRepository = $objectManager->get('\Magento\Catalog\Model\CategoryRepository');
+    $store = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore();
+    $category = $categoryFactory->create()->load($categoryId);
+    $categoryProducts = $category->getProductCollection()->addAttributeToSelect('*')->setOrder('cat_index_position','ASC')->addAttributeToSort('position');;;
+    
+
+    ?>
+
+    <div class="swatch-container">
+        <div class="swatch-attribute-label">
+            Shades
+        </div>
+
+        <?php   foreach ($categoryProducts as $product)   {
+            $imageUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getSwatchImage(); ?>
+            <div class="swatch-container-item" style="background-image:url('<?php echo $imageUrl?>');background-size:cover;background-position:center;">
+                <a href="<?= $product->getProductUrl(); ?>">
+                    <span><?= $product->getProductSubName(); ?></span>
+                </a>
+            </div>
+
+            <?php  }  ?>
+    </div>
+    <?php } ?>
+<?php if ($_product->getId() != 1) { ?>
+
+<div class="product-add-form">
+    <form data-product-sku="<?= $block->escapeHtmlAttr($_product->getSku()) ?>"
+        action="<?= $block->escapeUrl($block->getSubmitUrl($_product)) ?>" method="post"
+        id="product_addtocart_form"<?php if ($_product->getOptions()) :?> enctype="multipart/form-data"<?php endif; ?>>
+        <input type="hidden" name="product" value="<?= (int)$_product->getId() ?>" />
+        <input type="hidden" name="selected_configurable_option" value="" />
+        <input type="hidden" name="related_product" id="related-products-field" value="" />
+        <input type="hidden" name="item"  value="<?= (int)$block->getRequest()->getParam('id') ?>" />
+        <?= $block->getBlockHtml('formkey') ?>
+        <?= $block->getChildHtml('form_top') ?>
+        <?php if (!$block->hasOptions()) :?>
+            <?= $block->getChildHtml('product_info_form_content') ?>
+            <?php else :?>
+                <?php if ($_product->isSaleable() && $block->getOptionsContainer() == 'container1') :?>
+                <?= $block->getChildChildHtml('options_container') ?>
+            <?php endif;?>
+        <?php endif; ?>
+
+        <?php if ($_product->isSaleable() && $block->hasOptions() && $block->getOptionsContainer() == 'container2') :?>
+        <?= $block->getChildChildHtml('options_container') ?>
+    <?php endif;?>
+    <?= $block->getChildHtml('form_bottom') ?>
+</form>
+</div>
+<?php } ?>
+<div class="accordian-container">
+    <div class="accordian-detail">
+        <div class="accordian-header">
+            <span>Description</span> <i class="fa fa-chevron-down"></i>
+        </div>
+        <div class="accordian-content">
+            <?php echo $_product->getDescription() ?>
+        </div>
+    </div>
+    <?php if ($attributeHowToValue) { ?>
+        <div class="accordian-detail">
+            <div class="accordian-header">
+                <span>How To</span> <i class="fa fa-chevron-down"></i>
+            </div>
+            <div class="accordian-content">
+                <?php echo $attributeHowToValue ?>
+            </div>
+        </div>
+    <?php }?>
+    <?php if ($attributeIngredientsValue) { ?>
+        <div class="accordian-detail">
+            <div class="accordian-header">
+                <span>Ingredients</span> <i class="fa fa-chevron-down"></i>
+            </div>
+            <div class="accordian-content">
+                <?php echo $attributeIngredientsValue; ?>
+            </div>
+        </div>
+    <?php }?>
+
+    <?php if ($categoryId == 563 || $categoryId == 564 ) { ?>
+        <div class="accordian-detail">
+            <div class="accordian-header">
+                <span>Perfect Your Pout</span> <i class="fa fa-chevron-down"></i>
+            </div>
+            <div class="accordian-content">
+
+                <p>At VIEVE we love to mix and match our lipsticks and liners to create endless combinations. </p>
+
+ 
+
+<p>Whether you want complimentary shades or something to add a little contrast, we’ve created a colour map with some of our favourite combo’s.</p>
+
+                <a href="/assets/img/perfect-your-pout.jpg" data-fancybox><img src="/assets/img/perfect-your-pout.jpg" alt="Perfect Your Pout" /></a>
+            </div>
+        </div>
+    <?php }?>
+
+    <div class="accordian-detail">
+        <div class="accordian-header">
+            <span>Reviews</span> <i class="fa fa-chevron-down"></i>
+        </div>
+        <div class="accordian-content" id="review-replace">
+
+    
+    </div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "[data-role=priceBox][data-price-box=product-id-<?= $block->escapeHtml($_product->getId()) ?>]": {
+        "priceBox": {
+        "priceConfig":  <?= /* @noEscape */ $block->getJsonConfig() ?>
+    }
+}
+}
+
+
+
+
+
+    </script>
+
+    <script>
+            require([
+        'jquery',
+
+        ], function ($) {
+jQuery("#review-replace").html(jQuery("#reviews").show());
+        });
+
+
+    </script>

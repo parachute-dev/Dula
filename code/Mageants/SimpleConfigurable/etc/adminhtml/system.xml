@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="mageants" translate="label" sortOrder="100">
+            <label>Mageants</label>
+        </tab>
+        <section id="SimpleConfigurable_config" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <tab>mageants</tab>
+            <label>Simple Configurable Options</label>
+            <resource>Mageants_SimpleConfigurable::mageants_SimpleConfigurable_config</resource>
+            <group id="SimpleConfigurable_settings" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+				<field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>	
+
+                <field id="preselect" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Preselect for All Configurable Products</label>
+                   <source_model>Mageants\SimpleConfigurable\Model\Source\Options</source_model>
+                </field> 
+
+                <field id="updatepageurl" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Update Page URL</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="updatemeta" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Update Meta</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="showqty" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Available Quantity</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+            </group>
+
+            <group id="SimpleConfigurable_reload" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Reloadable Information</label>
+                <field id="content" translate="label comment" type="multiselect" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Reload Product Information</label>
+                    <source_model>Mageants\SimpleConfigurable\Model\Source\Reload</source_model>
+                </field>
+                <field id="name" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Name Dom-Selector</label>
+                </field>
+                <field id="description" translate="label comment" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Description Dom-Selector</label>
+                </field>
+                <field id="short_description" translate="label comment" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Short Description Dom-Selector</label>
+                </field>
+                <field id="attributes" translate="label comment" type="text" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Attributes Block Dom-Selector</label>
+                </field>
+                <field id="sku" translate="label comment" type="text" sortOrder="60" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>SKU Dom-Selector</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

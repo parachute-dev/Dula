@@ -1,0 +1,372 @@
+.bfb-formbuilder-conditional-header {
+	margin: 0;
+
+	.admin__field-complex-content {
+		max-width: 100%;
+	}
+
+	.bfb-formbuilder-conditional-header-left,
+	.bfb-formbuilder-conditional-header-right {
+		width: 45%;
+		display: inline-block;
+		margin-left: 3.5%;
+		text-align: center;
+		text-transform: uppercase;
+		padding: 1.5em;
+		padding-bottom: 0;
+		color: @bfb-main-color;
+
+		span {
+			float: left;
+			width: 100%;
+			font-weight: 600;
+			font-size: 1.6rem;
+		}
+	}
+}
+
+.bfb-formbuilder-conditional {
+	position: relative;
+
+	&.active {
+		> .admin__data-grid-loading-mask {
+			display: block;
+		}
+	}
+
+	.admin__data-grid-loading-mask {
+		display: none;
+	}
+
+	.bfb-formbuilder-conditional-children {
+		position: relative;
+	}
+
+	.bfb-conditional-hidden {
+		display: none;
+	}
+
+	.admin__action-multiselect-actions-wrap {
+		border-top: 0;
+	}
+
+	.admin__fieldset-wrapper-content .admin__fieldset {
+		padding-bottom: 1.5rem;
+		padding-top: 1.5rem;
+	}
+
+	.admin__field-complex-content {
+		max-width: 100%;
+	}
+
+	.action-delete {
+		.mgz-box-shadow(none);
+		width: 1%;
+		background-color: transparent;
+		border-color: transparent;
+		padding: 0.6rem 0;
+		right: 1rem;
+		top: 1.4rem;
+		border: 0;
+
+		&:before {
+			.BFB_AdminIcon();
+			content: '\e630';
+			font-size: 2rem;
+		}
+	}
+
+	.bfb-formbuilder-conditional-layout-right,
+	.bfb-formbuilder-conditional-layout-left {
+		width: 45%;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.bfb-formbuilder-conditional-layout-right,
+	.bfb-formbuilder-conditional-layout-left {
+		.bfb-formbuilder-conditional-children-inner {
+			.mgz-border-radius(2px);
+			line-height: inherit;
+			background: #FAFAFA;
+			border: 1px solid #007dbd;
+
+			.action-delete {
+				opacity: .8;
+				color: @bfb-main-color2;
+
+				&:before {
+					content: '\e62f';
+					padding-left: 5px;
+					font-size: 1.2rem;
+				}
+
+				&:hover {
+					.mgz-opacity(1);
+				}
+			}
+
+			.bfb-conditional-field {
+				.action-menu {
+					width: 525px;
+				}
+			}
+		}
+	}
+
+	.bfb-formbuilder-conditional-text {
+		width: 3.5%;
+		text-align: center;
+		text-transform: uppercase;
+		display: inline-block;
+		vertical-align: top;
+		line-height: inherit;
+		padding: .6em 0;
+		color: #007dbd;
+		font-weight: 600;
+	}
+
+	.bfb-conditional-field {
+		.action-menu {
+			min-width: 500px;
+		}
+	}
+
+	.bfb-formbuilder-conditional-row {
+
+		.admin__field-label {
+			display: none;
+		}
+
+		.admin__field-complex {
+			margin: 1rem 0 3rem;
+		}
+	}
+
+	.bfb-formbuilder-conditional-layout-left,
+	.bfb-formbuilder-conditional-layout-right {
+
+		.bfb-formbuilder-conditional-children-top {
+			> .bfb-formbuilder-conditional-childrens {
+				padding: 10px 10px 0 10px;
+
+				&:last-child {
+					padding-bottom: 10px;
+					border-bottom: 1px solid #d9d9d9;
+
+					> .aggregator {
+						display: none;
+					}
+				}
+			}
+		}
+
+		.admin__field {
+			display: table-cell;
+			vertical-align: top;
+
+			&._error {
+				position: relative;
+
+				.action-select.admin__action-multiselect {
+					border-color: @bfb-main-color2;
+					&:before {
+						border-color: @bfb-main-color2;
+						border-left-color: #adadad;
+					}
+				}
+			}
+
+			> .admin__field-control {
+				position: static;
+			}
+		}
+
+		.admin__field-error, label.mage-error {
+			position: absolute;
+			z-index: 9;
+			width: 100%;
+		}
+	}
+
+	.bfb-formbuilder-conditional-layout-left {
+		.bfb-formbuilder-conditional-row {
+			&.value {
+				width: 40%;
+			}
+
+			&.operator {
+				width: 30%;
+				padding-left: 1%;
+				padding-right: 1%;
+
+				.admin__action-multiselect {
+					padding-right: 3.1rem;
+
+					.admin__action-multiselect-text {
+						padding-right: 0;
+						padding-left: 8px;
+					}
+				}
+			}
+
+			&.aggregator {
+				width: 100%;
+				display: block;
+
+				.admin__action-multiselect {
+					border: 0;
+					background: transparent;
+
+					&:before {
+						border: 0;
+						background: transparent;
+					}
+				}
+			}
+
+			&.field {
+				width: 28%;
+			}
+
+			.admin__field {
+				display: block;
+			}
+		}
+	}
+
+	.bfb-formbuilder-conditional-layout-right {
+		.bfb-formbuilder-conditional-row {
+			&.left_container {
+				width: 30%;
+				padding-right: 1%;
+				display: table-cell;
+			}
+
+			&.right_container {
+				width: 68%;
+				display: table-cell;
+			}
+
+			.admin__field {
+				display: block;
+			}
+		}
+
+		.admin__field {
+			margin: 0;
+
+			&.bfb-conditional-field-setvalue {
+				margin-top: 3px;
+			}
+		}
+
+		.admin__field-group-columns.admin__field-control.admin__control-grouped {
+			margin: 0;
+		}
+
+		.admin__fieldset > .admin__field > .admin__field-control {
+			margin: 0;
+			width: 100%;
+			padding: 0;
+		}
+
+		.admin__fieldset {
+			padding: 0;
+		}
+
+		.bfb-conditional-field-right {
+			.action-menu {
+				right: 0;
+				left: auto;
+			}
+		}
+	}
+
+	.bfb-formbuilder-conditional-layout-right {
+		.bfb-formbuilder-conditional-row {
+			&.action {
+				width: 11%;
+				padding-right: 1%;
+			}
+		}
+
+		.signin {
+			width: 100%;
+			display: block;
+			text-align: center;
+			margin-top: 1.5rem;
+
+			.bfb-formbuilder-conditional-text {
+				color: #41362f;
+				font-size: 1.6rem;
+				font-weight: normal;
+				padding: 0;
+				margin-top: 10px;
+				margin-bottom: 0;
+			}
+		}
+
+		.bfb-formbuilder-conditional-children-top > .bfb-formbuilder-conditional-childrens:last-child {
+			.signin {
+				display: none;
+			}
+		}
+	}
+
+	.bfb-formbuilder-conditional-actions {
+		margin: 10px;
+
+		button {
+			width: 100%;
+			background: transparent;
+			border: 0;
+			text-shadow: none;
+			font-weight: 600;
+			text-transform: uppercase;
+			border: 1px dashed #555;
+			padding: .8rem;
+
+			&:hover {
+				background-color: #e1f6fe;
+			}
+		}
+	}
+}
+
+.bfb-formbuilder-conditional-footer {
+	margin: 20px 0 0 0;
+	padding: 0;
+
+	.admin__field-complex-elements {
+		max-width: 100%;
+		width: 100%;
+		text-align: center;
+
+		button {
+			.mgz-border-radius(2px);
+			border: 1px dashed #555;
+			height: 70px;
+			width: 100%;
+			margin: 0;
+			box-shadow: none;
+			max-width: 750px;
+			background: #FAFAFA;
+
+			&:hover {
+				box-shadow: none;
+				background: #e1f6fe;
+			}
+
+			span {
+				color: #41362f;
+				text-transform: uppercase;
+				text-shadow: none;
+			}
+		}
+	}
+}
+
+.bfb-conditional-field .action-menu {
+	min-width: 400px;
+}

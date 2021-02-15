@@ -1,0 +1,314 @@
+<?php
+/**
+* Copyright © Magento, Inc. All rights reserved.
+* See COPYING.txt for license details.
+*/
+
+	/**
+	* @var \Magento\Theme\Block\Html\Header $block
+	*/
+
+	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	$cmsPage = $objectManager->get('\Magento\Cms\Model\Page');
+	$currentFullAction = $block->getRequest()->getFullActionName();
+
+?>
+
+<div class="our-blog content-block">
+	<div class="container">
+		<div class="row text-center" >
+			<div class="col-12">
+				<header class="content-block__header">
+					<h2>Our Blog.</h2>
+				</header>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 col-xs-12">
+				<div class="blog-item">
+					<a class="row justify-content-center ">
+						<div class="image col-6">
+							<img src="/assets/img/blog-1.png" alt="">
+						</div>
+						<span class="content col-6">
+							<h6>00th Month 2020</h6>
+							<h4>This is a place..</h4>
+							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas nostrum corporis atque, esse tempore quod labore odit dolor, temporibus laborum animi ratione minima quis sunt numquam minus distinctio! Atque, placeat?</p>
+							<span href="#" class="inline-button">Read</span>
+						</span>
+					</a>					
+				</div>
+			</div>
+			<div class="col-md-6 col-xs-12">
+				<div class="blog-item">
+					<a class="row justify-content-center ">
+						<div class="image col-6">
+							<img src="/assets/img/blog-2.png" alt="">
+						</div>
+						<span class="content col-6">
+							<h6>00th Month 2020</h6>
+							<h4>This is a place..</h4>
+							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas nostrum corporis atque, esse tempore quod labore odit dolor, temporibus laborum animi ratione minima quis sunt numquam minus distinctio! Atque, placeat?</p>
+							<span href="#" class="inline-button">Read</span>
+						</span>
+					</a>					
+				</div>
+			</div>			
+		</div>
+	</div>
+</div>
+
+<div class="newsletter content-block background-colour-brand-one">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h2>Get 20% Off Your First Order.</h2>
+				<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit voluptas nemo sunt totam, quae dolor molestias tempora odit error esse veritatis voluptates cumque omnis laborum libero ullam quasi cupiditate. Magni.</p>
+				<form action=""><input placeholder="Email Address" type="text"><button>></button></form>
+			</div>
+		</div>
+	</div> 
+	
+</div>
+<div id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="logo"><img src="/assets/img/logo-footer.png" alt=""></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="footer-navigation">
+					<ul>
+						<li>
+							<a href="">What's New</a>
+							<ul>
+								<li><a href="#">Tops</a></li>
+								<li><a href="#">Dresses</a></li>
+								<li><a href="#">Trousers</a></li>
+								<li><a href="#">Jackets</a></li>
+								<li><a href="#">Shoes</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="">Shop</a>
+							<ul>
+								<li><a href="#">Tops</a></li>
+								<li><a href="#">Dresses</a></li>
+								<li><a href="#">Trousers</a></li>
+								<li><a href="#">Jackets</a></li>
+								<li><a href="#">Shoes</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="">Brand</a>
+							<ul>
+								<li><a href="#">About</a></li>
+								<li><a href="#">Jilly Cross</a></li>
+
+							</ul>
+						</li>	
+						<li>
+							<a href="">Inspiration</a>
+							<ul>
+								<li><a href="#">Blog</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="">Contact</a>
+							<ul>
+								<li><a href="#">hello@dulalabel.com</a></li>
+								<li><a href="#">+44 0000000000</a></li>
+								<li><div class="social-media">
+								</div></li>
+							</ul>
+						</li>					
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="footer-bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h5><strong>&copy Dula 2021</strong> - website by <a href="">Parachute</a></h5>
+					<ul>
+						<li><a href="#">Terms & Conditions</a></li>
+						<li><a href="#">Return Policy</a></li>
+						<li><a href="#">Cookie Policy</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.js" integrity="sha512-yXXqOFjdjHNH1GND+1EO0jbvvebABpzGKD66djnUfiKlYME5HGMUJHoCaeE4D5PTG2YsSJf6dwqyUUvQvS0vaA==" crossorigin="anonymous"></script>
+
+<script>
+	window.cookieconsent.initialise({
+		"palette": {
+			"popup": {
+				"background": "#000",
+				"text": "#fff"
+			},
+			"button": {
+				"background": "#fff",
+				"color":"#000"
+			}
+		},
+		content: {
+			header: 'Cookies used on the website!',
+			message: 'Our site uses cookies. Cookies are small text files that we put on your computer. Some are essential to enable the functionality of our site and some help us to provide you with a better experience online.  Our cookies can’t be switched off. We use analytical cookies to recognise and count visitors to our site and monitor visitor navigation to help us improve our site.',
+			allow: 'ACCEPT',
+			deny: 'REJECT',
+			link: 'Our full cookie policy is here',
+			href: "/cookie-policy",
+			close: '&#x274c;',
+			policy: 'Cookie Policy',
+			target: '_blank',
+		}
+	});
+
+
+
+
+	require([
+		'jquery',
+
+		], function ($) {
+			$('#minusQty').click(function () {
+				var currentVal = parseInt(jQuery("#qty").val());
+				if (currentVal > 0){
+					$('#qty').val(parseInt($('#qty').val())-1);
+				}
+			});
+
+			$('#addQty').click(function () {
+				var currentVal = parseInt(jQuery("#qty").val());
+
+				if (currentVal < 3){
+					$('#qty').val(parseInt($('#qty').val())+1);
+				}
+			});
+
+
+
+		});
+
+	require([
+		'jquery',
+		'Magezon_Core/js/owl.carousel.min'
+		], function ($) {
+			$(document).ready(function () { 
+
+				jQuery(".video-item a").click(function(event){
+					if (!jQuery(this).hasClass("added")){
+						event.preventDefault();
+						jQuery(this).addClass("added");
+						var target = jQuery(this).attr("href");
+						var res = target.split('v=');
+						console.log(res);
+
+						jQuery(this).find(".image").prepend('<div class="player"><iframe width="560" height="315" src="https://www.youtube.com/embed/'  +  res[1] + '?autoplay=1 " allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>');
+					}
+
+				});
+
+
+				jQuery(document).on("click", ".opc-block-summary",function(event){
+					jQuery(".block.items-in-cart").toggleClass("selected");
+				});
+
+				jQuery(".search-trigger").click(function(event){
+					event.preventDefault();
+					jQuery(".block-search").slideToggle(); 
+				});
+
+
+				jQuery(".trust-carousel").owlCarousel({
+					loop:true,
+					margin:10,
+					nav:false,
+					dots:false,
+					autoplay:true,
+					responsiveClass:true,
+					responsive:{
+						0:{
+							items:1,
+							nav:false,
+							loop:true
+						},     
+						1000:{
+							items:3,
+							nav:false,
+							loop:false
+						}
+					}
+				})
+			});
+		});
+	</script>
+
+	<script>
+		require(['jquery', 'jquery/ui'],function($){
+			$('[data-block="minicart"]').on('contentLoading', function (event) {
+
+
+
+				$('[data-block="minicart"]').on('contentUpdated', function ()  {
+					$('[data-block="minicart"]').find('[data-role="dropdownDialog"]').dropdownDialog("open");
+				});
+			});
+		});
+		require([
+			'jquery',
+			'waypoint'
+			],
+			function($) {
+
+				jQuery(".accordian-header").click(function(event){
+					jQuery(this).next(".accordian-content").slideToggle();
+				});
+
+				jQuery(".modal-trigger").click(function(event){
+					event.preventDefault();
+					var target = jQuery(this).data("modal");
+					jQuery(target).addClass("active");
+				});
+
+				jQuery(".modal-close").click(function(event){
+					event.preventDefault();
+					jQuery(".modal-box").removeClass("active");
+				});
+
+
+				$(".animated-element").waypoint(function (direction) {
+					if (direction == "down") {
+						if (!$(this.element).hasClass("animate-me")) {
+							$(this.element).addClass("animate-me");
+						}
+					}
+					if (direction == "up") {
+						if ($(this.element).hasClass("animate-me")) {
+							$(this.element).removeClass("animate-me");
+						}
+					}
+				}, {
+					offset: '75%'
+				});
+			});
+
+		</script>
+		<script type="text/javascript" xml="space">
+			require([
+				'jquery',
+				'js/jquery.fancybox.min'
+				],
+				function($) {
+         // You can add your custom changes here.
+     });
+ </script>

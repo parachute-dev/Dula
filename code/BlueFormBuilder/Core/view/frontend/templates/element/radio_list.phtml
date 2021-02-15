@@ -1,0 +1,81 @@
+<?php
+/**
+ * @var $block \BlueFormBuilder\Core\Block\Element\Control
+ */
+
+$builderHelper      = $this->helper('\Magezon\Builder\Helper\Data');
+$elementId          = $this->getElHtmlId();
+$elemName           = $this->getElemName();
+$element            = $this->getElement();
+$elemValue          = $element->getData('elem_value');
+$options            = $element->getData('options');
+$others             = $element->getData('others');
+$othersLabel        = $element->getData('others_label');
+$othersDescrition   = $element->getData('others_description');
+$placeholder        = $element->getData('placeholder');
+$optionsColumn      = $element->getData('options_column');
+$imageWidth         = $element->getData('image_width');
+$imageHeight        = $element->getData('image_height');
+$choicesImagesStyle = $element->getData('choices_images_style');
+$autoWidth          = $element->getData('auto_width');
+$hasDefault         = false;
+if ($element->getShuffle()) shuffle($options);
+foreach ($options as $k => $option) {
+	if (isset($option['default']) && $option['default']) $hasDefault = true;
+	if (!isset($option['label'])) unset($options[$k]);
+}
+if ($others && $othersLabel) {
+	$options[] = [
+		'value' => 'bfb_others',
+		'label' => $othersLabel
+	];
+}
+$validate = [];
+if ($element->getData('required')) $validate['validate-one-required-by-name'] = true;
+?>
+<div class="bfb-column<?= $optionsColumn ?> <?= $autoWidth ? 'bfb-choices-auto-width' : '' ?> bfb-choices-image-style-<?= $choicesImagesStyle ?>">
+	<?php foreach ($options as $index => $option) { ?>
+		<?php $optionValue = (isset($option['value']) && $option['value']) ? $option['value'] : $option['label']; ?>
+		<?php if (!$optionValue) continue; ?>
+		<?php $optionId = $elementId . $index ?>
+		<div class="bfb-radio-item bfb-choices-item <?= isset($option['classes']) ? $option['classes'] : '' ?> <?php if (isset($option['default']) && $option['default']) { ?>option-selected<?php } ?>">
+			<label for="<?= $optionId ?>">
+				<?php if (isset($option['image']) && $option['image']) { ?>
+					<div class="bfb-choices-image">
+						<img src="<?= $builderHelper->getImageUrl($option['image']) ?>" alt="<?= $option['label'] ?>" <?php if ($imageWidth) { ?>width="<?= $imageWidth ?>"<?php } ?> <?php if ($imageHeight) { ?>height="<?= $imageHeight ?>"<?php } ?>/>
+					</div>
+				<?php } ?>
+				<input name="<?= $elemName ?>" class="bfb-control mgz-control-radio" type="radio" id="<?= $optionId ?>" <?php if (isset($option['default']) && $option['default']) { ?>checked<?php } ?> value="<?= $optionValue ?>" data-validate="{<?= $this->parseJson($validate) ?>}"/>
+				<label for="<?= $elementId ?>"></label> <span><?= $option['label'] ?></span>
+			</label>
+		</div>
+	<?php } ?>
+	<?php if ($others && $othersLabel) { ?>
+		<div class="bfb-others">
+			<textarea type="text" name="<?= $elemName ?>_others" data-validate="{<?= $this->parseJson($validate) ?>}" disabled></textarea>
+			<?php if ($othersDescrition) { ?>
+				<div class="bfb-element-description"><?= $othersDescrition ?></div>
+			<?php } ?>
+		</div>
+	<?php } ?>
+	<script>
+		require(['jquery'], function($) {
+			$('.<?= $element->getHtmlId() ?> input').click(function(e) {
+				if ($(this).is(':checked')) {
+	                $('.<?= $element->getHtmlId() ?> .bfb-choices-item').removeClass('option-selected');
+	                $(this).closest('.bfb-choices-item').addClass('option-selected');
+	            }
+				<?php if ($others && $othersLabel) { ?>
+				var val = $(this).val();
+				if (val == 'bfb_others') {
+					$('.<?= $element->getHtmlId() ?> .bfb-others').show();
+	                $('.<?= $element->getHtmlId() ?> .bfb-others *').prop("disabled", false);
+				} else {
+					$('.<?= $element->getHtmlId() ?> .bfb-others').hide();
+	                $('.<?= $element->getHtmlId() ?> .bfb-others *').prop("disabled", true);
+				}
+				<?php } ?>
+			});
+		});
+	</script>
+</div>

@@ -1,0 +1,71 @@
+<?php
+$helper     = $this->helper(\BlueFormBuilder\Core\Helper\Data::class);
+$submission = $this->getCurrentSubmission();
+$form       = $submission->getForm();
+$summaryData[] = [
+	'label' => __('Form'),
+	'value' => $form->getName()
+];
+if ($helper->getConfig('form_summary/show_ip')) {
+	$summaryData[] = [
+		'label' => __('IP Address'),
+		'value' => $submission->getRemoteIp()
+	];
+}
+$summaryData[] = [
+	'label' => __('Link'),
+	'value' => '<a href="' . $submission->getTrackLink() . '">' . $submission->getTrackLink() . '</a>'
+];
+$summaryData[] = [
+	'label' => __('Date'),
+	'value' => $submission->getCreatedAtFormatted()
+];
+$summaryData[] = [
+	'label' => __('Submitted From Page'),
+	'value' => $submission->getSubmittedPage()
+];
+$product = $submission->getProduct();
+if ($product && $product->getId()) {
+	$summaryData[] = [
+		'label' => __('Product'),
+		'value' => $product->getName()
+	];
+}
+$values = $this->getValues();
+?>
+<div class="bfb-submission-confirmed">
+	<div class="bfb-submission-summary">
+		<h2 class="bfb-submission-title"><?= __('Submission Summary') ?></h2>
+		<table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<?php foreach ($summaryData as $row) { ?>
+				<tr>
+					<td>
+						<?= $row['label'] ?>
+					</td>
+					<td>
+						<?= $row['value'] ?>
+					</td>
+				</tr>
+			<?php } ?>
+		</table>
+	</div>
+	<div class="bfb-submission-data">
+		<h2 class="bfb-submission-title"><?= __('Submission Data') ?></h2>
+		<table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<?php foreach ($values as $key => $value) { ?>
+				<?php
+					$element = $form->getElement($key, 'elem_name');
+					if (!$element) continue;
+				?>
+				<tr>
+					<td>
+						<?= $element->getConfig('label') ?>
+					</td>
+					<td>
+						<?= nl2br($value) ?>
+					</td>
+				</tr>
+			<?php } ?>
+		</table>
+	</div>
+</div>

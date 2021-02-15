@@ -1,0 +1,230 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license.
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  Magezon
+ * @package   Magezon_PageBuilder
+ * @copyright Copyright (C) 2019 Magezon (https://www.magezon.com)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<type name="Magento\Framework\Filter\Template">
+		<plugin name="magezonbuilder" type="\Magezon\PageBuilder\Plugin\Filter\Template" />
+	</type>
+	<type name="Magento\Catalog\Helper\Output">
+		<plugin name="magezonbuilder" type="\Magezon\PageBuilder\Plugin\Helper\Output" />
+	</type>
+	<type name="Magezon\Builder\Model\CompositeConfigProvider">
+		<arguments>
+			<argument name="configProviders" xsi:type="array">
+				<item name="default" xsi:type="object">Magezon\PageBuilder\Model\DefaultConfigProvider</item>
+				<item name="modules" xsi:type="array">
+					<item name="mgzFotorama" xsi:type="string">Magezon_PageBuilder/js/modules/fotorama</item>
+					<item name="mgzOwlCarousel" xsi:type="string">Magezon_PageBuilder/js/modules/owl-carousel</item>
+				</item>
+			</argument>
+		</arguments>
+	</type>
+	<type name="Magezon\Builder\Data\Elements">
+		<arguments>
+			<argument name="elements" xsi:type="array">
+				<item name="tabs" xsi:type="array">
+					<item name="disabled" xsi:type="boolean">false</item>
+				</item>
+				<item name="gmaps" xsi:type="array">
+					<item name="disabled" xsi:type="boolean">false</item>
+				</item>
+				<item name="single_image" xsi:type="array">
+					<item name="disabled" xsi:type="boolean">false</item>
+				</item>
+				<item name="social_icons" xsi:type="array">
+					<item name="disabled" xsi:type="boolean">false</item>
+				</item>
+				<item name="search_form" xsi:type="array">
+					<item name="disabled" xsi:type="boolean">false</item>
+				</item>
+				<item name="button" xsi:type="array">
+					<item name="disabled" xsi:type="boolean">false</item>
+				</item>
+				<item name="countdown" xsi:type="array">
+					<item name="disabled" xsi:type="boolean">false</item>
+				</item>
+				<item name="slider" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Slider</item>
+					<item name="class" xsi:type="string">Magezon\PageBuilder\Data\Element\Slider</item>
+					<item name="block" xsi:type="string">Magezon\PageBuilder\Block\Element\Slider</item>
+					<item name="template" xsi:type="string">Magezon_PageBuilder::element/slider.phtml</item>
+					<item name="livePreview" xsi:type="boolean">true</item>
+					<item name="description" xsi:type="string">Animated carousel with images</item>
+					<item name="sortOrder" xsi:type="number">115</item>
+					<item name="icon" xsi:type="string">mgz-builder-image_carousel-icon</item>
+					<item name="group" xsi:type="string">content</item>
+					<item name="requiredFields" xsi:type="array">
+						<item name="items" xsi:type="boolean">true</item>
+					</item>
+					<item name="demo_link" xsi:type="string">http://192.168.1.107/magezon/pagebuilder/slider</item>
+				</item>
+				<item name="raw_js" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Raw JS</item>
+					<item name="class" xsi:type="string">Magezon\PageBuilder\Data\Element\RawJs</item>
+					<item name="template" xsi:type="string">Magezon_PageBuilder::element/raw_js.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+					<item name="description" xsi:type="string">Output raw JavaScript code on your page</item>
+					<item name="builder_description" xsi:type="string">{{ element.content }}</item>
+					<item name="requiredFields" xsi:type="array">
+						<item name="content" xsi:type="boolean">true</item>
+					</item>
+					<item name="demo_link" xsi:type="string">http://192.168.1.107/magezon/pagebuilder/raw-html-and-js</item>
+				</item>
+				
+				<item name="recent_reviews" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Recent Reviews</item>
+					<item name="class" xsi:type="string">Magezon\PageBuilder\Data\Element\RecentReviews</item>
+					<item name="block" xsi:type="string">Magezon\PageBuilder\Block\Element\RecentReviews</item>
+					<item name="template" xsi:type="string">Magezon_PageBuilder::element/recent_reviews.phtml</item>
+					<item name="livePreview" xsi:type="boolean">true</item>
+					<item name="sortOrder" xsi:type="number">530</item>
+					<item name="description" xsi:type="string">The most recent reviews on your site</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-magento</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#f26322</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">magento</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.title : '' }}</item>
+					<item name="demo_link" xsi:type="string">http://192.168.1.107/magezon/pagebuilder/recent-reviews</item>
+				</item>
+				<item name="contact_form" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Contact Form</item>
+					<item name="class" xsi:type="string">Magezon\PageBuilder\Data\Element\ContactForm</item>
+					<item name="block" xsi:type="string">Magezon\PageBuilder\Block\Element\ContactForm</item>
+					<item name="template" xsi:type="string">Magezon_PageBuilder::element/contact_form.phtml</item>
+					<item name="sortOrder" xsi:type="number">560</item>
+					<item name="description" xsi:type="string">A contact form for your site</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-magento</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#f26322</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">magento</item>
+					<item name="builder_description" xsi:type="string">{{ element.form_width ? 'Width: ' + element.form_width : '' }}</item>
+					<item name="demo_link" xsi:type="string">http://192.168.1.107/magezon/pagebuilder/contact-form</item>
+				</item>
+				<item name="single_product" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Single Product</item>
+					<item name="class" xsi:type="string">Magezon\PageBuilder\Data\Element\SingleProduct</item>
+					<item name="block" xsi:type="string">Magezon\PageBuilder\Block\Element\SingleProduct</item>
+					<item name="template" xsi:type="string">Magezon_PageBuilder::element/single_product.phtml</item>
+					<item name="livePreview" xsi:type="boolean">true</item>
+					<item name="sortOrder" xsi:type="number">570</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-magento</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#f26322</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">magento</item>
+					<item name="description" xsi:type="string">Display specific product by sku</item>
+					<item name="builder_description" xsi:type="string">{{ (element.product_sku ? 'Product Sku: ' + element.sku + ', ' : '') + (element.product_display ? 'Product Display: ' + element.product_display : '') }}</item>
+					<item name="demo_link" xsi:type="string">http://192.168.1.107/magezon/pagebuilder/single-product</item>
+				</item>
+				<item name="product_slider" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Product Slider</item>
+					<item name="class" xsi:type="string">Magezon\PageBuilder\Data\Element\ProductSlider</item>
+					<item name="block" xsi:type="string">Magezon\PageBuilder\Block\Element\ProductSlider</item>
+					<item name="template" xsi:type="string">Magezon_PageBuilder::element/product_slider.phtml</item>
+					<item name="sortOrder" xsi:type="number">580</item>
+					<item name="description" xsi:type="string">Display products in a slider</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-magento</item>
+					<item name="livePreview" xsi:type="boolean">false</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#f26322</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">magento</item>
+					<item name="builder_description" xsi:type="string">{{ 'Source: ' + element.source  + (element.title ? ', Title: ' + element.title : '') }}</item>
+					<item name="demo_link" xsi:type="string">http://192.168.1.107/magezon/pagebuilder/product-slider</item>
+				</item>
+				<item name="product_grid" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Product Grid</item>
+					<item name="class" xsi:type="string">Magezon\PageBuilder\Data\Element\ProductGrid</item>
+					<item name="block" xsi:type="string">Magezon\PageBuilder\Block\Element\ProductGrid</item>
+					<item name="template" xsi:type="string">Magezon_PageBuilder::element/product_grid.phtml</item>
+					<item name="sortOrder" xsi:type="number">590</item>
+					<item name="livePreview" xsi:type="boolean">false</item>
+					<item name="description" xsi:type="string">Display products in a grid</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-magento</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#f26322</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">magento</item>
+					<item name="builder_description" xsi:type="string">{{ 'Source: ' + element.source  + (element.title ? ', Title: ' + element.title : '') }}</item>
+					<item name="demo_link" xsi:type="string">http://192.168.1.107/magezon/pagebuilder/product-grid</item>
+				</item>
+				<item name="categories" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Categories</item>
+					<item name="class" xsi:type="string">Magezon\PageBuilder\Data\Element\Categories</item>
+					<item name="block" xsi:type="string">Magezon\PageBuilder\Block\Element\Categories</item>
+					<item name="template" xsi:type="string">Magezon_PageBuilder::element/categories.phtml</item>
+					<item name="livePreview" xsi:type="boolean">true</item>
+					<item name="sortOrder" xsi:type="number">595</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-magento</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#f26322</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="description" xsi:type="string">A list of categories</item>
+					<item name="group" xsi:type="string">magento</item>
+					<item name="demo_link" xsi:type="string">http://192.168.1.107/magezon/pagebuilder/categories</item>
+				</item>
+				<item name="product_list" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Product List</item>
+					<item name="block" xsi:type="string">Magezon\PageBuilder\Block\Element\ProductList</item>
+					<item name="class" xsi:type="string">Magezon\PageBuilder\Data\Element\ProductList</item>
+					<item name="template" xsi:type="string">Magezon_PageBuilder::element/product_list.phtml</item>
+					<item name="sortOrder" xsi:type="number">600</item>
+					<item name="livePreview" xsi:type="boolean">false</item>
+					<item name="description" xsi:type="string">Display products in a vertical list</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-magento</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#f26322</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">magento</item>
+					<item name="builder_description" xsi:type="string">{{ 'Source: ' + element.source  + (element.title ? ', Title: ' + element.title : '') }}</item>
+					<item name="demo_link" xsi:type="string">http://192.168.1.107/magezon/pagebuilder/product-list</item>
+				</item>
+			</argument>
+		</arguments>
+	</type>
+	<type name="Magezon\Builder\Data\Sources">
+		<arguments>
+			<argument name="types" xsi:type="array">
+				<item name="pagebuilder_template" xsi:type="string">Magezon\PageBuilder\Model\Source\TemplateList</item>
+			</argument>
+		</arguments>
+	</type>
+	<type name="Magento\Catalog\Model\Indexer\Category\Flat\AbstractAction">
+		<plugin name="magezonbuilder" type="\Magezon\PageBuilder\Plugin\Model\Indexer\Category\Flat\AbstractAction" />
+	</type>
+</config>

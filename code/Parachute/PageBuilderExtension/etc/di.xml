@@ -1,0 +1,451 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+	   <type name="Magento\Checkout\Model\DefaultConfigProvider">
+        <plugin name="checkout-summary-product-attribute" type="Parachute\PageBuilderExtension\Plugin\Checkout\Model\DefaultConfigProvider" />
+    </type>
+
+ <type name="Magento\Checkout\Model\DefaultConfigProvider">
+        <plugin name="AddAttPlug" type="Parachute\PageBuilderExtension\Plugin\ConfigProviderPlugin" />
+    </type>
+<type name="Magento\Checkout\CustomerData\AbstractItem"> <plugin name="Parachute_PageBuilderExtension_DefaultItemPlugin" type="Parachute\PageBuilderExtension\Plugin\DefaultItemPlugin" sortOrder="10" disabled="false" /> </type>
+
+	<type name="Magezon\Builder\Data\Elements">
+		<arguments>
+			<argument name="elements" xsi:type="array">
+				<item name="parachute_contact_form" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Contact Form</item>
+					<item name="class" xsi:type="string">Parachute\PageBuilderExtension\Data\Element\ContactForm</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/contact-form.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+
+								<item name="parachute_rewards" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Rewards</item>
+					<item name="class" xsi:type="string">Parachute\PageBuilderExtension\Data\Element\Rewards</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/rewards.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+
+				<item name="parachute_subnav" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Sub Nav</item>
+					<item name="class" xsi:type="string">Parachute\PageBuilderExtension\Data\Element\Subnav</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/subnav.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+
+	<item name="parachute_video" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">video</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/video.phtml</item>
+						<item name="class" xsi:type="string">Parachute\PageBuilderExtension\Data\Element\Banner</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+
+					<item name="parachute_signup" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Signup</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/signup.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+
+	<item name="parachute_muse-hashtag" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Muse hashtag</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/muse-hashtag.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+				<item name="parachute_muse-products" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Muse Products</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/muse-products.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item> 
+
+						<item name="parachute_quote" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Quote</item>
+
+											<item name="class" xsi:type="string">Parachute\PageBuilderExtension\Data\Element\Quote</item>
+
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/quote.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item> 
+
+				<item name="parachute_parallax" xsi:type="array">
+										<item name="livePreview" xsi:type="boolean">true</item>
+					<item name="class" xsi:type="string">Parachute\PageBuilderExtension\Data\Element\Parallax</item>
+
+					<item name="name" xsi:type="string" translate="true">Parallax</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/parallax.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+	<item name="parachute_insta" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">insta</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+		<item name="parachute_benefits" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Benefits</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+
+						<item name="parachute_press" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Press</item>
+										<item name="class" xsi:type="string">Parachute\PageBuilderExtension\Data\Element\Parallax</item>
+
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/press.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+
+
+				<item name="parachute_events" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Events</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/events.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+
+				<item name="parachute_muse" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Muse</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/vieve-muse.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+
+				<item name="parachute_wall" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Muse Wall</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/vieve-wall.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+
+
+
+				<item name="parachute_faq" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">FAQ</item>
+					<item name="class" xsi:type="string">Parachute\PageBuilderExtension\Data\Element\Faqs</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/faq.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+
+				<item name="parachute_media_content_block" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Media Content Block</item>
+					<item name="class" xsi:type="string">Parachute\PageBuilderExtension\Data\Element\MediaContentBlock</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/media-content-block.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+
+				<item name="parachute_banner" xsi:type="array">
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="name" xsi:type="string" translate="true">Banner</item>
+					<item name="class" xsi:type="string">Parachute\PageBuilderExtension\Data\Element\Banner</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/banner.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+
+				<item name="newsletter" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Newsletter</item>
+					<item name="class" xsi:type="string">Parachute\PageBuilderExtension\Data\Element\Newsletter</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/newsletter.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+
+				<item name="category_highlights" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Category Highlights</item>
+					<item name="class" xsi:type="string">Parachute\PageBuilderExtension\Data\Element\CategoryHighlights</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/category-highlights.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+
+				<item name="text_panel" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Text Panel</item>
+					<item name="class" xsi:type="string">Parachute\PageBuilderExtension\Data\Element\TextPanel</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/text-panel.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+
+				
+		
+				<item name="parachute_calloutboxes" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Callout Boxes</item>
+					<item name="class" xsi:type="string">Parachute\PageBuilderExtension\Data\Element\CalloutBoxes</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/callout-boxes.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>				
+
+
+				<item name="parachute_image_block" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Image</item>
+					<item name="class" xsi:type="string">Parachute\PageBuilderExtension\Data\Element\Image</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/image.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+
+
+				<item name="parachute_instagram_feed_block" xsi:type="array">
+					<item name="name" xsi:type="string" translate="true">Instagram Feed</item>
+					<item name="class" xsi:type="string">Parachute\PageBuilderExtension\Data\Element\InstagramFeed</item>
+					<item name="template" xsi:type="string">Parachute_PageBuilderExtension::element/instagram-feed.phtml</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="icon" xsi:type="string">fab mgz-fa-js</item>
+					<item name="icon_styles" xsi:type="array">
+						<item name="background-color" xsi:type="string">transparent</item>
+						<item name="color" xsi:type="string">#fd5400</item>
+						<item name="font-size" xsi:type="string">32px</item>
+					</item>
+					<item name="group" xsi:type="string">structure</item>
+										<item name="livePreview" xsi:type="boolean">true</item>
+
+					<item name="description" xsi:type="string">Description</item>
+					<item name="builder_description" xsi:type="string">{{ element.title ? 'Title: ' + element.block_title : '' }}</item>
+				</item>
+
+
+			</argument>
+		</arguments>
+	</type>
+</config>

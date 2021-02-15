@@ -1,0 +1,41 @@
+.benefit-block{
+	padding:0 0 4em 0;
+
+	.col-xs-4{
+		padding-left:0;
+		padding-right:0;
+	}
+
+	.benefit-item{
+		text-align:center;
+		border-right:1px solid #ccc;
+
+
+		h3{
+			font-family:"roboto";
+			font-weight:500;
+			color:#505050;
+			@media (max-width: $screen-sm-max) {
+				
+				padding-bottom:6px;
+				font-size:15px;
+			}
+		}
+		h2{
+			font-size:45px;
+			text-transform:uppercase;
+			@media (max-width: $screen-sm-max) {
+				margin-bottom:0;
+				padding-bottom:0;
+				font-size:18px;
+			}
+
+		}
+
+	}
+	.col-xs-4:last-child{
+		.benefit-item{
+			border-right:0;
+		}
+	}
+}

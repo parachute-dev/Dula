@@ -1,0 +1,39 @@
+<?php
+/**
+ * @var \BlueFormBuilder\Core\Block\Email\Message $block
+ */
+$form                  = $this->getForm();
+$post                  = $this->getPost();
+$tableStyles           = [];
+$tableStyles['border'] = '1px solid #d6d6d6';
+$i                     = 0;
+?>
+<table class="bfb-email-message" cellspacing="0" cellpadding="0" border="0" width="100%"  style="<?= $this->parseStyles($tableStyles) ?>">
+	<?php foreach ($post as $elemName => $value) { ?>
+		<?php
+		$element = $form->getElement($elemName, 'elem_name');
+		if (!$element) continue;
+		$styles = [];
+		$styles['padding'] = '1rem 1rem';
+		$styles1 = [];
+		if ($i % 2 == 0) {
+			$styles1['background'] = '#f2f2f2';
+			$styles1['width'] = '20%';
+		}
+		$styles2                = [];
+		$styles2['border-left'] = '1px dashed #d6d6d6';
+		if ($i % 2 == 0) {
+			$styles2['background'] = '#f2f2f2';
+		}
+		?>
+		<tr>
+			<td style="<?= $this->parseStyles($styles) ?><?= $this->parseStyles($styles1) ?>">
+				<?= $element->getConfig('label') ?>
+			</td>
+			<td style="<?= $this->parseStyles($styles) ?><?= $this->parseStyles($styles2) ?>">
+				<?= nl2br($block->escapeHtml($element->getEmailHtmlValue())) ?>
+			</td>
+		</tr>
+		<?php $i++; ?>
+	<?php } ?>
+</table>

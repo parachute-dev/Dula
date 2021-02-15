@@ -1,0 +1,75 @@
+<?php
+/**
+ * @var $block \BlueFormBuilder\Core\Block\Element\File
+ */
+
+$coreHelper         = $this->helper('\Magezon\Core\Helper\Data');
+$elementId          = $this->getElHtmlId();
+$elemName           = $this->getElemName();
+$uploadUrl          = $this->getUploadUrl();
+$element            = $this->getElement();
+$showIcon           = $element->getData('show_icon');
+$iconPosition       = $element->getData('icon_position');
+$icon               = $element->getData('icon');
+$maxFileSize        = $element->getData('max_file_size');
+$minFileSize        = $element->getData('min_file_size');
+$maxFiles           = $element->getData('max_files');
+$minFiles           = $element->getData('min_files');
+$allowedExttensions = $element->getData('allowed_exttensions');
+$multiple           = $element->getData('multiple');
+$dragdrop           = $element->getData('dragdrop');
+$uploadBtnText      = $element->getData('upload_btn_text');
+
+$defaultValue = '';
+$values       = $this->getFileValues();
+foreach ($values as $file) $defaultValue;
+
+$attrs = [];
+if ($element->getData('select_multiple_files')) $attrs['multiple'] = true;
+if ($element->getData('max_file_size')) $attrs['data-max-size'] = $element->getData('max_file_size');
+if ($element->getData('min_file_size')) $attrs['data-min-size'] = $element->getData('min_file_size');
+if ($element->getData('min_files')) $attrs['data-min-files'] = $element->getData('min_files');
+if ($element->getData('max_files')) $attrs['data-max-files'] = $element->getData('max_files');
+$validate = [];
+if ($element->getData('required')) $validate['required'] = true;
+$validate['validate-file'] = true;
+?>
+<div id="<?= $elementId ?>" class="bfb-element-file-inner" data-mage-init='{"BlueFormBuilder_Core/js/fileUploader":{
+	"id": "<?= $elementId ?>",
+	"allowedExttensions": "<?= $allowedExttensions ?>",
+	"maxFileSize": "<?= $maxFileSize ?>",
+	"minFileSize": "<?= $minFileSize ?>",
+	"maxFiles": "<?= $maxFiles ?>",
+	"minFiles": "<?= $minFiles ?>",
+	"deleteUrl": "<?=  $this->getUrl('blueformbuilder/form/deleteFile') ?>",
+	"values": <?= $coreHelper->serialize($values) ?>
+}}'>
+	<?php if ($icon && $dragdrop) { ?>
+		<div class="bfb-file-insert" data-role="drop-zone">
+			<?php if ($showIcon && $icon) { ?>
+				<i class="bfb-element-icon <?= $icon ?>"></i>
+			<?php } ?>
+			<span class="file-uploader-spinner"></span>
+			<?php if ($dragdropDescription = $element->getData('dragdrop_description')) { ?>
+				<h3><?= $dragdropDescription ?></h3>
+			<?php } ?>
+			<input type="file" name="<?= $elemName ?>insert" id="<?= $elementId ?>insert" data-url="<?= $uploadUrl ?>" <?= $this->getAllowedExttensions() ?> <?= $multiple ? 'multiple' : '' ?>/>
+		</div>
+	<?php } else { ?>
+		<label class="file-uploader-button" for="<?= $elementId ?>insert">
+			<?php if ($showIcon && $icon && $iconPosition == 'left') { ?>
+				<i class="<?= $icon ?>"></i>
+			<?php } ?>
+			<span><?= $uploadBtnText ?></span>
+			<?php if ($showIcon && $icon && $iconPosition == 'right') { ?>
+				<i class="<?= $icon ?>"></i>
+			<?php } ?>
+		</label>
+		<input type="file" name="<?= $elemName ?>insert" id="<?= $elementId ?>insert" data-url="<?= $uploadUrl ?>" <?= $this->getAllowedExttensions() ?> <?= $multiple ? 'multiple' : '' ?>/> <span class="file-uploader-spinner"></span>
+	<?php } ?>
+	<?php if ($fileUploadMeta = $block->getFileUploadMeta()) { ?>
+		<div class="bfb-file-meta"><?= $fileUploadMeta ?></div>
+	<?php } ?>
+	<div class="bfb-file-list"></div>
+	<input type="text" id="<?= $elementId ?>-values" class="bfb-control" data-role="values" name="<?= $elemName ?>" data-validate="{<?= $this->parseJson($validate) ?>}" <?= $this->parseAttributes($attrs) ?> value="<?= $defaultValue ?>"/>
+</div>
