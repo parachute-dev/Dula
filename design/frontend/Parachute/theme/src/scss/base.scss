@@ -31,12 +31,19 @@
 @import "vendor/mmenu";
 
 // Pages 
-@import "pages/page";  
+@import "pages/cart";  
+@import "pages/checkout";  
+@import "pages/category";  
+@import "pages/minicart";  
+@import "pages/search";  
+@import "pages/account";  
+@import "pages/wishlist";  
+
 
 // Animations 
 @import "helper/animations";      
-  
 
-  .action.skip.contentarea, .modals-wrapper{
-  	display:none;
-  }
+
+.action.skip.contentarea, .modals-wrapper{
+	display:none;
+} 

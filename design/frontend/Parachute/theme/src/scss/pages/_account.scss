@@ -1,0 +1,375 @@
+ .catalog-category-view {
+
+  .main{
+    padding:0 30px;
+  }
+}
+
+.product-item-info{
+  background:white;
+  .product-image-photo{
+    width:100%;
+  }
+
+}
+.products.list{
+  display:flex;
+  flex-wrap:wrap;
+
+  .product.actions{
+    width:100%;
+  }
+  .action.tocart.primary{
+    background:white;
+    width:100%;
+    color:colours(brand,black);
+    border:1px solid colours(brand,black);
+  }
+  .product-item{
+    width:25%;
+    padding:10px;
+    .background-image{
+      position:static;
+      width:100%;
+      height:300px;
+    }
+
+  }
+  .product-item-name{
+    font-family:$font-heading;
+    text-transform:uppercase;
+    color:colours(brand,black);
+
+    line-height:0.9;
+    a{
+      color:colours(brand,black);
+      font-size:18px;
+      font-weight:500;
+      line-height:1;
+    }
+  }
+  .price{
+    font-size:15px;
+    margin-bottom:10px; 
+    margin-top:10px;
+    display:inline-block;
+    width:100%;
+  }
+}
+.sidebar-main{
+  background:white;
+  padding:20px;
+
+  a{
+    color:#333;
+
+  } 
+  .block-subtitle{
+    display:none;
+  }
+  .filter-options-title{
+    font-family:$font-body;
+    text-transform:uppercase;
+    font-weight:800;
+    font-size:16px;
+    padding:0 5px 5px 5px;
+  }
+  .item{
+    .count{
+      float:right;
+      .filter-count-label{
+        display:none;
+      }
+    }
+  }
+  .filter-options-content{
+    li{
+      padding:5px;
+      border-bottom:1px solid #ccc;
+    }
+  }
+  .block.filter{
+    .filter-title{
+      display:none;
+    }
+  }
+}
+
+
+.customer-account-login, .customer-account-create{
+  .page-title-wrapper{
+
+    margin-bottom:2em;
+  }
+  .columns{
+
+  }
+  
+  .login-container{
+    
+    margin-top:2em;
+    margin-bottom:5em;
+
+    .login{
+      .note{
+        padding-left:10px;
+      }
+    }
+
+    @include media-breakpoint-up(lg) { 
+      display:flex;
+    }
+  }
+  .block{
+    
+    padding:15px;
+    @include media-breakpoint-up(lg) { 
+      margin:20px;            }
+      
+    }
+    .block-title{
+      strong{
+        font-family: "bodoni-urw", "arial", "helvetica", "san-serif";
+        font-weight:400;
+        text-transform:uppercase;
+        font-size:2em;
+        font-style:italic;
+        margin-bottom:20px;
+        
+      }
+    }
+    .fieldset.login{
+      margin-left:-10px;
+      display:inline-block;
+    }
+    
+    .block-new-customer .actions-toolbar{
+      margin:20px 0;
+    }
+    .block-customer-login .actions-toolbar{
+      padding:0 10px;
+    }
+    .actions-toolbar{
+      text-align:center;
+    }
+    
+  }
+
+
+  .account{
+    .page-title-wrapper{
+      display:block!important;
+    }
+    
+    
+    .block-title{
+      font-family:"bodoni-urw", "arial", "helvetica", "san-serif";
+      text-transform:uppercase;
+      font-size:30px;
+      font-weight:300;
+      font-style:italic;
+      strong{
+        font-weight:300; 
+        font-style:italic;
+      }
+      
+    }
+    
+    .action.edit{
+      font-family:"roboto";
+      font-size:15px;
+      font-weight:bold;
+      font-style:initial;
+      float:right;
+      text-transform:uppercase;
+      font-size:12px;
+      
+    }
+    .box-actions{
+     
+    }
+    .columns{
+      
+     display:flex;
+     flex-direction:column;
+     .sidebar{
+      order:1;
+    }
+    .main{
+      order:2;
+      display:flex;
+      flex-direction:row;
+      .block{
+        margin:20px;
+        padding:20px 40px;
+      }
+    }
+    
+  }
+  .sidebar-additional{
+    display:none!important;
+  }
+  
+  .nav.items{
+    
+    
+  }
+  
+  .account-nav-title:before{
+    content:"options";
+    font-family:"bodoni-urw", "arial", "helvetica", "san-serif";
+    text-transform:uppercase;
+    font-size:4em;
+    
+  }
+  .account-nav{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    ul{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      li{
+        padding:10px;
+        text-transform: uppercase;
+        font-family:"roboto";
+        line-height:1;
+        text-align:center;
+        font-weight:bold;
+      }
+    }
+  }
+  .block-dashboard-info{
+    flex:1;
+    
+  }
+  .block-dashboard-addresses{
+    flex:1;
+    
+  }
+  .box-title{
+    text-transform:uppercase;
+    font-size:16px;
+  }
+}
+.block-customer-login{
+
+}
+
+.block-customer-login{
+  @include media-breakpoint-up(lg) { 
+    padding-left:0!important;
+  }
+}
+
+.modals-wrapper .modal-popup._show{
+  overflow-y:scroll;
+
+} 
+
+
+
+
+
+.account{
+
+ .columns .main .block{
+  padding:0;
+}
+.column{
+  flex-wrap:wrap;
+}
+.column .block{
+  width:47%;
+  flex:initial;
+  box-shadow:0px 0px 20px rgba(0,0,0,0.1);
+  padding:30px!important;
+}
+.box-newsletter{
+  display:none
+}
+
+.account-nav{
+  display:flex;
+  justify-content:flex-start;
+}
+
+.columns .sidebar{
+  padding-left:10px;
+}
+
+.table-order-items{
+  width:100%;
+}
+.table-order-items td, .table-order-items th, .table-additional-addresses-items  th,  .table-additional-addresses-items  td{
+  padding:5px;
+}
+
+.table-order-items th,  .table-additional-addresses-items th{
+  font-weight:600;
+  text-transform:uppercase;
+}
+
+.action:not(.primary){
+  padding:10px;
+  text-transform:uppercase;
+  border:1px solid black;
+  padding:3px 10px;
+  font-weight:300;
+  color:#333;
+  font-size:13px;
+  margin:5px 0;
+  display:inline-block;
+  font-family:roboto;
+
+}
+.block-title .action{
+  float:right;
+}
+.block-title{
+  width:100%;
+}
+.block-dashboard-orders{
+  width:100%!important;
+}
+.table-caption{
+  display:none;
+}
+
+.order-details-items{
+  width:100%;
+  padding:20px;
+  box-shadow:0px 0px 20px rgba(0,0,0,0.1);
+  padding:30px!important;
+}
+
+.form-edit-account{
+  width:100%;
+}
+.actions-toolbar{
+  text-align:center;
+  margin:20px;
+}
+
+.table-wrapper{
+  width:100%; 
+
+}
+
+.block-addresses-default, .block-addresses-list{
+  width:100%!important;
+}
+.table-additional-addresses-items{
+  width:100%;
+}
+
+@include media-breakpoint-down(lg) { 
+
+  .column .block{
+    width:100%;
+  }
+}
+
+}

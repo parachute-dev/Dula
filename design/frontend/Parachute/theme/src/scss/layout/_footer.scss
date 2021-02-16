@@ -1,6 +1,10 @@
+.page-footer{
+	clear:both;
+}
 #footer{
 	text-align:center;
 	background:colours(brand,three);
+	clear:both;
 	@include padding-top(35px);
 
 	.logo{

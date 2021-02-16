@@ -176,3 +176,14 @@ padding:0!important;
 .page-title-wrapper{
     display:none;
 }
+
+
+body:not(.page-layout-1column) .columns, .category-view, .catalog-category-view .columns, .checkout-index-index .columns, .checkout-onepage-success .columns, .catalog-product-view  .columns, .customer-account-forgotpassword .columns, .checkout-cart-index .columns, .customer-account-login .columns, .customer-account-create .columns
+{ 
+  @include make-container();
+    @extend .container;
+
+  padding-left:0;
+  padding-right:0; 
+
+}

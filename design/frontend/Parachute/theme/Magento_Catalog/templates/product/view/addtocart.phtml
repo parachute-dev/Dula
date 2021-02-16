@@ -11,29 +11,9 @@
 <?php if ($_product->isSaleable()) :?>
 <div class="box-tocart">
     <div class="fieldset">
-              <?php if ($block->shouldRenderQuantity()) :?>
-
-             <div class="field qty">
-                  <label class="label qty-label" for="qty"><span><?= $block->escapeHtml(__('Quantity')) ?></span></label>
-
-<div class="qty-flex">
-
- 
-
-                <div id="minusQty" class="qty-manip">
-                -
-            </div>
- 
-
-
-        
-
-  
-
-
-
-
-
+        <?php if ($block->shouldRenderQuantity()) :?>
+        <div class="field qty">
+            <label class="label" for="qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
             <div class="control">
                 <input type="number"
                        name="qty"
@@ -45,11 +25,6 @@
                        data-validate="<?= $block->escapeHtmlAttr(json_encode($block->getQuantityValidators())) ?>"
                        />
             </div>
-
-                   <div id="addQty" class="qty-manip">
-                +
-            </div>
-            </div>
         </div>
         <?php endif; ?>
         <div class="actions">
@@ -57,12 +32,8 @@
                     title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
                     class="action primary tocart"
                     id="product-addtocart-button" disabled>
-                <span>Add to Bag</span>
+                <span><?= $block->escapeHtml($buttonTitle) ?></span>
             </button>
-<a href="#" data-post='<?php  echo $this->helper('Magento\Wishlist\Helper\Data')->getAddParams($_product) ?>' class="action towishlist" data-action="add-to-wishlist"><span>' .
-__('Add to Wish List') . '</span></a>
-
-
             <?= $block->getChildHtml('', true) ?>
         </div>
     </div>
@@ -74,18 +45,4 @@ __('Add to Wish List') . '</span></a>
             "Magento_Catalog/js/validate-product": {}
         }
     }
-</script>
-
-<script type="text/x-magento-init">
-{
-    "*": {
-        "Magento_Ui/js/core/app": {
-            "components": {
-                "wishlist": {
-                    "component": "Magento_Wishlist/js/view/wishlist"
-                }
-            }
-        }
-    }
-}
 </script>

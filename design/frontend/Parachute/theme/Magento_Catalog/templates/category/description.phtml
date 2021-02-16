@@ -13,34 +13,12 @@
  * @var $block \Magento\Catalog\Block\Category\View
  */
 ?>
-<div class="category-description">
-
-    <?php
-    $_helper    = $this->helper(Magento\Catalog\Helper\Output::class);
-    $_category  = $block->getCurrentCategory();
-
-    $image = "/assets/img/banner.png";
-
-    if ($_category->getImageUrl()){
-        $image = $_category->getImageUrl();
-    }
-
-    ?>
-
-
-    <div class="container">
-        <div class="row is-flex">
-            <div class="col-md-8 image-container">
-               <div class="background-image" style="background-image:url(<?php echo $image ; ?>);">
-               </div>
-           </div>
-           <div class="col-md-4 content">
-             <header class="category">
-                <h1><?php echo $block->getCurrentCategory()->getName() ?></h1>
-                <?php echo $block->getCurrentCategory()->getDescription(); ?>
-            </header>
-        </div>
+<?php if ($_description = $block->getCurrentCategory()->getDescription()) :?>
+    <div class="category-description">
+        <?= /* @noEscape */ $this->helper(Magento\Catalog\Helper\Output::class)->categoryAttribute(
+            $block->getCurrentCategory(),
+            $_description,
+            'description'
+        ) ?>
     </div>
-</div>
-
-</div>
+<?php endif; ?>
