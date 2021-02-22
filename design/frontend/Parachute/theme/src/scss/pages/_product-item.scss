@@ -1,0 +1,125 @@
+.product-item{
+  max-width:300px;
+  background:white;
+  padding:20px;
+  text-align:center;
+  a{
+    text-decoration:none;
+    color:inherit;
+  }
+  .product-item-details{
+    display:flex;
+        flex-direction:column;
+
+
+  }
+  .product-item-photo{
+    margin-bottom:5px;
+    display:inline-block;
+  }
+  .product-item-name{
+    text-transform:none;
+    order:2;
+    padding:5px 0!important;
+    display:inline-block;
+    width:100%;
+    text-align:left;
+    @include font-size(18px,"body");
+
+
+  }
+  .price-box {
+    .price-label{
+      display:none;
+    }
+    order:1;
+    text-align:left;
+        @include font-size(14px,"body");
+
+  }
+  .product-item-actions, .product-item-inner{
+    order:3;
+  }
+.action.tocompare, .towishlist{
+  display:none;
+}
+}
+
+.mgz-element-product_list{
+  background:colours(brand,one);
+  padding:3em 0;
+}
+
+
+@include media-breakpoint-up(lg) { 
+  .product-info-main{
+    width:60%;
+    float:right;
+    margin-top:10px;
+  }
+  .product.media{
+    width:40%;
+    float:left;
+    padding:20px;
+  }
+}
+
+
+@include media-breakpoint-up(lg) { 
+  .product-info-main{
+    width:45%;
+    float:right;
+    margin-top:10px;
+  }
+  .product.media{
+    width:55%;
+    float:left;
+    padding:20px;
+
+
+  }
+}
+
+.catalog-product-view{
+  background:white;
+}
+    .action-skip-wrapper, .skip, .reviews-actions, .tocompare{
+      display:none;
+
+    }
+.product.detailed{
+  clear:both;
+  width:100%;
+  display:none;
+
+}
+
+.product-info-main{
+  padding-top:5em;
+
+  h1{
+            @include font-size(58px,"heading");
+
+  }
+
+.price-box{
+        @include font-size(24px,"body");
+        padding-bottom:25px;
+
+
+  .price-label{
+    display:none!important;
+  }
+}
+  .field{
+    padding-left:0;
+    padding-right:0;
+    width:100%;
+  }
+  .stock{
+    display:none;
+  }  .sku{
+    display:none;
+  }
+
+}

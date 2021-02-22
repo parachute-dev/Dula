@@ -13,12 +13,15 @@
  * @var $block \Magento\Catalog\Block\Category\View
  */
 ?>
-<?php if ($_description = $block->getCurrentCategory()->getDescription()) :?>
     <div class="category-description">
+    	<h2><?php echo $block->getCurrentCategory()->getName() ;?>.</h2>
+    	<?php if ($_description = $block->getCurrentCategory()->getDescription()) :?>
+
         <?= /* @noEscape */ $this->helper(Magento\Catalog\Helper\Output::class)->categoryAttribute(
             $block->getCurrentCategory(),
             $_description,
             'description'
         ) ?>
+        <?php endif; ?>
     </div>
-<?php endif; ?>
+

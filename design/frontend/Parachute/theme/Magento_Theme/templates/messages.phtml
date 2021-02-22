@@ -4,7 +4,10 @@
  * See COPYING.txt for license details.
  */
 ?>
-<div data-bind="scope: 'messages'">
+<div class="container" style="position:relative;">
+    <div class="row">
+        <div class="col-md-12">
+<div data-bind="scope: 'messages'" id="messages">
     <!-- ko if: cookieMessages && cookieMessages.length > 0 -->
     <div role="alert" data-bind="foreach: { data: cookieMessages, as: 'message' }" class="messages">
         <div data-bind="attr: {
@@ -40,3 +43,7 @@
             }
     }
 </script>
+
+</div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
-#page{
-	background:white;
+#page, body{
+	background:#f3f3f3
 }
 #header {
 	background:white;
@@ -82,6 +82,8 @@
 		}
 
 	}
+
+
 
 	ul{
 		display:flex;
@@ -197,3 +199,75 @@
 .minicart-wrapper{
 	display:none;
 }
+
+
+.ninjamenus.ninjamenus-desktop.ninjamenus-horizontal > .magezon-builder > .nav-item{
+	float:none;
+	display:inline-block;
+	@include font-size(16px,"body");
+	> a{
+		padding:4px 30px;
+	}
+
+}
+.ninjamenus.ninjamenus-desktop.ninjamenus-horizontal > .magezon-builder{
+	position:relative;
+	z-index:9999;
+}
+.ninjamenus.ninjamenus-desktop.ninjamenus-horizontal > .magezon-builder {
+	text-align:center;
+}
+
+.ninjamenus.ninjamenus-desktop.ninjamenus-vertical .nav-item.level0:hover > a, .ninjamenus.ninjamenus-desktop.ninjamenus-horizontal .nav-item.level0:hover > a{
+	background:transparent;
+	color:#000;
+	text-decoration:none;
+}
+.level0 > .item-submenu{
+	border-top:0!important;
+	padding:10px!important;
+	box-shadow:0px 15px 20px rgba(0,0,0,0.24)!important;
+
+}
+.mgz-element-single_image + .nav-item a{
+	padding-left:0!important;
+	padding-top:0!important;
+}
+
+.level0 .nav-item > a span.title{
+	@include font-size(14px,"body");
+	font-weight:bold;
+	padding-bottom:10px;
+	text-transform:uppercase;
+}
+.nav-item > a .label{
+	left:-5px;
+	top:2px;
+	position:absolute;
+	display:none;
+}
+
+.ninjamenus.ninjamenus-desktop .item-submenu{
+	width:100%!important;
+}
+
+#messages .message{
+background:black;
+padding:20px 30px;
+color:white;
+font-weight:bold;
+
+z-index:999;
+width:100%;
+border:2px solid white;
+margin-top:20px;
+text-align:center;
+left:0;
+margin:10px 0;
+}
+ 
+#messages{
+
+z-index:999;
+width:100%;
+} 

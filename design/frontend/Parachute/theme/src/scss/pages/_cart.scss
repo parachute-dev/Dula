@@ -75,9 +75,8 @@
 
   .summary.title, #block-discount-heading{
    width:100%;
-   text-transform:uppercase;
    width:100%;
-   font-family:"bodoni-urw", "arial", "helvetica", "san-serif";
+        @include font-size(32px,"heading");
    font-weight:400;
    font-size:30px;
    display:inline-block;
@@ -193,13 +192,13 @@ td.col.item{
   display:flex;
   align-items:center;
   .product-item-details strong a{
-    font-family:"bodoni-urw", "arial", "helvetica", "san-serif";
     font-weight:normal;
     color:#333;
     font-size:20px;
     letter-spacing:1px;
-    text-transform:uppercase;
     line-height:1;
+        @include font-size(23px,"body");
+        font-weight:bold;
 
   }
 
@@ -271,7 +270,6 @@ background:white;
 }
 
 .checkout-cart-index .summary.title, .checkout-cart-index #block-discount-heading{
-  font-style:italic;
   font-size:25px;
   text-align:left;
 }
@@ -334,12 +332,8 @@ background:white;
 
   .page-title-wrapper h1{
     padding:0;
-    font-style:italic;
   }
 
-  .checkout-cart-index .columns{
-    max-width:1230px;
-  }
 
 }
 
@@ -350,9 +344,16 @@ background:white;
 
 .product-item-details .product-item-name{
   font-weight:400;
-  text-transform:uppercase;
 }
 
-.product-item-manufacturer{
-  text-transform:uppercase;
+
+.action.primary.checkout{
+  background:black;
+  color:white;
+  border:0;
+          @include font-size(16px,"body");
+          padding:15px;
+          text-transform:uppercase;
+          letter-spacing:1px;
+
 }

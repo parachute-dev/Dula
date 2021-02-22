@@ -4,10 +4,10 @@
 	text-transform:uppercase;
 	line-height:1;
 	border:2px solid colours(brand,one); 
-		@include font-size(15px,"body");
+		@include font-size(14px,"body");
 	font-weight:700;
 
-	letter-spacing:1px;
+	letter-spacing:0.5px;
 	@include padding-top(12px);
 	@include padding-bottom(13px);
 	@include padding-left(45px);
@@ -18,6 +18,12 @@
 		background:transparent;
 		border:2px solid white;
 		color:white;
+	}
+
+		&--black{
+		background:transparent;
+		border:2px solid black;
+		color:black; 
 	}
 	&:visited{
 		color:white;

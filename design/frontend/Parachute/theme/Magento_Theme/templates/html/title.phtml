@@ -18,6 +18,8 @@ if (trim($block->getPageHeading())) {
         . '</span>';
 }
 ?>
+
+
 <?php if ($titleHtml) : ?>
 <div class="page-title-wrapper<?= $block->escapeHtmlAttr($cssClass) ?>">
     <div class="container">
@@ -25,7 +27,7 @@ if (trim($block->getPageHeading())) {
             <div class="col-md-7">
     <div class="image"></div>
 </div>
-<div class="col-md-5">
+<div class="col-md-12">
     <div class="content">
     <h1 class="page-title"
         <?php if ($block->getId()) : ?> id="<?= $block->escapeHtmlAttr($block->getId()) ?>" <?php endif; ?>

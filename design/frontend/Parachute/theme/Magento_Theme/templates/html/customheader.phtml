@@ -32,8 +32,8 @@
 							?>
 						</li>
 						<li><a href="/customer/account/"><img src="/assets/img/account.png?v=2" alt="Account" /></a></li>
-						<li class=""><a href="/wishlist/index/"><img src="/assets/img/wishlist.png" alt="Wishlist" /></a></li>
-						<li class="" id="shopping-basket"><a href="/checkout/cart"><img src="/assets/img/basket.png?v=2" alt="Basket" /></a>
+						<li class=""><a href="/wishlist/index/"><img src="/assets/img/heart.png" alt="Wishlist" /></a></li>
+						<li class="" id="shopping-basket"><a href="/checkout/cart"><img src="/assets/img/return-policy.png" alt="Basket" /></a>
 							<?php echo $this->getChildHtml('minicart'); ?>
 						</li>
 					</ul>
@@ -45,14 +45,8 @@
 	<div class="main-navigation">
 		<div class="container"><div class="row">
 			<div class="col-12">
-				<ul>
-					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
-				</ul>
-				<?= $this->helper(\Magezon\NinjaMenus\Helper\Menu::class)->getMenuHtml('main') ?>
+		
+				<?= $this->helper(\Magezon\NinjaMenus\Helper\Menu::class)->getMenuHtml('home') ?>
 			</div>
 		</div>
 	</div>

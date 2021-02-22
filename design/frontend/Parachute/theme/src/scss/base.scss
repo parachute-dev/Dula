@@ -24,7 +24,10 @@
 @import "grid/content-listings";
 @import "grid/accordian";
 @import "grid/icon-grid";
+@import "grid/video";
+@import "grid/category-highlights";
 
+ 
 //Vendor
 @import "vendor/fancybox";
 @import "vendor/slick";
@@ -38,6 +41,7 @@
 @import "pages/search";  
 @import "pages/account";  
 @import "pages/wishlist";  
+@import "pages/product-item";  
 
 
 // Animations 

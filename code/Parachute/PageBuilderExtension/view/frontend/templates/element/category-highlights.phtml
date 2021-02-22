@@ -39,6 +39,7 @@ $listings_class_arr = [];
     // Block
 $block_active = $_element->getData('block_active');
 $block_title = $_element->getData('block_title');
+
 $block_subtitle = $_element->getData('block_subtitle');
 $block_content = $_element->getData('block_content');
 $block_subcontent = $_element->getData('block_subcontent');
@@ -47,6 +48,8 @@ $block_cta_target = $_element->getData('block_cta_target');
 $block_cta_link = $_element->getData('block_cta_link');
 $block_cta_link_text = $_element->getData('block_cta_link_text');
 $block_image = $_element->getData('block_image');
+$block_carousel = $_element->getData('block_carousel');
+
 $block_header_show = boolval($_element->getData('block_header_show')) ? $_element->getData('block_header_show') : false;
 $block_footer_show = boolval($_element->getData('block_footer_show')) ? $_element->getData('block_footer_show') : false;
 $block_layout = !empty($_element->getData("layout_type")) ? $_element->getData("layout_type") : "content";
@@ -136,138 +139,137 @@ if(!empty($listings_class_arr))
     // Loop vars
 $item_count = count($_items);
 $counter = 0;
+
 $loop = 1;
-$id                   = time() . uniqid();
+$carousel = "";
+if ($block_carousel){
+    $carousel = "category-highlight-carousel";
+}
 ?>
 
 
-
-
-    <div class="container-fluid">
+<div class="category-highlight-block content-block animated-element">
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <header class="content-header content-header-line">
                     <h2><?php echo $block_title; ?></h2>
                 </header>
 
-<?php if ($block_subtitle) { ?>
-                <div class="header-subtitle">
-                       <p class=""><?php echo $block_subtitle;?> </p>
-                   </div>
-               <?php }?>
-               <?php if ($block_content) { ?>
-                      <div class="header-subtitle">
-                     <?php echo $block_content;?>
-                   </div>
-               <?php } ?>
-            </div>
-        </div>
+                <?php if ($block_subtitle) { ?>
+                    <div class="header-subtitle">
+                     <p class=""><?php echo $block_subtitle;?> </p>
+                 </div>
+             <?php }?>
+             <?php if ($block_content) { ?>
+              <div class="header-subtitle">
+               <?php echo $block_content;?>
+           </div>
+       <?php } ?>
+   </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+    <div id="<?php echo $_id; ?>" class="owl-carousel callout-carousel">
 
 
-                <?php foreach($_items as $_item): ?>
-                    <?php 
+
+        <?php foreach($_items as $_item): ?>
+            <?php 
                                                 // Active
-                    $active = $_item->getData('active');
+            $active = $_item->getData('active');
 
-                    if($active != "1")
-                        continue;
+            if($active != "1")
+                continue;
 
                                                 // Content
-                    $title = $_item->getData('title');
-                    $subtitle = $_item->getData('subtitle');
-                    $subcontent = $_item->getData('subcontent');
-                    $content = $_item->getData('content');
-                    $cta_type = $_item->getData('cta_type');
-                    $image = $_item->getData('image');
-                    $image_src = !empty($_builderHelper->getImageUrl($image)) ? $_builderHelper->getImageUrl($image) : "/assets/img/banner-masthead.jpg";
-                    $secondary_image = $_item->getData('secondary_image');
-                    $secondary_image_src = !empty($_builderHelper->getImageUrl($secondary_image)) ? $_builderHelper->getImageUrl($secondary_image) : "";
+            $title = $_item->getData('title');
+            $subtitle = $_item->getData('subtitle');
+            $subcontent = $_item->getData('subcontent');
+            $content = $_item->getData('content');
+            $cta_type = $_item->getData('cta_type');
+            $image = $_item->getData('image');
+            $image_src = !empty($_builderHelper->getImageUrl($image)) ? $_builderHelper->getImageUrl($image) : "/assets/img/banner-masthead.jpg";
+            $secondary_image = $_item->getData('secondary_image');
+            $secondary_image_src = !empty($_builderHelper->getImageUrl($secondary_image)) ? $_builderHelper->getImageUrl($secondary_image) : "";
 
                                                 // Video data
-                    $video_url = $_item->getData('video_url');
+            $video_url = $_item->getData('video_url');
 
                                                 // Image list
-                    $image_list = $this->toObjectArray($_item->getData('image_list'));
+            $image_list = $this->toObjectArray($_item->getData('image_list'));
 
                                                 // CTA
-                    $cta_link = $_item->getData('cta_link');
-                    $cta_link_text = !empty($_item->getData('cta_link_text')) ? $_item->getData('cta_link_text') : "Learn more";
-                    $secondary_cta_link = $_item->getData('secondary_cta_link');
-                    $secondary_cta_link_text = !empty($_item->getData('secondary_cta_link_text')) ? $_item->getData('secondary_cta_link_text') : "Learn more";
+            $cta_link = $_item->getData('cta_link');
+            $cta_link_text = !empty($_item->getData('cta_link_text')) ? $_item->getData('cta_link_text') : "Learn more";
+            $secondary_cta_link = $_item->getData('secondary_cta_link');
+            $secondary_cta_link_text = !empty($_item->getData('secondary_cta_link_text')) ? $_item->getData('secondary_cta_link_text') : "Learn more";
 
-                    $class_str = "";
-                    $class_arr = [];
+                                                // Layout
+            $class_str = "";
+            $class_arr = [];
 
-                    $banner_type = !empty($_item->getData('layout_type')) ? $_item->getData('layout_type') : "content";
-                    $text_align = !empty($_item->getData('text_align')) ? $_item->getData('text_align') : "centre";
-                    $content_align = !empty($_item->getData('content_align')) ? $_item->getData('content_align') : "centre";
-                    $content_justify = !empty($_item->getData('content_justify')) ? $_item->getData('content_justify') : "centre";
-                    $alignment = !empty($_item->getData('alignment')) ? $_item->getData('alignment') : "left";
-                    $content_size = !empty($_element->getData('content_size')) ? $_element->getData('content_size') : "medium";
+            $banner_type = !empty($_item->getData('layout_type')) ? $_item->getData('layout_type') : "content";
+            $text_align = !empty($_item->getData('text_align')) ? $_item->getData('text_align') : "centre";
+            $content_align = !empty($_item->getData('content_align')) ? $_item->getData('content_align') : "centre";
+            $content_justify = !empty($_item->getData('content_justify')) ? $_item->getData('content_justify') : "centre";
+            $alignment = !empty($_item->getData('alignment')) ? $_item->getData('alignment') : "left";
+            $content_size = !empty($_item->getData('content_size')) ? $_item->getData('content_size') : "medium";
 
-                    $background_color = $_item->getData("background_color");
-                    $content_width = $_item->getData("content_width");
-                    $banner_style = $_item->getData("banner_style");
+            $class_arr[] = $banner_type;
+            $class_arr[] = "text-align-" . $text_align;
+            $class_arr[] = "align-content-" . $content_align;
+            $class_arr[] = "justify-content-" . $content_justify;
+            $class_arr[] = "align-" . $alignment;
+            $class_arr[] = $content_size;
 
+            if(!empty($class_arr))
+            {
+                $class_str = join(" ", $class_arr);
+            }
+            ?>
 
-                    $class_arr[] = "text-align-" . $text_align;
-                    $class_arr[] = "vertical-" . $content_align;
-                    $class_arr[] = "horizontal-" . $content_justify;
-                    $class_arr[] = "align-" . $alignment;
-                    $class_arr[] = "background-color-" .  $background_color;
-                    $class_arr[] = "content-width-" .  $content_width;
-                    $class_arr[] = "banner-style-" .  $banner_style;
-
-                    $class_arr[] = "container-height-" . $content_size;
-
-                    if(!empty($class_arr))
-                    {
-                        $class_str = join(" ", $class_arr);
-                    }
-                    ?>
-<div class="video-block" style="margin-top:00px;">
-    <div class="row">
-
-        <div class="col-md-12">
-            <div class="video-item">
-                <a data-video href="<?php echo $video_url; ?>">
-                   
-                    <div class="video-content">
-                        <div class="image" style="background-image:url('<?php echo $image_src; ?>'
-                        )"></div>
-                        <div class="content">
-                                                    <i class="fa fa-play-circle"></i>
-
-                        </div>
+            <div class="category-highlight">
+                <a href="<?php echo $cta_link; ?>">
+                    <div class="image" style="background-image:url('<?php echo $image_src; ?>')">
+                    </div>
+                    <div class="content">
+                        <span class="button button--black"><?php echo $title; ?></span>
                     </div>
                 </a>
             </div>
-        </div>
-        </div>
-
+        <?php endforeach; ?>
+    </div>
 </div>
-
-
-    <?php endforeach; ?>
-
 </div>
-
 </div>
-
-
+</div>
 
 <script>
 
 
     require(['jquery', 'Magezon_Core/js/owl.carousel.min'], function($) {
-        jQuery('#<?= $id ?>').owlCarousel({
+        jQuery('#<?= $_id ?>').owlCarousel({
          animateOut: 'fadeOut',
          animateIn: 'fadeIn',
-
          loop:true,
+            dots:false,
          nav:true,
-         items: 1
-     });
+         items: 5,
+         margin:15,
+         responsive : {
+
+            0 : {
+               items: 2,
+ 
+
+           },
+
+           768 : {
+            items: 5,
+        }
+    }
+    });
     });
 
 </script>

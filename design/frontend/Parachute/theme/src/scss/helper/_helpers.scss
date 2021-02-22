@@ -187,3 +187,13 @@ body:not(.page-layout-1column) .columns, .category-view, .catalog-category-view 
   padding-right:0; 
 
 }
+
+
+.mgz-block-heading.mgz-block-heading-line .title{
+    background:transparent;
+    padding-bottom:1em;
+}
+.mgz-block-heading.mgz-block-heading-line:before{
+    height:0;
+    display:none;
+}

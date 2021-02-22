@@ -7,6 +7,7 @@
 <?php /* @var $block \Magento\Catalog\Block\Product\View\AbstractView */?>
 <?php $_product = $block->getProduct() ?>
 
+<h1><?php echo $_product->getName(); ?></h1>
 <?php if ($block->displayProductStockStatus()) :?>
     <?php if ($_product->isAvailable()) :?>
         <div class="stock available" title="<?= $block->escapeHtmlAttr(__('Availability')) ?>">
