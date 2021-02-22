@@ -25,11 +25,11 @@
                     color:white;
                     font-size:12px;
                     width:22px;
-                    right:2px;
+                    right:-13px;
                     border:1px solid white;
                     text-align:center;
                     border-radius:50%;
-                    top:-13px;
+                    top:-33px;
                     line-height:20px;
                     height:22px;
                     display:inline-block;
@@ -59,6 +59,10 @@
     position:relative;
 }
 .minicart-wrapper{
+
+    .product-item .product-item-details{
+        display:inline-block;
+    }
 
     .action.viewcart{
         padding:10px;
@@ -233,6 +237,10 @@ padding:0 20px 20px 20px;
             font-family:roboto;
             letter-spacing:2px;
             font-weight:600!important;;
+            text-transform:uppercase;
+            font-weight:bold;
+            font-style:normal;
+            margin-bottom:15px;
         } 
     }
 } 
@@ -240,17 +248,29 @@ padding:0 20px 20px 20px;
 #btn-minicart-close{
     font-size:0;
     position:absolute;
-    right:20px;
-    top:15px;
+    right:-8px;
+    top:-15px;
     background:transparent;
+    background:black;
+    color:white;
+    border-radius:50%;
     padding:0;
+    height:25px;
+    width:25px;
+    line-height:22px;
+    outline:0;
+    text-align:center;
     &:after{
         content:"\f00d";
         font-family:"FontAwesome";
-        font-size:30px;
+        font-size:15px;
+            line-height:22px;
+    outline:0;
+
         color:black;
         font-weight:300;
-        
+            color:white;
+
         
     }
 }
@@ -323,4 +343,36 @@ text-align:center;
 
 .minicart-wrapper .product-item-name a{
     line-height:1.1;
+}
+
+.logo-container{
+position:relative;
+z-index:99999;
+}
+
+.minicart-wrapper{
+position:relative;
+z-index:99999;
+
+.items-total{
+display:none;
+}
+.subtotal{
+padding:10px 0;
+
+}
+.product.actions a{
+border:1px solid black;
+text-transform:uppercase;
+font-size:14px;
+padding:5px;
+margin:5px;
+display:inline-block;
+}
+}
+
+#minicart-content-wrapper .block-content{
+    flex-direction:column-reverse;
+    display:flex;
+    padding-top:15px;
 }

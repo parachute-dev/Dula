@@ -52,7 +52,7 @@
 		} 
 		.actions{
 			position:absolute;
-			top:50%;
+			top:47%;
 			right:25px;
 			padding:0;
 			transform:translate(0,-50%);
@@ -128,7 +128,6 @@
 	background:colours(brand,grey);
 	@include media-breakpoint-down(lg) { 
 
-		display:none!important;
 	}
 	ul{
 		text-align:center;
@@ -196,10 +195,12 @@
 	}
 }
 
-.minicart-wrapper{
-	display:none;
+.minicart-wrapper
+{
 }
-
+#shopping-basket{
+	position:relative;
+}
 
 .ninjamenus.ninjamenus-desktop.ninjamenus-horizontal > .magezon-builder > .nav-item{
 	float:none;
@@ -271,3 +272,22 @@ margin:10px 0;
 z-index:999;
 width:100%;
 } 
+
+
+.ninjamenus-hamburger-trigger{
+    position:absolute;
+    top:22px;
+    left:20px;
+    z-index:9999999;
+    background:white
+}
+.menu-trigger-inner .label{
+    display:none!important;
+}
+.trigger-icon{
+    transform:scale(1.6);
+}
+.ninjamenus-hamburger-active .menu-trigger-inner{
+    background:black!important;
+    padding-right:11px;
+}
