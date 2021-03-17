@@ -43,16 +43,15 @@
         padding:10px;
     }
     .step-title{
-       font-family:"bodoni-urw", "arial", "helvetica", "san-serif";
-       text-transform:uppercase;
-       font-size:35px;
-       font-style:italic;
-       letter-spacing:1px;
-       font-weight:400;
-       padding:10px;
-       line-height:1;
-   }
-   .field-tooltip{
+     
+      @include font-size(16px,"body");
+      font-size:35px;
+      letter-spacing:1px;
+      font-weight:400;
+      padding:10px;
+      line-height:1;
+  }
+  .field-tooltip{
     display:none;
 }
 #checkout-shipping-method-load{
@@ -87,10 +86,10 @@
     .title{
         font-size:24px;
         font-weight:400;
-        text-transform:uppercase;
+        
         line-height:1;
         font-weight:400;
-        font-family: "bodoni-urw", "arial", "helvetica", "san-serif";
+        
 
         
     }
@@ -102,9 +101,9 @@
     font-size:18px;
 }
 .grand.totals td, .grand.totals th{
-   padding-bottom:10px;
-   padding-top:10px;
-   
+ padding-bottom:10px;
+ padding-top:10px;
+ 
 }
 .minicart-items{
     
@@ -119,8 +118,8 @@
                 display:flex;
                 
                 .product-item-name{
-                  font-family: "bodoni-urw", "arial", "helvetica", "san-serif";
-                  text-transform:uppercase;
+                  
+                  
                   font-size:18px;
                   font-weight:400;
                   line-height:1;
@@ -166,7 +165,7 @@
     
 }
 .opc-block-shipping-information{
- 
+   
 }
 .control{
     position:relative;
@@ -257,9 +256,9 @@ div[name='shippingAddress.company']{
         width:100%;
         text-align:center;
         p{
-            font-family: "bodoni-urw", "arial", "helvetica", "san-serif";
+            
             font-size:3em;
-            text-transform:uppercase;
+            
             font-style:italic;
             margin-top:-40px;
 
@@ -336,7 +335,7 @@ div[name="shippingAddress.street.0"]{
         padding:10px;
 
         font-weight:500;
-        text-transform:uppercase;
+        
         border:1px solid #ccc;
         color:#333;
         font-size:11px;
@@ -348,7 +347,7 @@ div[name="shippingAddress.street.0"]{
     padding:5px 10px;
 
     font-weight:500;
-    text-transform:uppercase;
+    
     border:1px solid #ccc;
     color:#333;
     font-size:11px;
@@ -452,21 +451,21 @@ input[type=radio]{
     display:none;
 }
 .loading-mask .loader:before{
-   box-sizing: border-box;
-   margin:0 auto;
-   width: 150px;
-   margin-bottom:70px;
-   content:"";
+ box-sizing: border-box;
+ margin:0 auto;
+ width: 150px;
+ margin-bottom:70px;
+ content:"";
 
-   display:inline-block;
+ display:inline-block;
 
 
-   margin-bottom:00px;
-   height: 150px;;
-   background-repeat: no-repeat;
-   background-size: 50%;
-   background-image:url(https://vieve.co.uk/logo.gif);
-   background-position:center;
+ margin-bottom:00px;
+ height: 150px;;
+ background-repeat: no-repeat;
+ background-size: 50%;
+ background-image:url(https://vieve.co.uk/logo.gif);
+ background-position:center;
 }
 
 span.note{
@@ -487,7 +486,7 @@ span.note{
 .table-checkout-shipping-method td:nth-child(3).col-method{
     text-align:left;
     margin-bottom:10px;
-    text-transform:uppercase;
+    
 
 
 }
@@ -555,7 +554,7 @@ span.note{
 }
 
 .checkout-success p{
-    text-transform:uppercase;
+    
     font-size:14px!important;
 }
 
@@ -748,9 +747,9 @@ input[type=checkbox]{
 
             .shipping-information-title{
                 font-weight:bold;
-                text-transform:uppercase;
+                
                 margin:10px 0;
-                font-family:"bodoni-urw", "arial", "helvetica", "san-serif";
+                
                 font-weight:300;
                 font-size:20px;
             }
@@ -761,10 +760,10 @@ input[type=checkbox]{
                     margin-bottom:0;}
 
                     .opc-sidebar .grand.totals td strong, .opc-sidebar .grand.totals th strong,.opc-sidebar .grand.totals th strong{
-                        font-family:"bodoni-urw", "arial", "helvetica", "san-serif";
+                        
                         font-size:20px;
                         font-weight:400!important;
-                        text-transform:uppercase;
+                        
                     }
                     .opc-sidebar .grand.totals td, .opc-sidebar .grand.totals th{
                         padding-bottom:0;
@@ -789,7 +788,7 @@ input[type=checkbox]{
                     .out-of-stock{
                         padding:10px;
                         text-align:center;
-                        text-transform:uppercase;
+                        
                         margin-bottom:10px;
                         background:black;
                         color:white;
@@ -819,3 +818,29 @@ input[type=checkbox]{
                             display:block!important;
                         }
                     }
+
+
+                    .checkout-index-index   
+                    {
+
+                        .fieldset{
+                            clear:both;
+                        }
+                        #header .col-lg-9{
+                            display:none!important;
+                        }
+
+                        .minicart{
+                            display:none!important;
+                        }
+                        .minicart-wrapper .action.showcart .counter.qty{
+                            display:none!important;
+                        }
+                        .product-item{
+                            width:100%!important;
+                            max-width:100%!important;
+                        }
+                    }
+
+
+

@@ -227,6 +227,14 @@ padding:0 20px 20px 20px;
         }
         
     }
+    .options{
+        display:none;
+    }
+    .viewcart{
+        font-weight:bold;
+        color:#333;
+        text-decoration:none;
+    }
     .minicart-items-wrapper + .actions{
         .secondary{
             text-align:center;
@@ -234,7 +242,7 @@ padding:0 20px 20px 20px;
             border:1px solid black;
             padding:10px;
             font-size:16px;
-            font-family:roboto;
+        color:black;
             letter-spacing:2px;
             font-weight:600!important;;
             text-transform:uppercase;

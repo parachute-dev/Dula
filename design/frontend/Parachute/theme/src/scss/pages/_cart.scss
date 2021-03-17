@@ -195,6 +195,7 @@ td.col.item{
     font-weight:normal;
     color:#333;
     font-size:20px;
+    text-decoration:none;
     letter-spacing:1px;
     line-height:1;
         @include font-size(23px,"body");
@@ -270,7 +271,8 @@ background:white;
 }
 
 .checkout-cart-index .summary.title, .checkout-cart-index #block-discount-heading{
-  font-size:25px;
+  font-size:32px;
+  padding-bottom:5px;
   text-align:left;
 }
 
